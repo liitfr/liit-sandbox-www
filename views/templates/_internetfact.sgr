@@ -1,0 +1,7 @@
+li.fact
+  .fact-text
+    span.fact-content **23 % des sites e-commerce** utilisent l'A/B testing (ou test de variantes) de manière régulière ou continue.
+    span.fact-source Romain Créteur
+    span.fact-date sept 2014
+  .factbg1
+  .factbg2

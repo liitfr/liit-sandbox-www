@@ -1,0 +1,28 @@
+/* TEAM */
+
+Designer: Mathias Hoffmann
+Twitter:  @IntendantsIt
+Contact:  mathias [at] liit.fr
+From:     Lyon, France
+
+/* THANKS */
+
+Jeff Escalante: http://jeffescalante.com
+
+/* SITE */
+
+Last update:  2017/01/01
+Standards: HTML5, CSS3,
+Components: HTML5Boilerplate, Modernizr, jQuery, Spike, GSAP, Three, Webpack, Contentful, Reshape, PostCSS, ...
+Software: Atom, GitKraken
+
+                ___       ___          ___
+               /  /\     /  /\        /  /\
+ ___     ___  /  /:/    /  /:/       /  /:/
+/__/\   /  /\/__/::\   /__/::\      /  /:/
+\  \:\ /  /:/\__\/\:\__\__\/\:\__  /  /::\
+ \  \:\  /:/    \  \:\/\  \  \:\/\/__/:/\:\
+  \  \:\/:/      \__\::/   \__\::/\__\/  \:\
+   \  \::/       /__/:/    /__/:/      \  \:\
+    \__\/        \__\/     \__\/        \__\/
+    

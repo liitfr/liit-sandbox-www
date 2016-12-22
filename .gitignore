@@ -1,0 +1,10 @@
+.DS_Store
+node_modules
+public
+dist
+_cache
+.env
+assets/img/**/*.png
+assets/img/**/*.gif
+assets/img/**/*.jpg
+assets/img/**/*.jpeg

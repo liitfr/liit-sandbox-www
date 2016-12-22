@@ -1,0 +1,15 @@
+/*TODO : Text highlight */
+/*BUG : Unnecessary curly bracket & Unexpected separator errors */
+/*@import 'cssrecipes-defaults' */
+/*BUG : Unnecessary curly bracket & Unexpected separator errors. */
+/*Workaround : css.plugins.push(normalize()) in app.js */
+/*@import 'normalize.css' */
+
+/*Current strategy : all pages use the same bundle.css file. */
+/*Pros: cache. OK if pages don't have too much individual styles (increase overall size)  */
+/*Cons : Size. KO if some pages only use few individual styles ... */
+/*Let's find the critical path ... ;) */
+/*Best practices : https://github.com/jescalan/gps */
+
+@import '_html5boilerplate.sss'
+@import '_web.sss'

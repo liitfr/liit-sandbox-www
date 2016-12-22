@@ -1,0 +1,52 @@
+{
+  "name": "liit-www",
+  "description": "liit.fr website creation",
+  "version": "0.0.1",
+  "author": "liitfr",
+  "ava": {
+    "verbose": "true"
+  },
+  "bugs": "https://github.com/liitfr/liit-www/issues",
+  "dependencies": {
+    "babel-preset-latest": "^6.16.0",
+    "dotenv": "^2.0.0",
+    "hard-source-webpack-plugin": "0.2.2",
+    "image-webpack-loader": "^3.0.0",
+    "lost": "^7.1.1",
+    "postcss-normalize": "^0.3.0",
+    "reshape-standard": "^0.4.2",
+    "spike-contentful": "^0.4.0",
+    "spike-css-standards": "^0.1.3",
+    "spike-page-id": "^0.1.0",
+    "webpack": "^1.13.3"
+  },
+  "devDependencies": {
+    "ava": "^0.17.0",
+    "del": "^2.2.2",
+    "favicons-webpack-plugin": "0.0.7",
+    "gulp": "^3.9.1",
+    "gulp-inject-string": "^1.1.0",
+    "gulp-load-plugins": "^1.4.0",
+    "gulp-rev": "^7.1.2",
+    "gulp-rev-css-url": "^0.1.0",
+    "gulp-rev-delete-original": "^0.2.2",
+    "gulp-rev-replace": "^0.4.3",
+    "image-webpack-loader": "^3.1.0",
+    "q": "^1.4.1",
+    "rimraf": "^2.5.4",
+    "run-sequence": "^1.2.2",
+    "snazzy": "^5.0.0",
+    "spike-core": "^0.12.3",
+    "standard": "^8.6.0"
+  },
+  "homepage": "https://github.com/liitfr/liit-www",
+  "main": "app.js",
+  "private": true,
+  "repository": "https://github.com/liitfr/liit-www",
+  "scripts": {
+    "lint": "standard | snazzy",
+    "precommit": "npm run lint -s",
+    "pretest": "npm run lint -s",
+    "test": "NODE_ENV=test ava"
+  }
+}
