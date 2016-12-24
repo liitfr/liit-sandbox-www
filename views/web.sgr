@@ -1,9 +1,12 @@
 extends(src='layout.sgr')
-  block(name='content')
-    h2 Hello World!
-    p Example of locals: {{ foo }}
-    p(md) Example of **markdown**
-    p Example of "smart quotes" -- and dashes
 
-    ul.factotron
-      
+  block(name='meta')
+    title Websites | LIIT
+    meta(name='description' content='Création de sites web modernes. Interfaces et expériences utilisateur qui tapent en plein dans le mille')
+    meta(name='robots', content='index, follow')
+
+  block(name='content')
+    main(role='main' id='web')
+      ul.factotron
+        each(loop='internetfact, index in contentful.internet_facts')
+          include(src='templates/_internetfact.sgr')

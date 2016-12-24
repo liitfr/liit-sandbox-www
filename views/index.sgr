@@ -1,18 +1,10 @@
 extends(src='layout.sgr')
+
   block(name='content')
-    h2 Hello World!
-    p Example of locals: {{ foo }}
-    p(md) Example of **markdown**
-    p Example of "smart quotes" -- and dashes
-
-    hr
-
-    h3 Getting Started
-    h4 The Stack:
-    ul
-      li
-        a(href="/web") web
-
-    p Customize your settings by editing the
-      a(href="https://spike.readme.io/docs/appjs") app.js
-      |  file or simply start by editing this view
+    main(role='main' id='index')
+      h2 Accueil
+      ul
+        li
+          a(href="/web") Web
+        li
+          a(href="/blog") Blog

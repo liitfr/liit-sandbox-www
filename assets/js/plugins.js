@@ -1,5 +1,5 @@
 // Avoid `console` errors in browsers that lack a console.
-() => {
+(() => {
   var method
   var noop = () => {}
   var methods = [
@@ -19,5 +19,5 @@
           console[method] = noop
       }
   }
-}
+})()
 // Place any jQuery/helper plugins in here.

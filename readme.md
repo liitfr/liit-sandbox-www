@@ -20,6 +20,7 @@ liit.fr website creation
 - I used gulp when I felt something couldn't get done easily with Webpack / Spike couple. Gulp manages long term caching (hashes) & favicons meta injection.
 - No transformation used over Contentful's data !
 - Still to explain : vendor vs webpack / pagejs, templates & page.json / split data & transforms / plugin offline / gestion images
+- I didn't use PageId but did it myself (because of bug)
 
 ## Setup
 

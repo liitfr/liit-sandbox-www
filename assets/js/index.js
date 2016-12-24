@@ -1,1 +1,1 @@
-console.log('you can use ES6 here : )')
+const page = require('page')

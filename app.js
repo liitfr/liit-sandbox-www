@@ -1,8 +1,10 @@
 // TODO: css source map ?
-// TODO: assets hash
-// TODO: meta & favicons
 // TODO: Vendor vs webpack require ?
 // TODO : Remove images from .gitignore
+// BUG : Github doesn't display good technology (linguist)
+// TODO : add new feature to spike-contentful : export json per model
+// BUG : la notation coffee $ est toujours acceptée ? (nom des pages par ex)
+
 const Contentful = require('spike-contentful')
 const cssStandards = require('spike-css-standards')
 const dotEnv = require('dotenv').config()
@@ -10,11 +12,16 @@ const HardSourcePlugin = require('hard-source-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const htmlStandards = require('reshape-standard')
 const jsStandards = require('babel-preset-latest')
-const locals = {}
 const lost = require('lost')
+const markdown = require('markdown-it')()
 const normalize = require('postcss-normalize')
-const pageId = require('spike-page-id')
 const path = require('path')
+const slug = require('slug')
+
+var locals = {
+  markdown: markdown,
+  slug: slug
+}
 
 module.exports = {
 
@@ -33,10 +40,7 @@ module.exports = {
   reshape: (ctx) => {
     return htmlStandards({
       webpack: ctx,
-      locals: {
-        pageId: pageId(ctx),
-        foo: 'bar', locals
-      }
+      locals
     })
   },
   postcss: (ctx) => {
@@ -82,11 +86,55 @@ module.exports = {
       spaceId: process.env.CF_SPACE_ID,
       contentTypes: [
         {
+          name: 'blog_posts',
+          id: process.env.CF_MODEL_BLOGPOST,
+          // ordered: true,
+          // filters: {
+          //   order: 'sys.createdAt'
+          // },
+          template: {
+            path: 'views/templates/_blogpost.sgr',
+            output: (blogpost) => { return 'blog/' + slug(blogpost.blogUrl) + '.html' }
+          }
+        },
+        {
+          name: 'blog_categories',
+          id: process.env.CF_MODEL_BLOGCATEGORY
+        },
+        {
+          name: 'discoveries',
+          id: process.env.CF_MODEL_DISCOVERY
+        },
+        {
+          name: 'discovery_batches',
+          id: process.env.CF_MODEL_DISCOVERYBATCH
+        },
+        {
+          name: 'images',
+          id: process.env.CF_MODEL_IMAGE
+        },
+        {
           name: 'internet_facts',
           id: process.env.CF_MODEL_INTERNETFACT
+        },
+        {
+          name: 'persons',
+          id: process.env.CF_MODEL_PERSON
+        },
+        {
+          name: 'tags',
+          id: process.env.CF_MODEL_TAG
+        },
+        {
+          name: 'works',
+          id: process.env.CF_MODEL_WORK
+        },
+        {
+          name: 'work_types',
+          id: process.env.CF_MODEL_WORKTYPE
         }
       ],
-      json: path.join(process.env.SP_API_DIR, 'data.json')
+      json: path.join(process.env.SP_API_DIR, 'all_data.json')
     }),
     new FaviconsWebpackPlugin({
       logo: path.join(__dirname, 'assets/img', process.env.FAVICON_FILE),
