@@ -2,7 +2,7 @@
 
 Designer: Mathias Hoffmann
 Twitter:  @IntendantsIt
-Contact:  mathias [at] liit.fr
+Contact:  mathias [at] liit [dot] fr
 From:     Lyon, France
 
 /* THANKS */
@@ -12,7 +12,7 @@ Jeff Escalante: http://jeffescalante.com
 /* SITE */
 
 Last update:  2017/01/01
-Standards: HTML5, CSS3,
+Standards: HTML5, CSS3, ES6
 Components: HTML5Boilerplate, Modernizr, jQuery, Spike, GSAP, Three, Webpack, Contentful, Reshape, PostCSS, ...
 Software: Atom, GitKraken
 
@@ -25,4 +25,3 @@ Software: Atom, GitKraken
   \  \:\/:/      \__\::/   \__\::/\__\/  \:\
    \  \::/       /__/:/    /__/:/      \  \:\
     \__\/        \__\/     \__\/        \__\/
-    

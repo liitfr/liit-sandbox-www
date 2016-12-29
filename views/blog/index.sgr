@@ -1,14 +1,14 @@
-extends(src='../layout.sgr')
+extends(src="../layout.sgr")
 
-  block(name='meta')
+  block(name="meta")
     title Le Blog | LIIT
-    meta(name='description' content='Articles, Dossiers & Actualités')
-    meta(name='robots', content='index, follow')
+    meta(name="description" content="Articles, Dossiers & Actualités")
+    meta(name="robots", content="index, follow")
 
-  block(name='content')
-    main(role='main' id='blog-index')
+  block(name="content")
+    main(role="main" id="blog-index")
       h2 Blog
       ul
-        each(loop='blogpost, index in contentful.blog_posts')
+        each(loop="blogpost, index in contentful.blog_posts")
           li
-            a(href='{{ slug(blogpost.blogUrl) }}') {{ blogpost.title }}
+            a(href="/blog/{{ slug(blogpost.blogUrl) }}") {{ blogpost.title }}

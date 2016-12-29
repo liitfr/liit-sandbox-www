@@ -1,9 +1,6 @@
-// TODO: css source map ?
 // TODO: Vendor vs webpack require ?
-// TODO : Remove images from .gitignore
-// BUG : Github doesn't display good technology (linguist)
-// TODO : add new feature to spike-contentful : export json per model
-// BUG : la notation coffee $ est toujours acceptée ? (nom des pages par ex)
+// TODO : Remove images from .gitignore once they are revelant
+// BUG : Github doesn't display good technology (linguist) ...
 
 const Contentful = require('spike-contentful')
 const cssStandards = require('spike-css-standards')
@@ -12,22 +9,30 @@ const HardSourcePlugin = require('hard-source-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const htmlStandards = require('reshape-standard')
 const jsStandards = require('babel-preset-latest')
+const locals = {}
 const lost = require('lost')
 const markdown = require('markdown-it')()
 const normalize = require('postcss-normalize')
 const path = require('path')
 const slug = require('slug')
-
-var locals = {
-  markdown: markdown,
-  slug: slug
-}
+const urlJoin = require('url-join')
+const webpack = require('webpack')
 
 module.exports = {
 
   outputDir: process.env.SP_OUTPUT_DIR,
-  dumpDirs: ['views', 'assets', 'config'],
-  ignore: ['**/layout.sgr', '**/_*', '.*', 'assets/img/.gitkeep', '_cache/**', 'readme.md', 'license.md'],
+  dumpDirs: ['views', 'assets', 'misc'],
+  ignore: [
+    '**/layout.sgr',
+    '**/_*',
+    '.*',
+    'assets/img/.gitkeep',
+    '_cache/**',
+    'readme.md',
+    'license.md',
+    '**/templates/**.sgr',
+    'pages.json'
+  ],
   vendor: process.env.SP_VENDOR_DIR,
 
 // -----------------------------------------------------------------------------
@@ -40,7 +45,12 @@ module.exports = {
   reshape: (ctx) => {
     return htmlStandards({
       webpack: ctx,
-      locals
+      locals: Object.assign(
+        locals,
+        {md: markdown},
+        {siteId: process.env.GOOGLE_SITE_ID},
+        {slug: slug}
+      )
     })
   },
   postcss: (ctx) => {
@@ -61,25 +71,20 @@ module.exports = {
 // -----------------------------------------------------------------------------
 
   entry: {
-    'js/main': ['./assets/js/index.js'],
-    'js/plugins': ['./assets/js/plugins.js']
+    'js/main': ['./assets/js/index.js']
   },
 
 // -----------------------------------------------------------------------------
 
   module: {
     loaders: [
+      { test: /\.json$/, loader: 'json' }
     ]
   },
 
 // -----------------------------------------------------------------------------
 
   plugins: [
-    new HardSourcePlugin({
-      environmentPaths: { root: __dirname },
-      recordsPath: path.join(__dirname, '_cache/records.json'),
-      cacheDirectory: path.join(__dirname, '_cache/hard_source_cache')
-    }),
     new Contentful({
       addDataTo: locals,
       accessToken: process.env.CF_CONTENT_DELIVERY_API,
@@ -88,12 +93,8 @@ module.exports = {
         {
           name: 'blog_posts',
           id: process.env.CF_MODEL_BLOGPOST,
-          // ordered: true,
-          // filters: {
-          //   order: 'sys.createdAt'
-          // },
           template: {
-            path: 'views/templates/_blogpost.sgr',
+            path: 'views/templates/blogpost.sgr',
             output: (blogpost) => { return 'blog/' + slug(blogpost.blogUrl) + '.html' }
           }
         },
@@ -134,7 +135,14 @@ module.exports = {
           id: process.env.CF_MODEL_WORKTYPE
         }
       ],
-      json: path.join(process.env.SP_API_DIR, 'all_data.json')
+      json: path.join(process.env.SP_API_DIR, process.env.SP_API_ALLDATA_FILE)
+    }),
+    new webpack.DefinePlugin({
+      api_alldata: JSON.stringify(urlJoin(
+        process.env.SP_BASE_URL,
+        process.env.SP_API_DIR,
+        process.env.SP_API_ALLDATA_FILE
+      ))
     }),
     new FaviconsWebpackPlugin({
       logo: path.join(__dirname, 'assets/img', process.env.FAVICON_FILE),
@@ -157,6 +165,11 @@ module.exports = {
         yandex: false,
         windows: false
       }
+    }),
+    new HardSourcePlugin({
+      environmentPaths: { root: __dirname },
+      recordsPath: path.join(__dirname, '_cache/records.json'),
+      cacheDirectory: path.join(__dirname, '_cache/hard_source_cache')
     })
   ]
 

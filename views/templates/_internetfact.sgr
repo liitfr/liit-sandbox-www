@@ -1,7 +1,0 @@
-li.fact
-  .fact-text
-    span(md).fact-content {{ internetfact.fact }}
-    span.fact-source {{ internetfact.source }}
-    span.fact-date {{ internetfact.studyDate }}
-  .factbg1
-  .factbg2

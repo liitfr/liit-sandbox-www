@@ -1,12 +1,12 @@
-extends(src='layout.sgr')
+extends(src="layout.sgr")
 
-  block(name='meta')
+  block(name="meta")
     title Websites | LIIT
-    meta(name='description' content='Création de sites web modernes. Interfaces et expériences utilisateur qui tapent en plein dans le mille')
-    meta(name='robots', content='index, follow')
+    meta(name="description" content="Création de sites web modernes. Interfaces et expériences utilisateur qui tapent en plein dans le mille")
+    meta(name="robots", content="index, follow")
 
-  block(name='content')
-    main(role='main' id='web')
-      ul.factotron
-        each(loop='internetfact, index in contentful.internet_facts')
-          include(src='templates/_internetfact.sgr')
+  block(name="content")
+    main(role="main" id="web")
+      ul
+        each(loop="internetfact, index in contentful.internet_facts")
+          include(src="templates/internetfact.sgr")

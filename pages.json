@@ -1,0 +1,18 @@
+{
+  "blog" : {
+    "path": "^\/blog(?:\/|\/index(?:\\.htm|\\.html)?)?$",
+    "view": "blog/index.sgr"
+  },
+  "blogpost" : {
+    "path": "^\/blog\/(?!index(?:\\.htm|\\.html)?$).+$",
+    "view": "templates/blogpost.sgr"
+  },
+  "home": {
+    "path": "^(?:\/|\/index(?:\\.htm|\\.html)?)?$",
+    "view": "index.sgr"
+  },
+  "web": {
+    "path": "^\/web(?:\\.htm|\\.html)?$",
+    "view": "web.sgr"
+  }
+}
