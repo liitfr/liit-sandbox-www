@@ -7,7 +7,7 @@ html(class="no-js" lang="fr")
     block(name="meta")
       title Invenieur Informatifien | LIIT
       meta(name="description" content="Freelance. Full stack: Front, Back, Data")
-      meta(name="robots", content="index, follow")
+      meta(name="robots" content="index, follow")
     meta(name="author" content="liit.fr")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     link(rel="author" href="/humans.txt")
@@ -23,8 +23,8 @@ html(class="no-js" lang="fr")
       script(src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous")
       script.
         window.jQuery || document.write('<script src="/vendor/jquery/jquery-3.1.1.min.js"><\/script>')
-      script(src="/js/main.js" defer)
+      script(src="/js/common.js" defer)
       script.
         window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-        ga('create','{{ siteId }}','auto');ga('send','pageview')
+        ga('create','{{ config.googleSiteId }}','auto');ga('send','pageview')
       script(src="https://www.google-analytics.com/analytics.js" async defer)

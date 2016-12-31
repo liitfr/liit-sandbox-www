@@ -8,3 +8,7 @@ extends(src="../layout.sgr")
   block(name="content")
     main(role="main" id="erreurs-500")
       p Les données nécessaires à l'affichage de la page n'ont pu être téléchargées :'(
+      a(href="/") Retour à l'accueil
+      
+  block(name="js-body" type="append")
+    script(src="/js/error.js" defer)

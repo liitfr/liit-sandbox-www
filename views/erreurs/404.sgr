@@ -8,3 +8,7 @@ extends(src="../layout.sgr")
   block(name="content")
     main(role="main" id="erreurs-404")
       p Oups ! La page demandée est introuvable. Peut-être une abduction ?
+      a(href="/") Retour à l'accueil
+
+  block(name="js-body" type="append")
+    script(src="/js/error.js")

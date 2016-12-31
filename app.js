@@ -14,7 +14,7 @@ const lost = require('lost')
 const markdown = require('markdown-it')()
 const normalize = require('postcss-normalize')
 const path = require('path')
-const slug = require('slug')
+const slug = require('speakingurl')
 const urlJoin = require('url-join')
 const webpack = require('webpack')
 
@@ -48,7 +48,9 @@ module.exports = {
       locals: Object.assign(
         locals,
         {md: markdown},
-        {siteId: process.env.GOOGLE_SITE_ID},
+        {config: {
+          googleSiteId: process.env.GOOGLE_SITE_ID
+        }},
         {slug: slug}
       )
     })
@@ -71,7 +73,8 @@ module.exports = {
 // -----------------------------------------------------------------------------
 
   entry: {
-    'js/main': ['./assets/js/index.js']
+    'js/common': ['./assets/js/common.js'],
+    'js/error': ['./assets/js/error.js']
   },
 
 // -----------------------------------------------------------------------------
@@ -137,13 +140,6 @@ module.exports = {
       ],
       json: path.join(process.env.SP_API_DIR, process.env.SP_API_ALLDATA_FILE)
     }),
-    new webpack.DefinePlugin({
-      api_alldata: JSON.stringify(urlJoin(
-        process.env.SP_BASE_URL,
-        process.env.SP_API_DIR,
-        process.env.SP_API_ALLDATA_FILE
-      ))
-    }),
     new FaviconsWebpackPlugin({
       logo: path.join(__dirname, 'assets/img', process.env.FAVICON_FILE),
       prefix: 'img/favicons/',
@@ -170,6 +166,19 @@ module.exports = {
       environmentPaths: { root: __dirname },
       recordsPath: path.join(__dirname, '_cache/records.json'),
       cacheDirectory: path.join(__dirname, '_cache/hard_source_cache')
+    }),
+    new webpack.DefinePlugin({
+      config: {
+        api_alldata: JSON.stringify(urlJoin(
+          process.env.SP_BASE_URL,
+          process.env.SP_API_DIR,
+          process.env.SP_API_ALLDATA_FILE
+        )),
+        googleSiteId: JSON.stringify(process.env.GOOGLE_SITE_ID)
+      }
+    }),
+    new webpack.ProvidePlugin({
+        THREE: 'three'
     })
   ]
 

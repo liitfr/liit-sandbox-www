@@ -11,6 +11,14 @@
     "path": "^(?:\/|\/index(?:\\.htm|\\.html)?)?$",
     "view": "index.sgr"
   },
+  "p404" : {
+    "path": "^\/erreurs\/404(?:\\.htm|\\.html)?$",
+    "view": "erreurs/404.sgr"
+  },
+  "p500": {
+    "path": "^\/erreurs\/500(?:\\.htm|\\.html)?$",
+    "view": "erreurs/500.sgr"
+  },
   "web": {
     "path": "^\/web(?:\\.htm|\\.html)?$",
     "view": "web.sgr"

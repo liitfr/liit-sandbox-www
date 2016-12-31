@@ -1,12 +1,10 @@
-const markdown = require('markdown-it')()
 const pagejs = require('page')
-const slug = require('slug')
 
 var data = null
 
 getData = () => {
   if (data !== void 0) {
-    return $.get(api_alldata, (remoteData) => {
+    return $.get(config.api_alldata, (remoteData) => {
       data = remoteData
     })
   } else {
@@ -21,9 +19,7 @@ blog = (ctx, next) => {
     ctx.data = {
       contentful: {
         blog_posts: data.blog_posts
-      },
-      md: markdown,
-      slug: slug
+      }
     }
     next()
   }
@@ -38,15 +34,13 @@ blog = (ctx, next) => {
 blogpost = (ctx, next) => {
   success = () => {
     findBlogpost = $.grep(data.blog_posts, (blogpost, index) => (
-      blogpost.blogUrl == ctx.path.replace(/^\/blog\/|(.htm|.html)$/g,'')
+      blogpost.blogUrl === ctx.path.replace(/^\/blog\/|(.htm|.html)$/g,'')
     ))
     if(!findBlogpost.length > 0) {
       pagejs.redirect('/erreurs/404')
     } else {
       ctx.data = {
-        item: findBlogpost[0],
-        md: markdown,
-        slug: slug
+        item: findBlogpost[0]
       }
       next()
     }
@@ -64,13 +58,22 @@ home = (ctx, next) => {
   next()
 }
 
+p404 = (ctx, next) => {
+  ctx.data = null
+  next()
+}
+
+p500 = (ctx, next) => {
+  ctx.data = null
+  next()
+}
+
 web = (ctx, next) => {
   success = () => {
     ctx.data = {
       contentful: {
         internet_facts: data.internet_facts
-      },
-      md: markdown
+      }
     }
     next()
   }
@@ -85,8 +88,10 @@ web = (ctx, next) => {
 // -----------------------------------------------------------------------------
 
 module.exports = {
-    blog: blog,
-    blogpost: blogpost,
-    home: home,
-    web: web
+  blog: blog,
+  blogpost: blogpost,
+  home: home,
+  p404: p404,
+  p500: p500,
+  web: web
 }
