@@ -53,7 +53,18 @@ render = (ctx) => {
     return addIt
   })
   $(newScripts).each((ine, ele) => {
-    document.head.appendChild(ele)
+    // $.getScript($(ele).attr('src'))
+    $.cachedScript($(ele).attr('src'))
+    // console.log($(ele).attr('src'))
+  //   var head = document.getElementsByTagName("head")[0]
+  //   var script = document.createElement('script')
+  //   script.id = 'error'
+  //   script.type = 'text/javascript'
+  //   script.src = '/js/error.js'
+  //   head.appendChild(script)
+  //   // console.log(ele)
+  //   // document.head.appendChild('<scr' + 'ipt src="http://localhost:1111/js/error.js"></scr' + 'ipt>')
+  //   //  document.write('<scr' + 'ipt src="../jquery.min.js"></scr' + 'ipt>');
   })
   window.scrollTo(0,0)
   previousPath = ctx.path

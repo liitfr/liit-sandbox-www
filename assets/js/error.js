@@ -9,12 +9,11 @@ var mouseX = 0, mouseY = 0
 var windowHalfX = window.innerWidth / 2
 var windowHalfY = window.innerHeight / 2
 
-console.log('mathias')
 init()
 animate()
 function init() {
   container = document.createElement( 'div' )
-  document.body.appendChild( container )
+  $('main').append( container )
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 )
   camera.position.z = 1000
   scene = new THREE.Scene()

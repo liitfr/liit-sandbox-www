@@ -3,7 +3,7 @@ extends(src="layout.sgr")
   block(name="meta")
     title Websites | LIIT
     meta(name="description" content="Création de sites web modernes. Interfaces et expériences utilisateur qui tapent en plein dans le mille")
-    meta(name="robots", content="index, follow")
+    meta(name="robots" content="index, follow")
 
   block(name="content")
     main(role="main" id="web")

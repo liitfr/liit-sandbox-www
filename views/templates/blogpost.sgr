@@ -5,7 +5,7 @@ extends(src="../layout.sgr")
     title {{ item.title }} | Article LIIT
     // TODO : Attention à la longueur de la description
     meta(name="description" content="{{ item.descriptionMeta }}")
-    meta(name="robots", content="index, follow")
+    meta(name="robots" content="index, follow")
 
   block(name="content")
     main(role="main" id="blog-{{ slug(item.blogUrl) }}")

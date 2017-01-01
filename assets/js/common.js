@@ -6,4 +6,13 @@ router.run()
 
 $(function() {
     FastClick.attach(document.body)
-});
+})
+
+$.cachedScript = (url, options) => {
+  options = $.extend( options || {}, {
+    dataType: "script",
+    cache: true,
+    url: url
+  })
+  return jQuery.ajax(options)
+}
