@@ -1,4 +1,4 @@
 li
-  span {{{ md.render(internetfact.fact) }}}
+  span {{{ internetfact.fact }}}
   span {{ internetfact.source }}
   span {{ internetfact.studyDate }}

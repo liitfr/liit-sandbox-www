@@ -3,12 +3,12 @@ const pagejs = require('page')
 var data = null
 
 getData = () => {
-  if (data !== void 0) {
+  if (data) {
+    return data
+  } else {
     return $.get(config.api_alldata, (remoteData) => {
       data = remoteData
     })
-  } else {
-    return data
   }
 }
 
@@ -24,7 +24,7 @@ blog = (ctx, next) => {
     next()
   }
   error = () => {
-    pagejs.redirect('/erreurs/505')
+    pagejs.redirect('/erreurs/500')
   }
   $.when(
     getData()
@@ -46,7 +46,7 @@ blogpost = (ctx, next) => {
     }
   }
   error = () => {
-    pagejs.redirect('/erreurs/505')
+    pagejs.redirect('/erreurs/500')
   }
   $.when(
     getData()
@@ -78,7 +78,7 @@ web = (ctx, next) => {
     next()
   }
   error = () => {
-    pagejs.redirect('/erreurs/505')
+    pagejs.redirect('/erreurs/500')
   }
   $.when(
     getData()

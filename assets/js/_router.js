@@ -1,11 +1,23 @@
 const controllers = require('./_controllers.js')
-const markdown = require('markdown-it')()
 const pagejs = require('page')
-const slug = require('speakingurl')
 
 var initialRender = true
+var loadedScripts = []
 var pages = require('../../pages.json')
 var previousPath = null
+
+$.cachedScript = (url) => {
+  if(loadedScripts.indexOf(url) === -1) {
+    var options = {
+      dataType: "script",
+      cache: true,
+      url: url
+    }
+    return $.ajax(options)
+  } else {
+    return $.Deferred().done()
+  }
+}
 
 resolvePath = (path) => {
   var requestedPage = null
@@ -21,19 +33,20 @@ resolvePath = (path) => {
 prepare = (ctx, next) => {
   ctx.handled = true
   if (initialRender) {
+    $('script').each((id, el) => {
+      loadedScripts.push(el.outerHTML)
+    })
     return initialRender = false
   }
-  if (previousPath && previousPath == ctx.path) {
-    return false
-  }
+  if (previousPath && previousPath === ctx.path) { return false }
   ctx.data = []
   next()
 }
 
 render = (ctx) => {
+  previousPath = ctx.path
+  window.scrollTo(0,0)
   $.extend(ctx.data, {
-    md: markdown,
-    slug: slug,
     config: config
   })
   var generation = $(pages[resolvePath(ctx.path)].generation(ctx.data))
@@ -42,32 +55,28 @@ render = (ctx) => {
   $('meta[name="robots"]').attr('content', generation.filter('meta[name="robots"]').attr('content'))
   $('main').html(generation.filter('main').html())
   $('main').attr('id',generation.filter('main').attr('id'))
-  var newScripts = $.grep(generation.filter('script'), (elg, ing) => {
-    var addIt = true
-    $('script').each((ine, ele) => {
-      if(elg.outerHTML === ele.outerHTML) {
-        addIt = false
-        return false
+  $(generation).filter('script').each((id, el) => {
+    if(loadedScripts.indexOf(el.outerHTML) === -1) {
+      if($(el).attr('src')) {
+        $.when($.cachedScript($(el).attr('src'))).done(() => {
+          loadedScripts.push(el.outerHTML)
+        })
+      } else {
+        if($(el).hasClass('reloadPlease')) {
+          $('main').append(el.outerHTML)
+        } else {
+          $('body').append(el.outerHTML)
+        }
+        loadedScripts.push(el.outerHTML)
       }
-    })
-    return addIt
+    } else if($(el).hasClass('reloadPlease')) {
+      if($(el).attr('src')) {
+        Window.liit[$(el).attr('data-script-name')].onReload()
+      } else {
+        $('main').append(el.outerHTML)
+      }
+    }
   })
-  $(newScripts).each((ine, ele) => {
-    // $.getScript($(ele).attr('src'))
-    $.cachedScript($(ele).attr('src'))
-    // console.log($(ele).attr('src'))
-  //   var head = document.getElementsByTagName("head")[0]
-  //   var script = document.createElement('script')
-  //   script.id = 'error'
-  //   script.type = 'text/javascript'
-  //   script.src = '/js/error.js'
-  //   head.appendChild(script)
-  //   // console.log(ele)
-  //   // document.head.appendChild('<scr' + 'ipt src="http://localhost:1111/js/error.js"></scr' + 'ipt>')
-  //   //  document.write('<scr' + 'ipt src="../jquery.min.js"></scr' + 'ipt>');
-  })
-  window.scrollTo(0,0)
-  previousPath = ctx.path
 }
 
 run = () => {

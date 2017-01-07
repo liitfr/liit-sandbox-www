@@ -21,6 +21,8 @@ liit.fr website creation
 - No transformation used over Contentful's data !
 - Still to explain : vendor vs webpack / pagejs, templates & page.json / split data & transforms / plugin offline / gestion images
 - I didn't use PageId but did it myself (because of bug)
+- router and scripts
+- transformations to avoid big bundle
 
 ## Setup
 

@@ -1,14 +1,41 @@
 extends(src="../layout.sgr")
 
   block(name="meta")
-    // TODO : Attention à la longueur du titre
-    title {{ item.title }} | Article LIIT
-    // TODO : Attention à la longueur de la description
-    meta(name="description" content="{{ item.descriptionMeta }}")
+    title {{ item.title.length > config.spMetaTitleMaxSize ? item.title.substring(0, config.spMetaTitleMaxSize - 19) + " ..." : item.title }} | Article LIIT
+    meta(name="description" content="{{ item.descriptionMeta.length > config.spMetaDescMaxSize ? item.descriptionMeta.substring(0, config.spMetaDescMaxSize - 4) + ' ...' : item.descriptionMeta }}")
     meta(name="robots" content="index, follow")
 
   block(name="content")
-    main(role="main" id="blog-{{ slug(item.blogUrl) }}")
+    main(role="main" id="blog-{{ item.blogUrl }}")
       h2 {{ item.title }}
-      // BUG : Forced to use markdown (cannot use p(md))
-      p {{{ md.render(item.content) }}}
+      p {{ item.dateLabel }}
+      if(condition="item.readingTime")
+        p Temps de lecture : {{ item.readingTime }} {{ item.readingTime > 1 ? "minutes" : "minute" }}
+      p
+        | Publié dans {{ item.categories.length > 1 ? "les catégories" : "la catégorie" }} :
+        each(loop="category, index of item.categories")
+          | {{ index > 0 ? ", " : "" }} {{ category.fields.name }}
+      if(condition="item.tags")
+        p
+          | {{ item.tags.length > 1 ? "Tags" : "Tag" }} :
+          each(loop="tag, index of item.tags")
+            | {{ index > 0 ? ", " : "" }} {{ tag.fields.tagName }}
+      p Rédigé par {{ item.author.fields.firstName }}
+      p {{{ item.content }}}
+      if(condition="item.relatedBlogPosts")
+        p À lire également :
+        ul
+          each(loop="blogpost, index of item.relatedBlogPosts")
+            li {{ blogpost.fields.title }}
+      if(condition="item.relatedWorks")
+        p Découvrez {{ item.relatedWorks.length > 1 ? "ces réalisations" : "cette réalisation" }} :
+        ul
+          each(loop="work, index of item.relatedWorks")
+            li {{ work.fields.title }}
+      if(condition="item.relatedDiscoveries")
+        p Cet article fait référence à {{ item.relatedDiscoveries.length > 1 ? "ces découvertes" : "cette découverte" }} :
+        ul
+          each(loop="discovery, index of item.relatedDiscoveries")
+            li {{ discovery.fields.title }}
+
+      #disqus_thread

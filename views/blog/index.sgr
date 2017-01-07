@@ -11,4 +11,4 @@ extends(src="../layout.sgr")
       ul
         each(loop="blogpost, index in contentful.blog_posts")
           li
-            a(href="/blog/{{ slug(blogpost.blogUrl) }}") {{ blogpost.title }}
+            a(href="/blog/{{ blogpost.blogUrl }}") {{ blogpost.title }}

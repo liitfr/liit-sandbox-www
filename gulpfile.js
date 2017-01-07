@@ -2,6 +2,8 @@
 // TODO : rajouter watch
 // TODO : supprimer favicons (car ils ne seront pas présents dans le js)
 // TODO : clore les balises </html> (dans le js ?)
+// TODO : hash de all_data.json
+
 const del = require('del')
 const dotEnv = require('dotenv').config()
 const gulp = require('gulp')
