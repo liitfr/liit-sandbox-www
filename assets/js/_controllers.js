@@ -1,43 +1,51 @@
 const pagejs = require('page')
 
-var data = null
+var loadedJson = []
 
-getData = () => {
-  if (data) {
-    return data
+$.cachedJson = (url) => {
+  if(loadedJson[url] === undefined) {
+    var options = {
+      cache: true,
+      dataType: 'json',
+      success: (data) => {
+        loadedJson[url] = data
+      },
+      url: url
+    }
+    return $.ajax(options)
   } else {
-    return $.get(config.api_alldata, (remoteData) => {
-      data = remoteData
-    })
+    return loadedJson[url]
   }
 }
 
-// -----------------------------------------------------------------------------
+defaultController = (ctx, next) => {
+  ctx.data = null
+  next()
+}
+
+defaultError = () => {
+  pagejs.redirect(config.sp500Page)
+}
 
 blog = (ctx, next) => {
   success = () => {
     ctx.data = {
       contentful: {
-        blog_posts: data.blog_posts
+        blog_posts: loadedJson[config.spApiAlldata].blog_posts
       }
     }
     next()
   }
-  error = () => {
-    pagejs.redirect('/erreurs/500')
-  }
-  $.when(
-    getData()
-  ).then(success, error)
+  $.when($.cachedJson(config.spApiAlldata)).then(success, defaultError)
 }
 
 blogpost = (ctx, next) => {
   success = () => {
-    findBlogpost = $.grep(data.blog_posts, (blogpost, index) => (
+    findBlogpost = $.grep(loadedJson[config.spApiAlldata].blog_posts, (blogpost, index) => (
       blogpost.blogUrl === ctx.path.replace(/^\/blog\/|(.htm|.html)$/g,'')
     ))
     if(!findBlogpost.length > 0) {
-      pagejs.redirect('/erreurs/404')
+      pagejs.redirect(config.sp404Page)
     } else {
       ctx.data = {
         item: findBlogpost[0]
@@ -45,47 +53,32 @@ blogpost = (ctx, next) => {
       next()
     }
   }
-  error = () => {
-    pagejs.redirect('/erreurs/500')
-  }
-  $.when(
-    getData()
-  ).then(success, error)
+  $.when($.cachedJson(config.spApiAlldata)).then(success, defaultError)
 }
 
 home = (ctx, next) => {
-  ctx.data = null
-  next()
+  defaultController(ctx, next)
 }
 
 p404 = (ctx, next) => {
-  ctx.data = null
-  next()
+  defaultController(ctx, next)
 }
 
 p500 = (ctx, next) => {
-  ctx.data = null
-  next()
+  defaultController(ctx, next)
 }
 
 web = (ctx, next) => {
   success = () => {
     ctx.data = {
       contentful: {
-        internet_facts: data.internet_facts
+        internet_facts: loadedJson[config.spApiAlldata].internet_facts
       }
     }
     next()
   }
-  error = () => {
-    pagejs.redirect('/erreurs/500')
-  }
-  $.when(
-    getData()
-  ).then(success, error)
+  $.when($.cachedJson(config.spApiAlldata)).then(success, defaultError)
 }
-
-// -----------------------------------------------------------------------------
 
 module.exports = {
   blog: blog,

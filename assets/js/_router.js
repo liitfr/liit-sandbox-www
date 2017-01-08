@@ -9,13 +9,13 @@ var previousPath = null
 $.cachedScript = (url) => {
   if(loadedScripts.indexOf(url) === -1) {
     var options = {
-      dataType: "script",
       cache: true,
+      dataType: 'script',
       url: url
     }
     return $.ajax(options)
   } else {
-    return $.Deferred().done()
+    return true
   }
 }
 
@@ -49,6 +49,8 @@ render = (ctx) => {
   $.extend(ctx.data, {
     config: config
   })
+  // Class: hereOnly / always / once
+  // 404 remove when first arrival
   var generation = $(pages[resolvePath(ctx.path)].generation(ctx.data))
   document.title = generation.filter('title').text()
   $('meta[name="description"]').attr('content', generation.filter('meta[name="description"]').attr('content'))
@@ -71,7 +73,7 @@ render = (ctx) => {
       }
     } else if($(el).hasClass('reloadPlease')) {
       if($(el).attr('src')) {
-        Window.liit[$(el).attr('data-script-name')].onReload()
+        Window[config.spAppName][$(el).attr('data-script-name')].onReload()
       } else {
         $('main').append(el.outerHTML)
       }
@@ -84,7 +86,7 @@ run = () => {
     page.generation = require('!reshape?locals=false!../../views/' + page.view)
     pagejs(new RegExp(page.path, 'i'), prepare, controllers[name], render)
   })
-  pagejs('*', '/erreurs/404')
+  pagejs('*', config.sp404Page)
   pagejs()
 }
 

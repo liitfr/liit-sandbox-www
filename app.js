@@ -24,7 +24,9 @@ moment.locale('fr')
 module.exports = {
 
   outputDir: process.env.SP_OUTPUT_DIR,
+
   dumpDirs: ['views', 'assets', 'misc'],
+
   ignore: [
     '**/layout.sgr',
     '**/_*',
@@ -36,15 +38,16 @@ module.exports = {
     '**/templates/**.sgr',
     'pages.json'
   ],
+
   vendor: process.env.SP_VENDOR_DIR,
 
-// -----------------------------------------------------------------------------
-
   devtool: 'source-map',
+
   matchers: {
     html: '*(**/)*.sgr',
     css: '*(**/)*.sss'
   },
+
   reshape: (ctx) => {
     return htmlStandards({
       webpack: ctx,
@@ -52,6 +55,9 @@ module.exports = {
         {config: {
           disqusSrc: process.env.DISQUS_SRC,
           googleSiteId: process.env.GOOGLE_SITE_ID,
+          spAppName: process.env.SP_APP_NAME,
+          sp404Page: process.env.SP_404_PAGE,
+          sp500Page: process.env.SP_500_PAGE,
           spMetaTitleMaxSize: process.env.SP_META_TITLE_MAX_SIZE,
           spMetaDescMaxSize: process.env.SP_META_DESC_MAX_SIZE
         }},
@@ -59,6 +65,7 @@ module.exports = {
       )
     })
   },
+
   postcss: (ctx) => {
     const css = cssStandards({
       webpack: ctx,
@@ -70,18 +77,15 @@ module.exports = {
     css.plugins.push(normalize())
     return css
   },
+
   babel: {
     presets: [jsStandards]
   },
-
-// -----------------------------------------------------------------------------
 
   entry: {
     'js/common': ['./assets/js/common.js'],
     'js/error': ['./assets/js/error.js']
   },
-
-// -----------------------------------------------------------------------------
 
   module: {
     loaders: [
@@ -89,9 +93,8 @@ module.exports = {
     ]
   },
 
-// -----------------------------------------------------------------------------
-
   plugins: [
+
     new Contentful({
       addDataTo: locals,
       accessToken: process.env.CF_CONTENT_DELIVERY_API,
@@ -158,8 +161,9 @@ module.exports = {
           id: process.env.CF_MODEL_WORKTYPE
         }
       ],
-      json: path.join(process.env.SP_API_DIR, process.env.SP_API_ALLDATA_FILE)
+      json: path.join(process.env.SP_API_DIR, process.env.SP_API_ALLDATA)
     }),
+
     new FaviconsWebpackPlugin({
       logo: path.join(__dirname, 'assets/img', process.env.FAVICON_FILE),
       prefix: 'img/favicons/',
@@ -182,27 +186,34 @@ module.exports = {
         windows: false
       }
     }),
+
     new HardSourcePlugin({
       environmentPaths: { root: __dirname },
       recordsPath: path.join(__dirname, '_cache/records.json'),
       cacheDirectory: path.join(__dirname, '_cache/hard_source_cache')
     }),
+
     new webpack.DefinePlugin({
       config: {
-        api_alldata: JSON.stringify(urlJoin(
+        disqusSrc: JSON.stringify(process.env.DISQUS_SRC),
+        googleSiteId: JSON.stringify(process.env.GOOGLE_SITE_ID),
+        spApiAlldata: JSON.stringify(urlJoin(
           process.env.SP_BASE_URL,
           process.env.SP_API_DIR,
-          process.env.SP_API_ALLDATA_FILE
+          process.env.SP_API_ALLDATA
         )),
-        disqusSrc: JSON.stringify(process.env.GOOGLE_SITE_ID),
-        googleSiteId: JSON.stringify(process.env.GOOGLE_SITE_ID),
+        spAppName: JSON.stringify(process.env.SP_APP_NAME),
+        sp404Page: JSON.stringify(process.env.SP_404_PAGE),
+        sp500Page: JSON.stringify(process.env.SP_500_PAGE),
         spMetaTitleMaxSize: JSON.stringify(process.env.SP_META_TITLE_MAX_SIZE),
         spMetaDescMaxSize: JSON.stringify(process.env.SP_META_DESC_MAX_SIZE)
       }
     }),
+
     new webpack.ProvidePlugin({
-        THREE: 'three'
+      THREE: 'three'
     })
+
   ]
 
 }

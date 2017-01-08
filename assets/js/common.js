@@ -1,6 +1,3 @@
-// Todo : cache for all_data
-// transformations pour virer md, moment & slug !
-// Creuser les appels multiples à get script ...
 // disqus ?
 
 const FastClick = require('fastclick')
@@ -10,7 +7,7 @@ const router = require('./_router.js')
 router.run()
 
 $(function() {
-    FastClick.attach(document.body)
+  FastClick.attach(document.body)
 })
 
 // if($('#disqus_thread').length) {

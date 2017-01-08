@@ -101,7 +101,7 @@ function onReload() {
   $('main').append( container )
 }
 
-Window.liit = Object.assign(
+Window[config.spAppName] = Object.assign(
   {error: {
     onReload: onReload
   }}
