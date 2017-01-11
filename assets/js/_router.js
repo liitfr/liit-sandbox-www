@@ -1,3 +1,7 @@
+// Todo: Class: hereOnly / always / never
+// Todo: Class remove
+// Bug: 404 remove after first arrival
+
 const controllers = require('./_controllers.js')
 const pagejs = require('page')
 
@@ -49,8 +53,6 @@ render = (ctx) => {
   $.extend(ctx.data, {
     config: config
   })
-  // Class: hereOnly / always / once
-  // 404 remove when first arrival
   var generation = $(pages[resolvePath(ctx.path)].generation(ctx.data))
   document.title = generation.filter('title').text()
   $('meta[name="description"]').attr('content', generation.filter('meta[name="description"]').attr('content'))
@@ -73,7 +75,7 @@ render = (ctx) => {
       }
     } else if($(el).hasClass('reloadPlease')) {
       if($(el).attr('src')) {
-        Window[config.spAppName][$(el).attr('data-script-name')].onReload()
+        Window[config.spAppName][$(el).attr('data-script-name')][$(el).attr('data-function-name')]()
       } else {
         $('main').append(el.outerHTML)
       }

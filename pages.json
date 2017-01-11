@@ -1,26 +1,26 @@
 {
   "blog" : {
-    "path": "^\/blog(?:\/|\/index(?:\\.htm|\\.html)?)?$",
+    "path": "^\/blog(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?$",
     "view": "blog/index.sgr"
   },
   "blogpost" : {
-    "path": "^\/blog\/(?!index(?:\\.htm|\\.html)?$).+$",
+    "path": "^\/blog\/(?!index(?:.html?)?(?:\\?.*)?$|\\?.*).+$",
     "view": "templates/blogpost.sgr"
   },
   "home": {
-    "path": "^(?:\/|\/index(?:\\.htm|\\.html)?)?$",
+    "path": "^(?:\/|\/index(?:\\.html?)?)?(?:\\?.*)?$",
     "view": "index.sgr"
   },
   "p404" : {
-    "path": "^\/erreurs\/404(?:\\.htm|\\.html)?$",
+    "path": "^\/erreurs\/404(?:\\.html?)?(?:\\?.*)?$",
     "view": "erreurs/404.sgr"
   },
   "p500": {
-    "path": "^\/erreurs\/500(?:\\.htm|\\.html)?$",
+    "path": "^\/erreurs\/500(?:\\.html?)?(?:\\?.*)?$",
     "view": "erreurs/500.sgr"
   },
   "web": {
-    "path": "^\/web(?:\\.htm|\\.html)?$",
+    "path": "^\/web(?:\\.html?)?(?:\\?.*)?$",
     "view": "web.sgr"
   }
 }

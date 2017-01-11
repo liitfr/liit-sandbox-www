@@ -38,4 +38,7 @@ extends(src="../layout.sgr")
           each(loop="discovery, index of item.relatedDiscoveries")
             li {{ discovery.fields.title }}
 
-      #disqus_thread
+      #disqus_thread(data-disqus-identifier="{{ item.id }}")
+
+  block(name="js-body" type="append")
+    script.reloadPlease.hereOnly(src="/js/blogpost.js" data-script-name="blogpost" data-function-name="onReload" defer)

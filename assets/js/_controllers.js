@@ -1,3 +1,5 @@
+// TODO : test regex with ? parameters and # hash
+
 const pagejs = require('page')
 
 var loadedJson = []
@@ -42,7 +44,7 @@ blog = (ctx, next) => {
 blogpost = (ctx, next) => {
   success = () => {
     findBlogpost = $.grep(loadedJson[config.spApiAlldata].blog_posts, (blogpost, index) => (
-      blogpost.blogUrl === ctx.path.replace(/^\/blog\/|(.htm|.html)$/g,'')
+      blogpost.blogUrl === ctx.path.replace(/^\/blog\/|.html?$|(?:.html?)?\?.*$/gi,'')
     ))
     if(!findBlogpost.length > 0) {
       pagejs.redirect(config.sp404Page)

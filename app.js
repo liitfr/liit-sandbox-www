@@ -1,10 +1,10 @@
 // TODO: Vendor vs webpack require ?
 // TODO : Remove images from .gitignore once they are revelant
 // BUG : Github doesn't display good technology (linguist) ...
+require('dotenv').config({ silent: true })
 
 const Contentful = require('spike-contentful')
 const cssStandards = require('spike-css-standards')
-const dotEnv = require('dotenv').config()
 const HardSourcePlugin = require('hard-source-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const htmlStandards = require('reshape-standard')
@@ -53,7 +53,8 @@ module.exports = {
       webpack: ctx,
       locals: Object.assign(
         {config: {
-          disqusSrc: process.env.DISQUS_SRC,
+          disqusLanguage: process.env.DISQUS_LANGUAGE,
+          disqusShortname: process.env.DISQUS_SHORTNAME,
           googleSiteId: process.env.GOOGLE_SITE_ID,
           spAppName: process.env.SP_APP_NAME,
           sp404Page: process.env.SP_404_PAGE,
@@ -83,6 +84,7 @@ module.exports = {
   },
 
   entry: {
+    'js/blogpost': ['./assets/js/blogpost.js'],
     'js/common': ['./assets/js/common.js'],
     'js/error': ['./assets/js/error.js']
   },
@@ -195,7 +197,8 @@ module.exports = {
 
     new webpack.DefinePlugin({
       config: {
-        disqusSrc: JSON.stringify(process.env.DISQUS_SRC),
+        disqusLanguage: JSON.stringify(process.env.DISQUS_LANGUAGE),
+        disqusShortname: JSON.stringify(process.env.DISQUS_SHORTNAME),
         googleSiteId: JSON.stringify(process.env.GOOGLE_SITE_ID),
         spApiAlldata: JSON.stringify(urlJoin(
           process.env.SP_BASE_URL,
