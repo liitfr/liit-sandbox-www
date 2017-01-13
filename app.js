@@ -1,6 +1,7 @@
 // TODO: Vendor vs webpack require ?
 // TODO : Remove images from .gitignore once they are revelant
 // BUG : Github doesn't display good technology (linguist) ...
+// TODO : Add link rel canonical in pages ! (https://alexcican.com/post/how-to-remove-php-html-htm-extensions-with-htaccess/)
 require('dotenv').config({ silent: true })
 
 const Contentful = require('spike-contentful')
@@ -16,7 +17,6 @@ const moment = require('moment')
 const normalize = require('postcss-normalize')
 const path = require('path')
 const slug = require('speakingurl')
-const urlJoin = require('url-join')
 const webpack = require('webpack')
 
 moment.locale('fr')
@@ -200,8 +200,7 @@ module.exports = {
         disqusLanguage: JSON.stringify(process.env.DISQUS_LANGUAGE),
         disqusShortname: JSON.stringify(process.env.DISQUS_SHORTNAME),
         googleSiteId: JSON.stringify(process.env.GOOGLE_SITE_ID),
-        spApiAlldata: JSON.stringify(urlJoin(
-          process.env.SP_BASE_URL,
+        spApiAlldata: JSON.stringify(path.join(
           process.env.SP_API_DIR,
           process.env.SP_API_ALLDATA
         )),

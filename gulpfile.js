@@ -2,6 +2,8 @@
 // TODO : rajouter watch
 // TODO : supprimer favicons (car ils ne seront pas présents dans le js)
 // TODO : clore les balises </html> (dans le js ?)
+// TODO : supprimer les commentaires du htaccess
+// TODO : déploiement auto ftp
 
 const del = require('del')
 const dotEnv = require('dotenv').config()
@@ -51,7 +53,7 @@ gulp.task('compile', ['emptycache', 'clean'], function(){
 
 gulp.task('addhash', ['compile'], function(){
   return gulp.src([
-    path.join(outputDir, apiDir, '/**/*.json')
+    path.join(outputDir, apiDir, '/**/*.json'),
     path.join(outputDir, '/css/**/*.css'),
     path.join(outputDir, '/js/**/*.js'),
     path.join(outputDir, '/img/**/*.{gif,jpeg,jpg,png,svg}')

@@ -75,7 +75,7 @@ render = (ctx) => {
       }
     } else if($(el).hasClass('reloadPlease')) {
       if($(el).attr('src')) {
-        Window[config.spAppName][$(el).attr('data-script-name')][$(el).attr('data-function-name')]()
+        window[config.spAppName][$(el).attr('data-script-name')][$(el).attr('data-function-name')]()
       } else {
         $('main').append(el.outerHTML)
       }

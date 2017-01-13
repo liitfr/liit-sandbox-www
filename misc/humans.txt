@@ -15,7 +15,7 @@ Jeff Escalante: http://jeffescalante.com
 
 Last update:  2017/01/01
 Standards: HTML5, CSS3, ES6
-Components: HTML5Boilerplate, Modernizr, jQuery, Spike, GSAP, Three, Webpack, Contentful, Reshape, PostCSS, ...
+Components: Node.js, NPM, Gulp, HTML5Boilerplate, Modernizr, jQuery, Spike, GSAP, Three, Webpack, Contentful, Reshape, PostCSS, ...
 Software: Atom, GitKraken
 
                 ___       ___          ___

@@ -1,0 +1,14 @@
+extends(src="../layout.sgr")
+
+  block(name="meta")
+    title verboden forbidden verboten interdit prohibido | LIIT
+    meta(name="description" content="Damned ! L'accès à cette ressource n'est pas authorisé !")
+    meta(name="robots" content="noindex, nofollow")
+
+  block(name="content")
+    main(role="main" id="erreurs-403")
+      p Damned ! L'accès à cette ressource n'est pas authorisé !
+      a(href="/") Retour à l'accueil
+
+  block(name="js-body" type="append")
+    script.reloadPlease.hereOnly(src="/js/error.js" data-script-name="error" data-function-name="onReload" defer)

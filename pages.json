@@ -11,6 +11,10 @@
     "path": "^(?:\/|\/index(?:\\.html?)?)?(?:\\?.*)?$",
     "view": "index.sgr"
   },
+  "p403" : {
+    "path": "^\/erreurs\/403(?:\\.html?)?(?:\\?.*)?$",
+    "view": "erreurs/403.sgr"
+  },
   "p404" : {
     "path": "^\/erreurs\/404(?:\\.html?)?(?:\\?.*)?$",
     "view": "erreurs/404.sgr"

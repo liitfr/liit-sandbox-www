@@ -19,6 +19,7 @@ var reset = function() {
 }
 var s = d.createElement('script')
 
+window.disqus_config = disqus_config
 s.src = '//' + config.disqusShortname + '.disqus.com/embed.js'
 s.setAttribute('data-timestamp', +new Date());
 (d.head || d.body).appendChild(s)
@@ -27,7 +28,7 @@ function onReload() {
   reset()
 }
 
-Window[config.spAppName] = Object.assign(
+window[config.spAppName] = Object.assign(
   {blogpost: {
     onReload: onReload
   }}

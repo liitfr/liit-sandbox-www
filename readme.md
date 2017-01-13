@@ -12,7 +12,9 @@
     \__\/        \__\/     \__\/        \__\/
 
 ```
-liit.fr website creation
+website creation
+
+:construction: This document is a draft :heavy_exclamation_mark:
 
 ## Technical Choices
 

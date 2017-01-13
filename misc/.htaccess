@@ -85,6 +85,7 @@
 # Customize what Apache returns to the client in case of an error.
 # https://httpd.apache.org/docs/current/mod/core.html#errordocument
 
+ErrorDocument 403 /erreurs/403.html
 ErrorDocument 404 /erreurs/404.html
 
 # ----------------------------------------------------------------------
@@ -933,3 +934,224 @@ FileETag None
 #     RewriteCond %{REQUEST_FILENAME} !-f
 #     RewriteRule ^(.+)\.(\d+)\.(bmp|css|cur|gif|ico|jpe?g|js|png|svgz?|webp)$ $1.$3 [L]
 # </IfModule>
+
+# ######################################################################
+# # LIIT TOOLBOX                                                       #
+# ######################################################################
+
+# More settings that aren't used above
+# Some of them are presented here : https://perishablepress.com/stupid-htaccess-tricks/#performance
+
+# ----------------------------------------------------------------------
+# | Set TimeZone                                                       |
+# ----------------------------------------------------------------------
+
+SetEnv TZ Europe/Paris
+
+# ----------------------------------------------------------------------
+# | Server Signature                                                   |
+# ----------------------------------------------------------------------
+
+# ServerSignature Off
+
+# ----------------------------------------------------------------------
+# | Server Admin                                                       |
+# ----------------------------------------------------------------------
+
+# SetEnv SERVER_ADMIN default@domain.com
+
+# ----------------------------------------------------------------------
+# | Default Language                                                   |
+# ----------------------------------------------------------------------
+
+# DefaultLanguage en-US
+
+# ----------------------------------------------------------------------
+# | .htaccess & .htpasswds protection                                  |
+# ----------------------------------------------------------------------
+
+<Files ~ "^.*\.([Hh][Tt][AaPp])">
+    order allow,deny
+    deny from all
+    satisfy all
+</Files>
+
+# ----------------------------------------------------------------------
+# | Some more Expires headers                                          |
+# ----------------------------------------------------------------------
+
+<IfModule mod_expires.c>
+    ExpiresByType application/pdf "access plus 0 seconds"
+    ExpiresByType application/x-shockwave-flash "access plus 1 week"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType text/x-component "access plus 1 month"
+</IfModule>
+
+# ----------------------------------------------------------------------
+# | Wordpress author protection                                        |
+# ----------------------------------------------------------------------
+
+# <IfModule mod_rewrite.c>
+#     RewriteCond %{QUERY_STRING} ^author=([0-9]*)
+#     RewriteRule .* - [F]
+# </IfModule>
+
+# ----------------------------------------------------------------------
+# | Prevent hotlinking                                                 |
+# ----------------------------------------------------------------------
+
+# RewriteEngine on
+# RewriteCond %{HTTP_REFERER} !^$
+# RewriteCond %{HTTP_REFERER} !^http://(www\.)example.com/.*$ [NC]
+# RewriteRule \.(gif|jpg|jpeg|bmp|zip|rar|mp3|flv|swf|xml|php|png|css|pdf)$ - [F]
+
+# Or if you want to serve alternate content
+
+# RewriteEngine on
+# RewriteCond %{HTTP_REFERER} !^$
+# RewriteCond %{HTTP_REFERER} !^http://(www\.)example.com/.*$ [NC]
+# RewriteRule \.(gif|jpg)$ http://www.example.com/angryman.gif [R,L]
+
+# ----------------------------------------------------------------------
+# | Remove .htm(l) Extensions                                          |
+# ----------------------------------------------------------------------
+
+# https://alexcican.com/post/how-to-remove-php-html-htm-extensions-with-htaccess/
+# https://www.abeautifulsite.net/access-pages-without-the-php-extension-using-htaccess
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^([^\.]+)$ $1.html? [NC,L]
+</IfModule>
+
+# ----------------------------------------------------------------------
+# | Maintenance page                                                   |
+# ----------------------------------------------------------------------
+
+# <IfModule mod_rewrite.c>
+#     RewriteEngine on
+#     RewriteCond %{REQUEST_URI} !/maintenance.html$ [NC]
+#     RewriteCond %{REQUEST_URI} !/google3661a7a1823112c1.html$ [NC]
+#     RewriteCond %{REQUEST_URI} !/sitemap.xml$ [NC]
+#     RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|gif|svg|css|js)$ [NC]
+#     RewriteCond %{REMOTE_ADDR} !^XX\.XX\.XX\.XX
+#     RewriteRule ^(.*)$ /maintenance.html [R=302,L]
+# </IfModule>
+
+# ----------------------------------------------------------------------
+# | Construction page                                                  |
+# ----------------------------------------------------------------------
+
+# <IfModule mod_rewrite.c>
+#     RewriteEngine on
+#     RewriteCond %{REQUEST_URI} !/construction.html$ [NC]
+#     RewriteCond %{REQUEST_URI} !/google3661a7a1823112c1.html$ [NC]
+#     RewriteCond %{REQUEST_URI} !/sitemap.xml$ [NC]
+#     RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|gif|svg|css|js)$ [NC]
+#     RewriteCond %{REMOTE_ADDR} !^XX\.XX\.XX\.XX
+#     RewriteRule ^(.*)$ /construction.html [R=302,L]
+# </IfModule>
+
+# ----------------------------------------------------------------------
+# | Force files to be downloaded                                       |
+# ----------------------------------------------------------------------
+
+# AddType application/octet-stream .doc .docx .xls .xlsx .csv .mp3 .mp4 .avi .mpg .mov .pdf
+
+# ----------------------------------------------------------------------
+# | Redirections                                                       |
+# ----------------------------------------------------------------------
+
+# Permanent
+
+# Redirect 301 /admin http://www.website.com/assets/wordpress/wp-admin/
+# Redirect 301 /assets/wordpress/index.php http://www.website.com/index.php
+
+# Temporary
+
+# Redirect 302 /admin http://www.website.com/assets/wordpress/wp-admin/
+# Redirect 302 /assets/wordpress/index.php http://www.website.com/index
+
+# ----------------------------------------------------------------------
+# | Cache-Control Headers                                              |
+# ----------------------------------------------------------------------
+
+# <ifModule mod_headers.c>
+#     <filesMatch "\.(ico|jpe?g|png|gif|swf)$">
+#         Header set Cache-Control "public"
+#     </filesMatch>
+#     <filesMatch "\.(css)$">
+#         Header set Cache-Control "public"
+#     </filesMatch>
+#     <filesMatch "\.(js)$">
+#         Header set Cache-Control "private"
+#     </filesMatch>
+#     <filesMatch "\.(x?html?|php)$">
+#         Header set Cache-Control "private, must-revalidate"
+#     </filesMatch>
+# </ifModule>
+
+# ----------------------------------------------------------------------
+# | Security against injections                                        |
+# ----------------------------------------------------------------------
+
+# https://secure.rivalhost.com/knowledgebase/1037/htaccess-against-mysql-injections-and-other-hacks.html
+
+# RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK|DEBUG) [NC]
+# RewriteRule ^(.*)$ - [F,L]
+# RewriteCond %{REQUEST_URI} (timthumb\.php|phpthumb\.php|thumb\.php|thumbs\.php) [NC]
+# RewriteRule . - [S=1]
+# RewriteCond %{HTTP_USER_AGENT} (libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
+# RewriteCond %{HTTP_USER_AGENT} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
+# RewriteCond %{HTTP_USER_AGENT} (;|<|>|'|"|\)|\(|%0A|%0D|%22|%27|%28|%3C|%3E|%00).*(libwww-perl|wget|python|nikto|curl|scan|java|winhttp|HTTrack|clshttp|archiver|loader|email|harvest|extract|grab|miner) [NC,OR]
+# RewriteCond %{THE_REQUEST} \?\ HTTP/ [NC,OR]
+# RewriteCond %{THE_REQUEST} \/\*\ HTTP/ [NC,OR]
+# RewriteCond %{THE_REQUEST} etc/passwd [NC,OR]
+# RewriteCond %{THE_REQUEST} cgi-bin [NC,OR]
+# RewriteCond %{THE_REQUEST} (%0A|%0D) [NC,OR]
+# RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=http:// [OR]
+# RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=(\.\.//?)+ [OR]
+# RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=/([a-z0-9_.]//?)+ [NC,OR]
+# RewriteCond %{QUERY_STRING} \=PHP[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12} [NC,OR]
+# RewriteCond %{QUERY_STRING} (\.\./|\.\.) [OR]
+# RewriteCond %{QUERY_STRING} ftp\: [NC,OR]
+# RewriteCond %{QUERY_STRING} http\: [NC,OR]
+# RewriteCond %{QUERY_STRING} https\: [NC,OR]
+# RewriteCond %{QUERY_STRING} \=\|w\| [NC,OR]
+# RewriteCond %{QUERY_STRING} ^(.*)/self/(.*)$ [NC,OR]
+# RewriteCond %{QUERY_STRING} ^(.*)cPath=http://(.*)$ [NC,OR]
+# RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+# RewriteCond %{QUERY_STRING} (<|%3C)([^s]*s)+cript.*(>|%3E) [NC,OR]
+# RewriteCond %{QUERY_STRING} (\<|%3C).*iframe.*(\>|%3E) [NC,OR]
+# RewriteCond %{QUERY_STRING} (<|%3C)([^i]*i)+frame.*(>|%3E) [NC,OR]
+# RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [NC,OR]
+# RewriteCond %{QUERY_STRING} base64_(en|de)code[^(]*\([^)]*\) [NC,OR]
+# RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+# RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2}) [OR]
+# RewriteCond %{QUERY_STRING} ^.*(\[|\]|\(|\)|<|>).* [NC,OR]
+# RewriteCond %{QUERY_STRING} (NULL|OUTFILE|LOAD_FILE) [OR]
+# RewriteCond %{QUERY_STRING} (\./|\../|\.../)+(motd|etc|bin) [NC,OR]
+# RewriteCond %{QUERY_STRING} (localhost|loopback|127\.0\.0\.1) [NC,OR]
+# RewriteCond %{QUERY_STRING} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
+# RewriteCond %{QUERY_STRING} concat[^\(]*\( [NC,OR]
+# RewriteCond %{QUERY_STRING} union([^s]*s)+elect [NC,OR]
+# RewriteCond %{QUERY_STRING} union([^a]*a)+ll([^s]*s)+elect [NC,OR]
+# RewriteCond %{QUERY_STRING} (;|<|>|'|"|\)|%0A|%0D|%22|%27|%3C|%3E|%00).*(/\*|union|select|insert|drop|delete|update|cast|create|char|convert|alter|declare|order|script|set|md5|benchmark|encode) [NC,OR]
+# RewriteCond %{QUERY_STRING} (sp_executesql) [NC]
+# RewriteRule ^(.*)$ - [F,L]
+
+# ----------------------------------------------------------------------
+# | Further configs for Deflate                                        |
+# ----------------------------------------------------------------------
+
+# http://httpd.apache.org/docs/2.0/mod/mod_deflate.html
+
+# <Location />
+#     SetOutputFilter DEFLATE
+#     BrowserMatch ^Mozilla/4 gzip-only-text/html
+#     BrowserMatch ^Mozilla/4\.0[678] no-gzip
+#     BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+#     Header append Vary User-Agent env=!dont-vary
+# </Location>

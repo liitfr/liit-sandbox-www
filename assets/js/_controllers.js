@@ -62,6 +62,10 @@ home = (ctx, next) => {
   defaultController(ctx, next)
 }
 
+p403 = (ctx, next) => {
+  defaultController(ctx, next)
+}
+
 p404 = (ctx, next) => {
   defaultController(ctx, next)
 }
@@ -86,6 +90,7 @@ module.exports = {
   blog: blog,
   blogpost: blogpost,
   home: home,
+  p403: p403,
   p404: p404,
   p500: p500,
   web: web
