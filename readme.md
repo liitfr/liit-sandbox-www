@@ -26,6 +26,15 @@ website creation
 - I didn't use PageId but did it myself (because of bug)
 - router and scripts
 - transformations to avoid big bundle
+- router : ne fonctionne qu'avec des scripts non inline
+- css : tout dans un seul fichier :
+```
+Current strategy : all pages use the same bundle.css file.
+Pros: cache. OK if pages don't have too much individual styles (increase overall size)  
+Cons : Size. KO if some pages only use few individual styles ...
+Let's find the critical path ... ;)
+Best practices : https://github.com/jescalan/gps
+```
 
 ## Routing
 

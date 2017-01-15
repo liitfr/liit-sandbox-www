@@ -1,6 +1,3 @@
-// TODO : disqus ?
-// TODO : attention aux extensions html (404) et rafraichissement F5
-
 const FastClick = require('fastclick')
 const LogStyle = require('log-with-style')
 const plugins = require('./_plugins.js')

@@ -1,6 +1,6 @@
-// Todo: Class: hereOnly / always / never
-// Todo: Class remove
-// Bug: 404 remove after first arrival
+// TODO : window.location.href with .html (reference comments) ?
+// TODO : attention aux extensions html (404) et rafraichissement F5
+// TODO : canonical
 
 const controllers = require('./_controllers.js')
 const pagejs = require('page')
@@ -60,25 +60,12 @@ render = (ctx) => {
   $('main').html(generation.filter('main').html())
   $('main').attr('id',generation.filter('main').attr('id'))
   $(generation).filter('script').each((id, el) => {
-    if(loadedScripts.indexOf(el.outerHTML) === -1) {
-      if($(el).attr('src')) {
-        $.when($.cachedScript($(el).attr('src'))).done(() => {
-          loadedScripts.push(el.outerHTML)
-        })
-      } else {
-        if($(el).hasClass('reloadPlease')) {
-          $('main').append(el.outerHTML)
-        } else {
-          $('body').append(el.outerHTML)
-        }
+    if(loadedScripts.indexOf(el.outerHTML) === -1 && $(el).attr('src')) {
+      $.when($.cachedScript($(el).attr('src'))).done(() => {
         loadedScripts.push(el.outerHTML)
-      }
-    } else if($(el).hasClass('reloadPlease')) {
-      if($(el).attr('src')) {
-        window[config.spAppName][$(el).attr('data-script-name')][$(el).attr('data-function-name')]()
-      } else {
-        $('main').append(el.outerHTML)
-      }
+      })
+    } else if($(el).attr('data-hot-reload') === 'true') {
+      window[config.spAppName][$(el).attr('data-script-name')][$(el).attr('data-function-name')]()
     }
   })
 }

@@ -15,6 +15,7 @@
     "hard-source-webpack-plugin": "0.2.2",
     "html5-boilerplate": "0.0.1",
     "image-webpack-loader": "^3.0.0",
+    "isotope-layout": "^3.0.1",
     "json-loader": "^0.5.4",
     "log-with-style": "^0.3.0",
     "lost": "^7.1.1",

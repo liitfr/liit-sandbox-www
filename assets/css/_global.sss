@@ -1,4 +1,5 @@
-/*https://gist.github.com/dbox/f8bcb317d9d0d155c9ca33ef4a044a2d*/
+/* reproduction of rupture */ 
+/* https://gist.github.com/dbox/f8bcb317d9d0d155c9ca33ef4a044a2d*/
 :root
   @custom-media --xs (width < 20em)                   /* 320px  */
   @custom-media --s (width < 28em)                    /* 448px  */
@@ -17,3 +18,7 @@
   @custom-media --retina (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)
   @custom-media --landscape (orientation: landscape)
   @custom-media --portrait (orientation: portrait)
+
+::selection
+  color: red
+  background: yellow

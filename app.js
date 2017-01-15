@@ -84,6 +84,7 @@ module.exports = {
   },
 
   entry: {
+    'js/blog': ['./assets/js/blog.js'],
     'js/blogpost': ['./assets/js/blogpost.js'],
     'js/common': ['./assets/js/common.js'],
     'js/error': ['./assets/js/error.js']

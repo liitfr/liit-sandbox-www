@@ -11,4 +11,4 @@ extends(src="../layout.sgr")
       a(href="/") Retour à l'accueil
 
   block(name="js-body" type="append")
-    script.reloadPlease.hereOnly(src="/js/error.js" data-script-name="error" data-function-name="onReload" defer)
+    script(src="/js/error.js" data-hot-reload="true" data-script-name="error" data-function-name="onReload" defer)

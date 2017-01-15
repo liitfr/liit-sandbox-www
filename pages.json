@@ -8,23 +8,23 @@
     "view": "templates/blogpost.sgr"
   },
   "home": {
-    "path": "^(?:\/|\/index(?:\\.html?)?)?(?:\\?.*)?$",
+    "path": "^(?:\/|\/index(?:\\.html?)?)?(?:\\?.*)?(?:\\#.*)?$",
     "view": "index.sgr"
   },
   "p403" : {
-    "path": "^\/erreurs\/403(?:\\.html?)?(?:\\?.*)?$",
+    "path": "^\/erreurs\/403(?:\\.html?)?(?:\\?.*)?(?:\\#.*)?$",
     "view": "erreurs/403.sgr"
   },
   "p404" : {
-    "path": "^\/erreurs\/404(?:\\.html?)?(?:\\?.*)?$",
+    "path": "^\/erreurs\/404(?:\\.html?)?(?:\\?.*)?(?:\\#.*)?$",
     "view": "erreurs/404.sgr"
   },
   "p500": {
-    "path": "^\/erreurs\/500(?:\\.html?)?(?:\\?.*)?$",
+    "path": "^\/erreurs\/500(?:\\.html?)?(?:\\?.*)?(?:\\#.*)?$",
     "view": "erreurs/500.sgr"
   },
   "web": {
-    "path": "^\/web(?:\\.html?)?(?:\\?.*)?$",
+    "path": "^\/web(?:\\.html?)?(?:\\?.*)?(?:\\#.*)?$",
     "view": "web.sgr"
   }
 }
