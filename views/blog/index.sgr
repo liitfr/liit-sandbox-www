@@ -8,7 +8,18 @@ extends(src="../layout.sgr")
   block(name="content")
     main(role="main" id="blog-index")
       h2 Blog
-      ul
-        each(loop="blogpost, index in contentful.blog_posts")
-          li
-            a(href="/blog/{{ blogpost.blogUrl }}?test=test") {{ blogpost.title }}
+        h3 Catégories
+        ul
+          each(loop="blogcategory, index in contentful.blog_categories")
+            li {{ blogcategory.fields.name }}
+        h3 Posts
+        ul
+          each(loop="blogpost, index in contentful.blog_posts")
+            li
+              a(href="/blog/{{ blogpost.fields.blogUrl }}") {{ blogpost.fields.title }}
+              | (
+              span.disqus-comment-count(data-disqus-identifier="{{ blogpost.fields.id }}")
+              | )
+
+  block(name="js-body" type="append")
+    script(src="/js/blog.js" data-hot-reload="true" data-script-name="blog" data-function-name="onReload" defer)

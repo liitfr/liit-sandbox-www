@@ -6,4 +6,5 @@ extends(src="layout.sgr")
       ul
         li: a(href="/web") Web
         li: a(href="/blog") Blog
+        li: a(href="/fournees") Fournées
         li: a(href="/fake") Faux lien

@@ -1,44 +1,44 @@
 extends(src="../layout.sgr")
 
   block(name="meta")
-    title {{ item.title.length > config.spMetaTitleMaxSize ? item.title.substring(0, config.spMetaTitleMaxSize - 19) + " ..." : item.title }} | Article LIIT
-    meta(name="description" content="{{ item.descriptionMeta.length > config.spMetaDescMaxSize ? item.descriptionMeta.substring(0, config.spMetaDescMaxSize - 4) + ' ...' : item.descriptionMeta }}")
+    title {{ item.fields.title.length > config.spMetaTitleMaxSize ? item.fields.title.substring(0, config.spMetaTitleMaxSize - 19) + " ..." : item.fields.title }} | Article LIIT
+    meta(name="description" content="{{ item.fields.descriptionMeta.length > config.spMetaDescMaxSize ? item.fields.descriptionMeta.substring(0, config.spMetaDescMaxSize - 4) + ' ...' : item.fields.descriptionMeta }}")
     meta(name="robots" content="index, follow")
 
   block(name="content")
-    main(role="main" id="blog-{{ item.blogUrl }}")
-      h2 {{ item.title }}
-      p {{ item.dateLabel }}
-      if(condition="item.readingTime")
-        p Temps de lecture : {{ item.readingTime }} {{ item.readingTime > 1 ? "minutes" : "minute" }}
+    main(role="main" id="blog-{{ item.fields.blogUrl }}")
+      h2 {{ item.fields.title }}
+      p {{ item.fields.dateLabel }}
+      if(condition="item.fields.readingTime")
+        p Temps de lecture : {{ item.fields.readingTime }} {{ item.fields.readingTime > 1 ? "minutes" : "minute" }}
       p
-        | Publié dans {{ item.categories.length > 1 ? "les catégories" : "la catégorie" }} :
-        each(loop="category, index of item.categories")
+        | Publié dans {{ item.fields.categories.length > 1 ? "les catégories" : "la catégorie" }} :
+        each(loop="category, index of item.fields.categories")
           | {{ index > 0 ? ", " : "" }} {{ category.fields.name }}
-      if(condition="item.tags")
+      if(condition="item.fields.tags")
         p
-          | {{ item.tags.length > 1 ? "Tags" : "Tag" }} :
-          each(loop="tag, index of item.tags")
+          | {{ item.fields.tags.length > 1 ? "Tags" : "Tag" }} :
+          each(loop="tag, index of item.fields.tags")
             | {{ index > 0 ? ", " : "" }} {{ tag.fields.tagName }}
-      p Rédigé par {{ item.author.fields.firstName }}
-      p {{{ item.content }}}
-      if(condition="item.relatedBlogPosts")
+      p Rédigé par {{ item.fields.author.fields.firstName }}
+      p {{{ item.fields.content }}}
+      if(condition="item.fields.relatedBlogPosts")
         p À lire également :
         ul
-          each(loop="blogpost, index of item.relatedBlogPosts")
+          each(loop="blogpost, index of item.fields.relatedBlogPosts")
             li {{ blogpost.fields.title }}
-      if(condition="item.relatedWorks")
-        p Découvrez {{ item.relatedWorks.length > 1 ? "ces réalisations" : "cette réalisation" }} :
+      if(condition="item.fields.relatedWorks")
+        p Découvrez {{ item.fields.relatedWorks.length > 1 ? "ces réalisations" : "cette réalisation" }} :
         ul
-          each(loop="work, index of item.relatedWorks")
+          each(loop="work, index of item.fields.relatedWorks")
             li {{ work.fields.title }}
-      if(condition="item.relatedDiscoveries")
-        p Cet article fait référence à {{ item.relatedDiscoveries.length > 1 ? "ces découvertes" : "cette découverte" }} :
+      if(condition="item.fields.relatedDiscoveries")
+        p Cet article fait référence à {{ item.fields.relatedDiscoveries.length > 1 ? "ces découvertes" : "cette découverte" }} :
         ul
-          each(loop="discovery, index of item.relatedDiscoveries")
+          each(loop="discovery, index of item.fields.relatedDiscoveries")
             li {{ discovery.fields.title }}
 
-      #disqus_thread(data-disqus-identifier="{{ item.id }}")
+      #disqus_thread(data-disqus-identifier="{{ item.fields.id }}")
 
   block(name="js-body" type="append")
     script(src="/js/blogpost.js" data-hot-reload="true" data-script-name="blogpost" data-function-name="onReload" defer)

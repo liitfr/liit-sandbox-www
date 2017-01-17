@@ -2,13 +2,14 @@
 // TODO : Remove images from .gitignore once they are revelant
 // BUG : Github doesn't display good technology (linguist) ...
 // TODO : Add link rel canonical in pages ! (https://alexcican.com/post/how-to-remove-php-html-htm-extensions-with-htaccess/)
+
 require('dotenv').config({ silent: true })
 
 const Contentful = require('spike-contentful')
 const cssStandards = require('spike-css-standards')
 const HardSourcePlugin = require('hard-source-webpack-plugin')
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const htmlStandards = require('reshape-standard')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const jsStandards = require('babel-preset-latest')
 const locals = {}
 const lost = require('lost')
@@ -23,65 +24,13 @@ moment.locale('fr')
 
 module.exports = {
 
-  outputDir: process.env.SP_OUTPUT_DIR,
-
-  dumpDirs: ['views', 'assets', 'misc'],
-
-  ignore: [
-    '**/layout.sgr',
-    '**/_*',
-    '.*',
-    'assets/img/.gitkeep',
-    '_cache/**',
-    'readme.md',
-    'license.md',
-    '**/templates/**.sgr',
-    'pages.json'
-  ],
-
-  vendor: process.env.SP_VENDOR_DIR,
-
-  devtool: 'source-map',
-
-  matchers: {
-    html: '*(**/)*.sgr',
-    css: '*(**/)*.sss'
-  },
-
-  reshape: (ctx) => {
-    return htmlStandards({
-      webpack: ctx,
-      locals: Object.assign(
-        {config: {
-          disqusLanguage: process.env.DISQUS_LANGUAGE,
-          disqusShortname: process.env.DISQUS_SHORTNAME,
-          googleSiteId: process.env.GOOGLE_SITE_ID,
-          spAppName: process.env.SP_APP_NAME,
-          sp404Page: process.env.SP_404_PAGE,
-          sp500Page: process.env.SP_500_PAGE,
-          spMetaTitleMaxSize: process.env.SP_META_TITLE_MAX_SIZE,
-          spMetaDescMaxSize: process.env.SP_META_DESC_MAX_SIZE
-        }},
-        locals
-      )
-    })
-  },
-
-  postcss: (ctx) => {
-    const css = cssStandards({
-      webpack: ctx,
-      rucksack : {
-        fallbacks: true
-      }
-    })
-    css.plugins.push(lost())
-    css.plugins.push(normalize())
-    return css
-  },
-
   babel: {
     presets: [jsStandards]
   },
+
+  devtool: 'source-map',
+
+  dumpDirs: ['views', 'assets', 'misc'],
 
   entry: {
     'js/blog': ['./assets/js/blog.js'],
@@ -90,92 +39,141 @@ module.exports = {
     'js/error': ['./assets/js/error.js']
   },
 
+  ignore: [
+    '.*',
+    '**/_*',
+    '**/layout.sgr',
+    '**/templates/**.sgr',
+    '_cache/**',
+    'assets/img/.gitkeep',
+    'license.md',
+    'pages.json',
+    'readme.md'
+  ],
+
+  matchers: {
+    css: '*(**/)*.sss',
+    html: '*(**/)*.sgr'
+  },
+
   module: {
     loaders: [
-      { test: /\.json$/, loader: 'json' }
+      {
+        test: /\.json$/,
+        loader: 'json'
+      }
     ]
   },
+
+  outputDir: process.env.SP_OUTPUT_DIR,
 
   plugins: [
 
     new Contentful({
-      addDataTo: locals,
       accessToken: process.env.CF_CONTENT_DELIVERY_API,
-      spaceId: process.env.CF_SPACE_ID,
+      addDataTo: locals,
       contentTypes: [
+
         {
-          name: 'blog_posts',
+          filters: {
+            order: 'fields.name'
+          },
+          id: process.env.CF_MODEL_BLOGCATEGORY,
+          name: 'blog_categories',
+          transform: false
+        },
+
+        {
+          filters: {
+            order: '-fields.lastUpdate'
+          },
           id: process.env.CF_MODEL_BLOGPOST,
+          name: 'blog_posts',
           template: {
-            path: 'views/templates/blogpost.sgr',
-            output: (blogpost) => { return 'blog/' + slug(blogpost.blogUrl) + '.html' }
+            output: (blogpost) => { return 'blog/' + slug(blogpost.fields.blogUrl) + '.html' },
+            path: 'views/templates/blogpost.sgr'
           },
           transform: (blogpost) => {
-            blogpost = Contentful.transform(blogpost)
-            blogpost.blogUrl = slug(blogpost.blogUrl)
-            blogpost.content = markdown.render(blogpost.content)
-            if(blogpost.pubDate === blogpost.lastUpdate) {
-              blogpost.dateLabel = 'Publié le ' + moment(blogpost.pubDate).format("LL")
+            blogpost.fields.blogUrl = slug(blogpost.fields.blogUrl)
+            blogpost.fields.content = markdown.render(blogpost.fields.content)
+            if(blogpost.fields.pubDate === blogpost.fields.lastUpdate) {
+              blogpost.fields.dateLabel = 'Publié le ' + moment(blogpost.fields.pubDate).format('LL')
             } else {
-              blogpost.dateLabel = 'Mis à jour le ' + moment(blogpost.lastUpdate).format("LL")
+              blogpost.fields.dateLabel = 'Mis à jour le ' + moment(blogpost.fields.lastUpdate).format('LL')
             }
+            blogpost.fields.id = blogpost.sys.id
             return blogpost
           }
         },
+
         {
-          name: 'blog_categories',
-          id: process.env.CF_MODEL_BLOGCATEGORY
-        },
-        {
-          name: 'discoveries',
-          id: process.env.CF_MODEL_DISCOVERY
-        },
-        {
+          filters: {
+            order: '-fields.batchNumber'
+          },
+          id: process.env.CF_MODEL_DISCOVERYBATCH,
           name: 'discovery_batches',
-          id: process.env.CF_MODEL_DISCOVERYBATCH
+          template: {
+            output: (discoverybatch) => { return 'fournees/numero' + slug(discoverybatch.fields.batchNumber) + '.html' },
+            path: 'views/templates/discoverybatch.sgr'
+          },
+          transform: (discoverybatch) => {
+            discoverybatch.fields.batchNumber = slug(discoverybatch.fields.batchNumber)
+            discoverybatch.fields.pubDate = moment(discoverybatch.fields.pubDate).format('LL')
+            return discoverybatch
+          }
         },
+
         {
-          name: 'images',
-          id: process.env.CF_MODEL_IMAGE
-        },
-        {
-          name: 'internet_facts',
+          filters: {
+            order: 'fields.displayPriority'
+          },
           id: process.env.CF_MODEL_INTERNETFACT,
+          name: 'internet_facts',
           transform: (internetfact) => {
-            internetfact = Contentful.transform(internetfact)
-            internetfact.fact = markdown.render(internetfact.fact)
+            internetfact.fields.fact = markdown.render(internetfact.fields.fact)
             return internetfact
           }
         },
+
         {
-          name: 'persons',
-          id: process.env.CF_MODEL_PERSON
-        },
-        {
+          filters: {
+            order: 'fields.tagName'
+          },
+          id: process.env.CF_MODEL_TAG,
           name: 'tags',
-          id: process.env.CF_MODEL_TAG
+          transform: false
         },
+
         {
+          filters: {
+            order: '-fields.realStartDate'
+          },
+          id: process.env.CF_MODEL_WORK,
           name: 'works',
-          id: process.env.CF_MODEL_WORK
-        },
-        {
-          name: 'work_types',
-          id: process.env.CF_MODEL_WORKTYPE
+          transform: (work) => {
+            work.fields.blogUrl = slug(work.fields.workUrl)
+            work.fields.presentation = markdown.render(work.fields.presentation)
+            if (work.fields.realStartDate === work.fields.realEndDate) {
+              work.fields.dateLabel = moment(work.fields.realStartDate).format('MMM YY')
+            } else {
+              if(work.fields.realEndDate) {
+                work.fields.dateLabel = moment(work.fields.realStartDate).format('MMM YY') + ' - ' + moment(work.fields.realEndDate).format('MMM YY')
+              } else {
+                work.fields.dateLabel = moment(work.fields.realStartDate).format('MMM YY') + ' - AUJ'
+              }
+            }
+            return work
+          }
         }
+
       ],
-      json: path.join(process.env.SP_API_DIR, process.env.SP_API_ALLDATA)
+      json: path.join(process.env.SP_API_DIR, process.env.SP_API_ALLDATA),
+      spaceId: process.env.CF_SPACE_ID
     }),
 
     new FaviconsWebpackPlugin({
-      logo: path.join(__dirname, 'assets/img', process.env.FAVICON_FILE),
-      prefix: 'img/favicons/',
-      emitStats: true,
-      statsFilename: path.join(process.env.SP_API_DIR, 'favicons.json'),
-      persistentCache: true,
-      inject: false,
       background: process.env.FAVICON_BGCOL,
-      title: process.env.FAVICON_TITLE,
+      emitStats: true,
       icons: {
         android: true,
         appleIcon: true,
@@ -187,13 +185,19 @@ module.exports = {
         twitter: false,
         yandex: false,
         windows: false
-      }
+      },
+      inject: false,
+      logo: path.join(__dirname, 'assets/img', process.env.FAVICON_FILE),
+      persistentCache: true,
+      prefix: 'img/favicons/',
+      statsFilename: path.join(process.env.SP_API_DIR, 'favicons.json'),
+      title: process.env.FAVICON_TITLE
     }),
 
     new HardSourcePlugin({
+      cacheDirectory: path.join(__dirname, '_cache/hard_source_cache'),
       environmentPaths: { root: __dirname },
-      recordsPath: path.join(__dirname, '_cache/records.json'),
-      cacheDirectory: path.join(__dirname, '_cache/hard_source_cache')
+      recordsPath: path.join(__dirname, '_cache/records.json')
     }),
 
     new webpack.DefinePlugin({
@@ -201,10 +205,7 @@ module.exports = {
         disqusLanguage: JSON.stringify(process.env.DISQUS_LANGUAGE),
         disqusShortname: JSON.stringify(process.env.DISQUS_SHORTNAME),
         googleSiteId: JSON.stringify(process.env.GOOGLE_SITE_ID),
-        spApiAlldata: JSON.stringify(path.join(
-          process.env.SP_API_DIR,
-          process.env.SP_API_ALLDATA
-        )),
+        spApiAlldata: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.SP_API_ALLDATA)),
         spAppName: JSON.stringify(process.env.SP_APP_NAME),
         sp404Page: JSON.stringify(process.env.SP_404_PAGE),
         sp500Page: JSON.stringify(process.env.SP_500_PAGE),
@@ -217,6 +218,46 @@ module.exports = {
       THREE: 'three'
     })
 
-  ]
+  ],
+
+  postcss: (ctx) => {
+    const css = cssStandards({
+      rucksack : {
+        fallbacks: true
+      },
+      webpack: ctx
+    })
+    css.plugins.push(lost())
+    css.plugins.push(normalize())
+    return css
+  },
+
+  reshape: (ctx) => {
+    return htmlStandards({
+      locals: Object.assign(
+        {config: {
+          disqusLanguage: process.env.DISQUS_LANGUAGE,
+          disqusShortname: process.env.DISQUS_SHORTNAME,
+          googleSiteId: process.env.GOOGLE_SITE_ID,
+          spAppName: process.env.SP_APP_NAME,
+          sp404Page: process.env.SP_404_PAGE,
+          sp500Page: process.env.SP_500_PAGE,
+          spMetaTitleMaxSize: process.env.SP_META_TITLE_MAX_SIZE,
+          spMetaDescMaxSize: process.env.SP_META_DESC_MAX_SIZE
+        }},
+        locals
+      ),
+      webpack: ctx
+    })
+  },
+
+  resolve: {
+    alias: {
+      'isotope': 'isotope-layout',
+      'masonry': 'masonry-layout'
+    }
+  },
+
+  vendor: process.env.SP_VENDOR_DIR
 
 }

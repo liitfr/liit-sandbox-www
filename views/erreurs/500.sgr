@@ -3,7 +3,7 @@ extends(src="../layout.sgr")
   block(name="meta")
     title \kwak\ | LIIT
     meta(name="description" content="Les données nécessaires à l'affichage de la page n'ont pu être téléchargées :'(")
-    meta(name="robots" content="noindex, nofollow")
+    meta(name="robots" content="noindex, follow")
 
   block(name="content")
     main(role="main" id="erreurs-500")

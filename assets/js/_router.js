@@ -1,6 +1,8 @@
 // TODO : window.location.href with .html (reference comments) ?
 // TODO : attention aux extensions html (404) et rafraichissement F5
 // TODO : canonical
+// TODO : faire le tour de ul / each et mettre un message par défaut si aucune donnée
+// BUG : can't minify JS !!!
 
 const controllers = require('./_controllers.js')
 const pagejs = require('page')

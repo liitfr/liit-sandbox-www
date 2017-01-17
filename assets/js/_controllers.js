@@ -31,7 +31,8 @@ blog = (ctx, next) => {
   success = () => {
     ctx.data = {
       contentful: {
-        blog_posts: loadedJson[config.spApiAlldata].blog_posts
+        blog_posts: loadedJson[config.spApiAlldata].blog_posts,
+        blog_categories: loadedJson[config.spApiAlldata].blog_categories
       }
     }
     next()
@@ -52,6 +53,35 @@ blogpost = (ctx, next) => {
       }
       next()
     }
+  }
+  $.when($.cachedJson(config.spApiAlldata)).then(success, defaultError)
+}
+
+discoverybatch = (ctx, next) => {
+  success = () => {
+    findDiscoverybatch = $.grep(loadedJson[config.spApiAlldata].discovery_batches, (discoverybatch, index) => (
+      discoverybatch.batchNumber === ctx.path.replace(/^\/fournees\/numero|.html?$|(?:.html?)?\?.*$|(?:.html?)?\#.*$/gi,'')
+    ))
+    if(!findDiscoverybatch.length > 0) {
+      pagejs.redirect(config.sp404Page)
+    } else {
+      ctx.data = {
+        item: findDiscoverybatch[0]
+      }
+      next()
+    }
+  }
+  $.when($.cachedJson(config.spApiAlldata)).then(success, defaultError)
+}
+
+discoverybatches = (ctx, next) => {
+  success = () => {
+    ctx.data = {
+      contentful: {
+        discovery_batches: loadedJson[config.spApiAlldata].discovery_batches
+      }
+    }
+    next()
   }
   $.when($.cachedJson(config.spApiAlldata)).then(success, defaultError)
 }
@@ -87,6 +117,8 @@ web = (ctx, next) => {
 module.exports = {
   blog: blog,
   blogpost: blogpost,
+  discoverybatch: discoverybatch,
+  discoverybatches: discoverybatches,
   home: home,
   p403: p403,
   p404: p404,

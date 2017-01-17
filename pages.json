@@ -7,6 +7,14 @@
     "path": "^\/blog\/(?!index(?:.html?)?(?:\\?.*)?$|\\?.*).+$",
     "view": "templates/blogpost.sgr"
   },
+  "discoverybatch" : {
+    "path": "^\/fournees\/(?!index(?:.html?)?(?:\\?.*)?$|\\?.*).+$",
+    "view": "templates/discoverybatch.sgr"
+  },
+  "discoverybatches" : {
+    "path": "^\/fournees(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?$",
+    "view": "fournees/index.sgr"
+  },
   "home": {
     "path": "^(?:\/|\/index(?:\\.html?)?)?(?:\\?.*)?(?:\\#.*)?$",
     "view": "index.sgr"

@@ -12,6 +12,7 @@
     "cssrecipes-defaults": "^0.5.0",
     "dotenv": "^2.0.0",
     "fastclick": "^1.0.6",
+    "gsap": "^1.19.0",
     "hard-source-webpack-plugin": "0.2.2",
     "html5-boilerplate": "0.0.1",
     "image-webpack-loader": "^3.0.0",

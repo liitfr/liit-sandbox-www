@@ -3,7 +3,7 @@ extends(src="../layout.sgr")
   block(name="meta")
     title Damned ! C'est une erreur de navigation | LIIT
     meta(name="description" content="Oups ! La page demandée est introuvable. Peut-être une abduction ?")
-    meta(name="robots" content="noindex, nofollow")
+    meta(name="robots" content="noindex, follow")
 
   block(name="content")
     main(role="main" id="erreurs-404")

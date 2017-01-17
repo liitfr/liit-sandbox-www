@@ -1,4 +1,5 @@
 const FastClick = require('fastclick')
+const gsap = require('gsap')
 const LogStyle = require('log-with-style')
 const plugins = require('./_plugins.js')
 const router = require('./_router.js')

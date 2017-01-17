@@ -1,4 +1,4 @@
 li
-  span {{{ internetfact.fact }}}
-  span {{ internetfact.source }}
-  span {{ internetfact.studyDate }}
+  span {{{ internetfact.fields.fact }}}
+  span {{ internetfact.fields.source }}
+  span {{ internetfact.fields.studyDate }}

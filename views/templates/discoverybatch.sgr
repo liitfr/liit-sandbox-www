@@ -1,0 +1,20 @@
+extends(src="../layout.sgr")
+
+  block(name="meta")
+    title Fournée #{{ item.fields.batchNumber }} | Les découvertes LIIT
+    if(condition="item.tags")
+      meta(name="description" content="{{ item.fields.descriptionMeta.length > config.spMetaDescMaxSize ? item.fields.descriptionMeta.substring(0, config.spMetaDescMaxSize - 4) + ' ...' : item.fields.descriptionMeta }}")
+    else
+      meta(name="description" content="Fournée de liens intéressants dénichés par votre serviteur")
+    meta(name="robots" content="index, follow")
+
+  block(name="content")
+    main(role="main" id="fournees-numero{{ item.fields.batchNumber }}")
+      h2 Fournée #{{ item.fields.batchNumber }}
+      p Le {{ item.fields.pubDate }}
+      p {{ item.fields.descriptionSite }}
+      ul
+        each(loop="discovery, index in item.fields.discoveries")
+          li
+            | {{ discovery.fields.title }} / {{ discovery.fields.description }} /
+            a(href="{{ discovery.fields.discoveryUrl }}") {{ discovery.fields.hrefLabel }}
