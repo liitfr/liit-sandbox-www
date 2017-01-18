@@ -107,5 +107,6 @@ animate()
 window[config.spAppName] = Object.assign(
   {error: {
     onReload: onReload
-  }}
+  }},
+  window[config.spAppName]
 )

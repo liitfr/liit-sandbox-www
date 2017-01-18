@@ -27,23 +27,28 @@ defaultError = () => {
   pagejs.redirect(config.sp500Page)
 }
 
+// -----------------------------------------------------------------------------
+
 blog = (ctx, next) => {
   success = () => {
     ctx.data = {
       contentful: {
-        blog_posts: loadedJson[config.spApiAlldata].blog_posts,
-        blog_categories: loadedJson[config.spApiAlldata].blog_categories
+        blog_posts: loadedJson[config.spApiBlogpost],
+        blog_categories: loadedJson[config.spApiBlogcategory]
       }
     }
     next()
   }
-  $.when($.cachedJson(config.spApiAlldata)).then(success, defaultError)
+  $.when(
+    $.cachedJson(config.spApiBlogpost),
+    $.cachedJson(config.spApiBlogcategory)
+  ).then(success, defaultError)
 }
 
 blogpost = (ctx, next) => {
   success = () => {
-    findBlogpost = $.grep(loadedJson[config.spApiAlldata].blog_posts, (blogpost, index) => (
-      blogpost.blogUrl === ctx.path.replace(/^\/blog\/|.html?$|(?:.html?)?\?.*$|(?:.html?)?\#.*$/gi,'')
+    findBlogpost = $.grep(loadedJson[config.spApiBlogpost], (blogpost, index) => (
+      blogpost.fields.blogUrl === ctx.path.replace(/^\/blog\/|(?:\.html?)?(?:\?.*)?(?:\#.*)?$/gi,'')
     ))
     if(!findBlogpost.length > 0) {
       pagejs.redirect(config.sp404Page)
@@ -54,13 +59,13 @@ blogpost = (ctx, next) => {
       next()
     }
   }
-  $.when($.cachedJson(config.spApiAlldata)).then(success, defaultError)
+  $.when($.cachedJson(config.spApiBlogpost)).then(success, defaultError)
 }
 
 discoverybatch = (ctx, next) => {
   success = () => {
-    findDiscoverybatch = $.grep(loadedJson[config.spApiAlldata].discovery_batches, (discoverybatch, index) => (
-      discoverybatch.batchNumber === ctx.path.replace(/^\/fournees\/numero|.html?$|(?:.html?)?\?.*$|(?:.html?)?\#.*$/gi,'')
+    findDiscoverybatch = $.grep(loadedJson[config.spApiDiscoverybatch], (discoverybatch, index) => (
+      discoverybatch.fields.batchNumber === ctx.path.replace(/^\/fournees\/numero|(?:\.html?)?(?:\?.*)?(?:\#.*)?$/gi,'')
     ))
     if(!findDiscoverybatch.length > 0) {
       pagejs.redirect(config.sp404Page)
@@ -71,19 +76,19 @@ discoverybatch = (ctx, next) => {
       next()
     }
   }
-  $.when($.cachedJson(config.spApiAlldata)).then(success, defaultError)
+  $.when($.cachedJson(config.spApiDiscoverybatch)).then(success, defaultError)
 }
 
 discoverybatches = (ctx, next) => {
   success = () => {
     ctx.data = {
       contentful: {
-        discovery_batches: loadedJson[config.spApiAlldata].discovery_batches
+        discovery_batches: loadedJson[config.spApiDiscoverybatch]
       }
     }
     next()
   }
-  $.when($.cachedJson(config.spApiAlldata)).then(success, defaultError)
+  $.when($.cachedJson(config.spApiDiscoverybatch)).then(success, defaultError)
 }
 
 home = (ctx, next) => {
@@ -106,13 +111,15 @@ web = (ctx, next) => {
   success = () => {
     ctx.data = {
       contentful: {
-        internet_facts: loadedJson[config.spApiAlldata].internet_facts
+        internet_facts: loadedJson[config.spApiInternetfact]
       }
     }
     next()
   }
-  $.when($.cachedJson(config.spApiAlldata)).then(success, defaultError)
+  $.when($.cachedJson(config.spApiInternetfact)).then(success, defaultError)
 }
+
+// -----------------------------------------------------------------------------
 
 module.exports = {
   blog: blog,

@@ -79,6 +79,7 @@ module.exports = {
             order: 'fields.name'
           },
           id: process.env.CF_MODEL_BLOGCATEGORY,
+          json: path.join(process.env.SP_API_DIR, process.env.CF_MODEL_BLOGCATEGORY + '.json'),
           name: 'blog_categories',
           transform: false
         },
@@ -88,6 +89,7 @@ module.exports = {
             order: '-fields.lastUpdate'
           },
           id: process.env.CF_MODEL_BLOGPOST,
+          json: path.join(process.env.SP_API_DIR, process.env.CF_MODEL_BLOGPOST + '.json'),
           name: 'blog_posts',
           template: {
             output: (blogpost) => { return 'blog/' + slug(blogpost.fields.blogUrl) + '.html' },
@@ -111,6 +113,7 @@ module.exports = {
             order: '-fields.batchNumber'
           },
           id: process.env.CF_MODEL_DISCOVERYBATCH,
+          json: path.join(process.env.SP_API_DIR, process.env.CF_MODEL_DISCOVERYBATCH + '.json'),
           name: 'discovery_batches',
           template: {
             output: (discoverybatch) => { return 'fournees/numero' + slug(discoverybatch.fields.batchNumber) + '.html' },
@@ -128,6 +131,7 @@ module.exports = {
             order: 'fields.displayPriority'
           },
           id: process.env.CF_MODEL_INTERNETFACT,
+          json: path.join(process.env.SP_API_DIR, process.env.CF_MODEL_INTERNETFACT + '.json'),
           name: 'internet_facts',
           transform: (internetfact) => {
             internetfact.fields.fact = markdown.render(internetfact.fields.fact)
@@ -140,6 +144,7 @@ module.exports = {
             order: 'fields.tagName'
           },
           id: process.env.CF_MODEL_TAG,
+          json: path.join(process.env.SP_API_DIR, process.env.CF_MODEL_TAG + '.json'),
           name: 'tags',
           transform: false
         },
@@ -149,6 +154,7 @@ module.exports = {
             order: '-fields.realStartDate'
           },
           id: process.env.CF_MODEL_WORK,
+          json: path.join(process.env.SP_API_DIR, process.env.CF_MODEL_WORK + '.json'),
           name: 'works',
           transform: (work) => {
             work.fields.blogUrl = slug(work.fields.workUrl)
@@ -167,7 +173,6 @@ module.exports = {
         }
 
       ],
-      json: path.join(process.env.SP_API_DIR, process.env.SP_API_ALLDATA),
       spaceId: process.env.CF_SPACE_ID
     }),
 
@@ -205,7 +210,12 @@ module.exports = {
         disqusLanguage: JSON.stringify(process.env.DISQUS_LANGUAGE),
         disqusShortname: JSON.stringify(process.env.DISQUS_SHORTNAME),
         googleSiteId: JSON.stringify(process.env.GOOGLE_SITE_ID),
-        spApiAlldata: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.SP_API_ALLDATA)),
+        spApiBlogcategory: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_BLOGCATEGORY + '.json')),
+        spApiBlogpost: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_BLOGPOST + '.json')),
+        spApiDiscoverybatch: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_DISCOVERYBATCH + '.json')),
+        spApiInternetfact: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_INTERNETFACT + '.json')),
+        spApiModeltag: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_TAG + '.json')),
+        spApiModelwork: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_WORK + '.json')),
         spAppName: JSON.stringify(process.env.SP_APP_NAME),
         sp404Page: JSON.stringify(process.env.SP_404_PAGE),
         sp500Page: JSON.stringify(process.env.SP_500_PAGE),
@@ -236,12 +246,7 @@ module.exports = {
     return htmlStandards({
       locals: Object.assign(
         {config: {
-          disqusLanguage: process.env.DISQUS_LANGUAGE,
-          disqusShortname: process.env.DISQUS_SHORTNAME,
           googleSiteId: process.env.GOOGLE_SITE_ID,
-          spAppName: process.env.SP_APP_NAME,
-          sp404Page: process.env.SP_404_PAGE,
-          sp500Page: process.env.SP_500_PAGE,
           spMetaTitleMaxSize: process.env.SP_META_TITLE_MAX_SIZE,
           spMetaDescMaxSize: process.env.SP_META_DESC_MAX_SIZE
         }},

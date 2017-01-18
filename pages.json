@@ -1,22 +1,22 @@
 {
   "blog" : {
-    "path": "^\/blog(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?$",
+    "path": "^\/blog(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:\\#.*)?$",
     "view": "blog/index.sgr"
   },
   "blogpost" : {
-    "path": "^\/blog\/(?!index(?:.html?)?(?:\\?.*)?$|\\?.*).+$",
+    "path": "^\/blog\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:\\#.*)?$).+$",
     "view": "templates/blogpost.sgr"
   },
   "discoverybatch" : {
-    "path": "^\/fournees\/(?!index(?:.html?)?(?:\\?.*)?$|\\?.*).+$",
+    "path": "^\/fournees\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:\\#.*)?$).+$",
     "view": "templates/discoverybatch.sgr"
   },
   "discoverybatches" : {
-    "path": "^\/fournees(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?$",
+    "path": "^\/fournees(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:\\#.*)?$",
     "view": "fournees/index.sgr"
   },
   "home": {
-    "path": "^(?:\/|\/index(?:\\.html?)?)?(?:\\?.*)?(?:\\#.*)?$",
+    "path": "^(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:\\#.*)?$",
     "view": "index.sgr"
   },
   "p403" : {
