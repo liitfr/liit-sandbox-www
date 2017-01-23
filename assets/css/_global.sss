@@ -1,3 +1,13 @@
+/*TODO : CSS Byebye (https://github.com/AoDev/css-byebye)*/
+/*TODO : css2modernizr (https://github.com/vovanbo/css2modernizr)*/
+/*TODO : Text highlight */
+
+@font-face
+  font-family: 'breeze'
+  font-path: '../fonts/breeze/breeze'
+  font-weight: normal
+  font-style: normal
+
 /* reproduction of rupture */
 /* https://gist.github.com/dbox/f8bcb317d9d0d155c9ca33ef4a044a2d*/
 :root
@@ -23,5 +33,19 @@
   color: red
   background: yellow
 
-#logo-liit  polygon
-  fill: #41B883
+body
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+#logo-liit
+  width: 80px
+  height: 80px
+  & polygon
+    fill: #41B883
+  & text
+    font-family: 'breeze'
+    fill: white
+    font-size: 6em
+    pointer-events: none
+    text-anchor: middle
+    alignment-baseline: middle

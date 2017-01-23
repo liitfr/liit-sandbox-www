@@ -15,7 +15,6 @@ const locals = {}
 const lost = require('lost')
 const markdown = require('markdown-it')()
 const moment = require('moment')
-const normalize = require('postcss-normalize')
 const path = require('path')
 const slug = require('speakingurl')
 const webpack = require('webpack')
@@ -36,7 +35,8 @@ module.exports = {
     'js/blog': ['./assets/js/blog.js'],
     'js/blogpost': ['./assets/js/blogpost.js'],
     'js/common': ['./assets/js/common.js'],
-    'js/error': ['./assets/js/error.js']
+    'js/error': ['./assets/js/error.js'],
+    'js/web': ['./assets/js/web.js']
   },
 
   ignore: [
@@ -238,7 +238,6 @@ module.exports = {
       webpack: ctx
     })
     css.plugins.push(lost())
-    css.plugins.push(normalize())
     return css
   },
 

@@ -4,7 +4,7 @@ extends(src="layout.sgr")
     main(role="main" id="index")
       h2 Accueil
       ul
-        li: a(href="/web") Web
         li: a(href="/blog") Blog
+        li: a(href="/web") Web
         li: a(href="/fournees") Fournées
         li: a(href="/fake") Faux lien
