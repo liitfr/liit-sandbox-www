@@ -30,6 +30,7 @@
     "page": "^1.7.1",
     "reshape-standard": "^0.5.0",
     "speakingurl": "^11.0.0",
+    "spike": "^0.14.2",
     "spike-contentful": "^0.6.0",
     "spike-css-standards": "^0.2.0",
     "three": "^0.84.0",
