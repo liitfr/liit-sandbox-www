@@ -12,12 +12,13 @@
     \__\/        \__\/     \__\/        \__\/
 
 ```
-website creation
+[website](liit.fr) creation
 
 :construction: This document is a draft :heavy_exclamation_mark:
 
 ## Technical Choices
 
+- Favicon : http://realfavicongenerator.net/ (is there another option ?)
 - I used [html5boilerplate](https://html5boilerplate.com/) to start with.
 - I used page.js for routing
 - I used gulp when I felt something couldn't get done easily with Webpack / Spike couple. Gulp manages long term caching (hashes for json js css imgs) & favicons meta injection.
@@ -35,6 +36,13 @@ Cons : Size. KO if some pages only use few individual styles ...
 Let's find the critical path ... ;)
 Best practices : https://github.com/jescalan/gps
 ```
+when creating a new page :
+add it to pages.js
+add a controller function
+add an export for this function
+
+when creating a new js :
+add it to app.js
 
 ## Routing
 

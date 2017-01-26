@@ -1,38 +1,46 @@
 {
-  "blog" : {
-    "path": "^\/blog(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:\\#.*)?$",
+  "blog": {
+    "path": "^\/blog(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:#.*)?$",
     "view": "blog/index.sgr"
   },
-  "blogpost" : {
-    "path": "^\/blog\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:\\#.*)?$).+$",
+  "blogpost": {
+    "path": "^\/blog\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:#.*)?$).+$",
     "view": "templates/blogpost.sgr"
   },
-  "discoverybatch" : {
-    "path": "^\/fournees\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:\\#.*)?$).+$",
+  "comingsoon": {
+    "path": "^\/coming-soon(?:\\.html?)?(?:\\?.*)?(?:#.*)?$",
+    "view": "coming-soon.sgr"
+  },
+  "discoverybatch": {
+    "path": "^\/fournees\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:#.*)?$).+$",
     "view": "templates/discoverybatch.sgr"
   },
-  "discoverybatches" : {
-    "path": "^\/fournees(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:\\#.*)?$",
+  "discoverybatches": {
+    "path": "^\/fournees(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:#.*)?$",
     "view": "fournees/index.sgr"
   },
   "home": {
-    "path": "^(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:\\#.*)?$",
+    "path": "^(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:#.*)?$",
     "view": "index.sgr"
   },
-  "p403" : {
-    "path": "^\/erreurs\/403(?:\\.html?)?(?:\\?.*)?(?:\\#.*)?$",
+  "internetkf": {
+    "path": "^\/tendances-internet(?:\\.html?)?(?:\\?.*)?(?:#.*)?$",
+    "view": "tendances-internet.sgr"
+  },
+  "maintenance": {
+    "path": "^\/maintenance(?:\\.html?)?(?:\\?.*)?(?:#.*)?$",
+    "view": "maintenance.sgr"
+  },
+  "p403": {
+    "path": "^\/erreurs\/403(?:\\.html?)?(?:\\?.*)?(?:#.*)?$",
     "view": "erreurs/403.sgr"
   },
-  "p404" : {
-    "path": "^\/erreurs\/404(?:\\.html?)?(?:\\?.*)?(?:\\#.*)?$",
+  "p404": {
+    "path": "^\/erreurs\/404(?:\\.html?)?(?:\\?.*)?(?:#.*)?$",
     "view": "erreurs/404.sgr"
   },
   "p500": {
-    "path": "^\/erreurs\/500(?:\\.html?)?(?:\\?.*)?(?:\\#.*)?$",
+    "path": "^\/erreurs\/500(?:\\.html?)?(?:\\?.*)?(?:#.*)?$",
     "view": "erreurs/500.sgr"
-  },
-  "web": {
-    "path": "^\/web(?:\\.html?)?(?:\\?.*)?(?:\\#.*)?$",
-    "view": "web.sgr"
   }
 }

@@ -9,12 +9,11 @@ extends(src="../layout.sgr")
     meta(name="robots" content="index, follow")
 
   block(name="content")
-    main(role="main" id="fournees-numero{{ item.fields.batchNumber }}")
-      h2 Fournée #{{ item.fields.batchNumber }}
-      p Le {{ item.fields.pubDate }}
-      p {{ item.fields.descriptionSite }}
-      ul
-        each(loop="discovery, index in item.fields.discoveries")
-          li
-            | {{ discovery.fields.title }} / {{ discovery.fields.description }} /
-            a(href="{{ discovery.fields.discoveryUrl }}") {{ discovery.fields.hrefLabel }}
+    h2 Fournée #{{ item.fields.batchNumber }}
+    p Le {{ item.fields.pubDate }}
+    p {{ item.fields.descriptionSite }}
+    ul
+      each(loop="discovery, index in item.fields.discoveries")
+        li
+          | {{ discovery.fields.title }} / {{ discovery.fields.description }} /
+          a(href="{{ discovery.fields.discoveryUrl }}") {{ discovery.fields.hrefLabel }}

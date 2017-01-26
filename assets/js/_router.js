@@ -11,9 +11,10 @@ var initialRender = true
 var loadedScripts = []
 var pages = require('../../pages.json')
 var previousPath = null
+var nextPath = null
 
 $.cachedScript = (url) => {
-  if(loadedScripts.indexOf(url) === -1) {
+  if (loadedScripts.indexOf(url) === -1) {
     var options = {
       cache: true,
       dataType: 'script',
@@ -42,7 +43,8 @@ prepare = (ctx, next) => {
     $('script').each((id, el) => {
       loadedScripts.push(el.outerHTML)
     })
-    return initialRender = false
+    initialRender = false
+    return initialRender
   }
   if (previousPath && previousPath === ctx.path) { return false }
   ctx.data = []
@@ -51,22 +53,23 @@ prepare = (ctx, next) => {
 
 render = (ctx) => {
   previousPath = ctx.path
-  window.scrollTo(0,0)
+  nextPath = resolvePath(ctx.path)
+  window.scrollTo(0, 0)
   $.extend(ctx.data, {
     config: config
   })
-  var generation = $(pages[resolvePath(ctx.path)].generation(ctx.data))
+  var generation = $(pages[nextPath].generation(ctx.data))
   document.title = generation.filter('title').text()
   $('meta[name="description"]').attr('content', generation.filter('meta[name="description"]').attr('content'))
   $('meta[name="robots"]').attr('content', generation.filter('meta[name="robots"]').attr('content'))
   $('main').html(generation.filter('main').html())
-  $('main').attr('id',generation.filter('main').attr('id'))
+  $('body').attr('id', nextPath)
   $(generation).filter('script').each((id, el) => {
-    if(loadedScripts.indexOf(el.outerHTML) === -1 && $(el).attr('src')) {
+    if (loadedScripts.indexOf(el.outerHTML) === -1 && $(el).attr('src')) {
       $.when($.cachedScript($(el).attr('src'))).done(() => {
         loadedScripts.push(el.outerHTML)
       })
-    } else if($(el).attr('data-hot-reload') === 'true') {
+    } else if ($(el).attr('data-hot-reload') === 'true') {
       window[config.spAppName][$(el).attr('data-script-name')][$(el).attr('data-function-name')]()
     }
   })
@@ -80,6 +83,8 @@ run = () => {
   pagejs('*', config.sp404Page)
   pagejs()
 }
+
+// -----------------------------------------------------------------------------
 
 module.exports = {
   run: run

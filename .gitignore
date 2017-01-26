@@ -4,8 +4,3 @@ public
 dist
 _cache
 .env
-assets/img/**/*.png
-assets/img/**/*.gif
-assets/img/**/*.jpg
-assets/img/**/*.jpeg
-assets/img/**/*.svg

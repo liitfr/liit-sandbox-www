@@ -1,7 +1,8 @@
 // TODO: Vendor vs webpack require ?
-// TODO : Remove images from .gitignore once they are revelant
 // BUG : Github doesn't display good technology (linguist) ...
 // TODO : Add link rel canonical in pages ! (https://alexcican.com/post/how-to-remove-php-html-htm-extensions-with-htaccess/)
+// TODO : Add nojs message on all pages
+// TODO : Add twitter card + seo + google business etc
 
 require('dotenv').config({ silent: true })
 
@@ -9,17 +10,27 @@ const Contentful = require('spike-contentful')
 const cssStandards = require('spike-css-standards')
 const HardSourcePlugin = require('hard-source-webpack-plugin')
 const htmlStandards = require('reshape-standard')
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const jsStandards = require('babel-preset-latest')
 const locals = {}
 const lost = require('lost')
 const markdown = require('markdown-it')()
 const moment = require('moment')
+const pages = require('./pages.json')
 const path = require('path')
 const slug = require('speakingurl')
 const webpack = require('webpack')
 
 moment.locale('fr')
+
+pageId = (ctx) => {
+  for (var page in pages) {
+    if (pages.hasOwnProperty(page)) {
+      if (pages[page].view === ctx.resourcePath.replace(`${path.join(__dirname, '/views/')}`, '')) {
+        return page
+      }
+    }
+  }
+}
 
 module.exports = {
 
@@ -35,8 +46,8 @@ module.exports = {
     'js/blog': ['./assets/js/blog.js'],
     'js/blogpost': ['./assets/js/blogpost.js'],
     'js/common': ['./assets/js/common.js'],
-    'js/error': ['./assets/js/error.js'],
-    'js/web': ['./assets/js/web.js']
+    'js/isogrid': ['./assets/js/isogrid.js'],
+    'js/waves': ['./assets/js/waves.js']
   },
 
   ignore: [
@@ -98,7 +109,7 @@ module.exports = {
           transform: (blogpost) => {
             blogpost.fields.blogUrl = slug(blogpost.fields.blogUrl)
             blogpost.fields.content = markdown.render(blogpost.fields.content)
-            if(blogpost.fields.pubDate === blogpost.fields.lastUpdate) {
+            if (blogpost.fields.pubDate === blogpost.fields.lastUpdate) {
               blogpost.fields.dateLabel = 'Publié le ' + moment(blogpost.fields.pubDate).format('LL')
             } else {
               blogpost.fields.dateLabel = 'Mis à jour le ' + moment(blogpost.fields.lastUpdate).format('LL')
@@ -162,7 +173,7 @@ module.exports = {
             if (work.fields.realStartDate === work.fields.realEndDate) {
               work.fields.dateLabel = moment(work.fields.realStartDate).format('MMM YY')
             } else {
-              if(work.fields.realEndDate) {
+              if (work.fields.realEndDate) {
                 work.fields.dateLabel = moment(work.fields.realStartDate).format('MMM YY') + ' - ' + moment(work.fields.realEndDate).format('MMM YY')
               } else {
                 work.fields.dateLabel = moment(work.fields.realStartDate).format('MMM YY') + ' - AUJ'
@@ -176,29 +187,6 @@ module.exports = {
       spaceId: process.env.CF_SPACE_ID
     }),
 
-    new FaviconsWebpackPlugin({
-      background: process.env.FAVICON_BGCOL,
-      emitStats: true,
-      icons: {
-        android: true,
-        appleIcon: true,
-        appleStartup: true,
-        coast: false,
-        favicons: true,
-        firefox: true,
-        opengraph: false,
-        twitter: false,
-        yandex: false,
-        windows: false
-      },
-      inject: false,
-      logo: path.join(__dirname, 'assets/img', process.env.FAVICON_FILE),
-      persistentCache: true,
-      prefix: 'img/favicons/',
-      statsFilename: path.join(process.env.SP_API_DIR, 'favicons.json'),
-      title: process.env.FAVICON_TITLE
-    }),
-
     new HardSourcePlugin({
       cacheDirectory: path.join(__dirname, '_cache/hard_source_cache'),
       environmentPaths: { root: __dirname },
@@ -210,6 +198,7 @@ module.exports = {
         disqusLanguage: JSON.stringify(process.env.DISQUS_LANGUAGE),
         disqusShortname: JSON.stringify(process.env.DISQUS_SHORTNAME),
         googleSiteId: JSON.stringify(process.env.GOOGLE_SITE_ID),
+        pageId: JSON.stringify(pageId),
         spApiBlogcategory: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_BLOGCATEGORY + '.json')),
         spApiBlogpost: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_BLOGPOST + '.json')),
         spApiDiscoverybatch: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_DISCOVERYBATCH + '.json')),
@@ -232,7 +221,7 @@ module.exports = {
 
   postcss: (ctx) => {
     const css = cssStandards({
-      rucksack : {
+      rucksack: {
         fallbacks: true
       },
       webpack: ctx
@@ -249,6 +238,7 @@ module.exports = {
           spMetaTitleMaxSize: process.env.SP_META_TITLE_MAX_SIZE,
           spMetaDescMaxSize: process.env.SP_META_DESC_MAX_SIZE
         }},
+        {pageId: pageId(ctx)},
         locals
       ),
       webpack: ctx

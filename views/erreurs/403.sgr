@@ -6,9 +6,8 @@ extends(src="../layout.sgr")
     meta(name="robots" content="noindex, follow")
 
   block(name="content")
-    main(role="main" id="erreurs-403")
-      p Damned ! L'accès à cette ressource n'est pas autorisé !
-      a(href="/") Retour à l'accueil
+    p Damned ! L'accès à cette ressource n'est pas autorisé !
+    a(href="/") Retour à l'accueil
 
   block(name="js-body" type="append")
-    script(src="/js/error.js" data-hot-reload="true" data-script-name="error" data-function-name="onReload" defer)
+    script(src="/js/waves.js" data-hot-reload="true" data-script-name="waves" data-function-name="onReload" defer)

@@ -34,24 +34,24 @@ project.on('warning', console.error)
 
 // -----------------------------------------------------------------------------
 
-gulp.task('emptycache', function() {
+gulp.task('emptycache', function () {
   return del([
     path.join('_cache/hard_source_cache'),
     path.join('_cache/records.json')
   ])
 })
 
-gulp.task('clean', function(){
+gulp.task('clean', function () {
   project.clean()
   return deferredRemove.promise
 })
 
-gulp.task('compile', ['emptycache', 'clean'], function(){
+gulp.task('compile', ['emptycache', 'clean'], function () {
   var {id, compiler} = project.compile()
   return deferredCompile.promise
 })
 
-gulp.task('addhash', ['compile'], function(){
+gulp.task('addhash', ['compile'], function () {
   return gulp.src([
     path.join(outputDir, apiDir, '/**/*.json'),
     path.join(outputDir, '/css/**/*.css'),
@@ -66,21 +66,21 @@ gulp.task('addhash', ['compile'], function(){
     .pipe(gulp.dest(path.join(outputDir, apiDir)))
 })
 
-gulp.task('replace', ['addhash'], function(){
+gulp.task('replace', ['addhash'], function () {
   var manifest = gulp.src(path.join(outputDir, apiDir, '/rev-manifest.json'))
   return gulp.src(path.join(outputDir, '/**/*.html'))
     .pipe($.revReplace({manifest: manifest}))
     .pipe(gulp.dest(outputDir))
 })
 
-gulp.task('favicons', ['compile'], function(){
+gulp.task('favicons', ['compile'], function () {
   var faviconsCode = require(path.join(__dirname, outputDir, apiDir, '/favicons.json')).html.join('')
   return gulp.src(path.join(outputDir, '/**/*.html'))
     .pipe($.injectString.after('</title>', faviconsCode))
     .pipe(gulp.dest(outputDir))
 })
 
-gulp.task('delete', ['favicons', 'replace'], function() {
+gulp.task('delete', ['favicons', 'replace'], function () {
   return del([
     path.join(outputDir, apiDir, '/rev-manifest.json'),
     path.join(outputDir, apiDir, '/favicons.json'),
@@ -89,6 +89,6 @@ gulp.task('delete', ['favicons', 'replace'], function() {
   ])
 })
 
-gulp.task('default', ['emptycache', 'clean', 'compile', 'addhash', 'replace', 'favicons', 'delete'], function(){
+gulp.task('default', ['emptycache', 'clean', 'compile', 'addhash', 'replace', 'favicons', 'delete'], function () {
 
 })

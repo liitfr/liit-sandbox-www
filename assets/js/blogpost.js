@@ -1,11 +1,11 @@
 var d = document
-var disqus_config = function() {
+var disqus_config = function () {
   this.language = config.disqusLanguage
   this.page.identifier = $('#disqus_thread').attr('data-disqus-identifier')
   this.page.url = window.location.href.split(/[?#]/)[0]
   this.page.title = document.title
 }
-var reset = function() {
+var reset = function () {
   DISQUS.reset({
     reload: true,
     config: disqus_config

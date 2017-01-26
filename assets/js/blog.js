@@ -2,7 +2,7 @@ const isotope = require('isotope-layout')
 
 var d = document
 var s = d.createElement('script')
-var updateCount = function() {
+var updateCount = function () {
   DISQUSWIDGETS.getCount({reset: true})
 }
 

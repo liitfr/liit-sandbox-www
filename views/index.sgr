@@ -1,10 +1,9 @@
 extends(src="layout.sgr")
 
   block(name="content")
-    main(role="main" id="index")
-      h2 Accueil
-      ul
-        li: a(href="/blog") Blog
-        li: a(href="/web") Web
-        li: a(href="/fournees") Fournées
-        li: a(href="/fake") Faux lien
+    h2 Accueil
+    ul
+      li: a(href="/blog") Blog
+      li: a(href="/tendances-internet") Tendances internet
+      li: a(href="/fournees") Fournées
+      li: a(href="/fake") Faux lien

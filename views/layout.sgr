@@ -2,28 +2,47 @@ doctype html
 html(class="no-js" lang="fr")
 
   head
+
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge, chrome=1")
+
     block(name="meta")
       title Invenieur Informatifien | LIIT
       meta(name="description" content="Freelance. Full stack: Front, Back, Data")
       meta(name="robots" content="index, follow")
+
     meta(name="author" content="liit.fr")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     link(rel="author" href="/humans.txt")
+    link(rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png")
+    link(rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32")
+    link(rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16")
+    link(rel="manifest" href="/img/favicons/manifest.json")
+    link(rel="mask-icon" href="/img/favicons/safari-pinned-tab.svg" color="#ff358b")
+    link(rel="shortcut icon" href="/img/favicons/favicon.ico")
+    meta(name="msapplication-config" content="/img/favicons/browserconfig.xml")
+    meta(name="theme-color" content="#2b5797")
+
     block(name="stylesheets")
       link(rel="stylesheet" href="/css/bundle.css")
+
     block(name="js-head")
       script(src="/vendor/modernizr/modernizr-3.3.1.min.js")
 
-  body(role="document")
+  body(role="document" id="{{ pageId }}")
+
     // [if lt IE 9]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+
     header
       svg#logo-liit(viewbox="0 0 200 200")
         polygon
         text(x="50%" y="50%" transform="translate(-5,5)") Liit
-    block(name="content")
+
+    main(role="main")
+      block(name="content")
+
     footer
+
     block(name="js-body")
       script(src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous")
       script.

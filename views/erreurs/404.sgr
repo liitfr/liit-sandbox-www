@@ -6,9 +6,9 @@ extends(src="../layout.sgr")
     meta(name="robots" content="noindex, follow")
 
   block(name="content")
-    main(role="main" id="erreurs-404")
+    div(class="message")
       p Oups ! La page demandée est introuvable. Peut-être une abduction ?
       a(href="/") Retour à l'accueil
 
   block(name="js-body" type="append")
-    script(src="/js/error.js" data-hot-reload="true" data-script-name="error" data-function-name="onReload" defer)
+    script(src="/js/waves.js" data-hot-reload="true" data-script-name="waves" data-function-name="onReload" defer)

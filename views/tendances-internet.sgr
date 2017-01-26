@@ -1,0 +1,27 @@
+extends(src="layout.sgr")
+
+  block(name="meta")
+    title Websites | LIIT
+    meta(name="description" content="Création de sites web modernes. Interfaces et expériences utilisateur qui tapent en plein dans le mille")
+    meta(name="robots" content="index, follow")
+
+  block(name="content")
+    p Connaitre les tendances du web, c'est avant tout se donner les moyens de prendre les décisions les plus cohérentes
+    div(class="isolayer")
+      ul(class="grid")
+        each(loop="internetfact, index in contentful.internet_facts")
+          li(class="grid__item")
+            div(class="grid__link")
+              div(class="layer third")
+              div(class="layer second")
+              div(class="layer fact")
+                | {{{ internetfact.fields.fact }}}
+                if(condition="internetfact.fields.source")
+                  span {{ internetfact.fields.source }}
+                if(condition="internetfact.fields.studyDate")
+                  if(condition="internetfact.fields.source")
+                    span ,&nbsp;
+                  span(class="studyDate") {{ internetfact.fields.studyDate }}
+
+  block(name="js-body" type="append")
+    script(src="/js/isogrid.js" data-hot-reload="true" data-script-name="isogrid" data-function-name="onReload" defer)
