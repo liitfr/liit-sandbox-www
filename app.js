@@ -238,8 +238,8 @@ module.exports = {
           spMetaTitleMaxSize: process.env.SP_META_TITLE_MAX_SIZE,
           spMetaDescMaxSize: process.env.SP_META_DESC_MAX_SIZE
         }},
-        {pageId: pageId(ctx)},
-        locals
+        locals,
+        {pageId: pageId(ctx)}
       ),
       webpack: ctx
     })
