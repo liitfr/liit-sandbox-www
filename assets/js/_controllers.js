@@ -2,12 +2,12 @@ const pagejs = require('page')
 
 var loadedJson = []
 
-$.cachedJson = (url) => {
+function cachedJson (url) {
   if (loadedJson[url] === undefined) {
     var options = {
       cache: true,
       dataType: 'json',
-      success: (data) => {
+      success: function (data) {
         loadedJson[url] = data
       },
       url: url
@@ -18,19 +18,19 @@ $.cachedJson = (url) => {
   }
 }
 
-defaultController = (ctx, next) => {
+function defaultController (ctx, next) {
   ctx.data = null
   next()
 }
 
-defaultError = () => {
+function defaultError () {
   pagejs.redirect(config.sp500Page)
 }
 
 // -----------------------------------------------------------------------------
 
-blog = (ctx, next) => {
-  success = () => {
+function blog (ctx, next) {
+  function success () {
     ctx.data = {
       contentful: {
         blog_posts: loadedJson[config.spApiBlogpost],
@@ -40,16 +40,16 @@ blog = (ctx, next) => {
     next()
   }
   $.when(
-    $.cachedJson(config.spApiBlogpost),
-    $.cachedJson(config.spApiBlogcategory)
+    cachedJson(config.spApiBlogpost),
+    cachedJson(config.spApiBlogcategory)
   ).then(success, defaultError)
 }
 
-blogpost = (ctx, next) => {
-  success = () => {
-    findBlogpost = $.grep(loadedJson[config.spApiBlogpost], (blogpost, index) => (
-      blogpost.fields.blogUrl === ctx.path.replace(/^\/blog\/|(?:\.html?)?(?:\?.*)?(?:#.*)?$/gi, '')
-    ))
+function blogpost (ctx, next) {
+  function success () {
+    findBlogpost = $.grep(loadedJson[config.spApiBlogpost], function (blogpost, index) {
+      return blogpost.fields.blogUrl === ctx.path.replace(/^\/blog\/|(?:\.html?)?(?:\?.*)?(?:#.*)?$/gi, '')
+    })
     if (!findBlogpost.length > 0) {
       pagejs.redirect(config.sp404Page)
     } else {
@@ -59,18 +59,18 @@ blogpost = (ctx, next) => {
       next()
     }
   }
-  $.when($.cachedJson(config.spApiBlogpost)).then(success, defaultError)
+  $.when(cachedJson(config.spApiBlogpost)).then(success, defaultError)
 }
 
-comingsoon = (ctx, next) => {
+function comingsoon (ctx, next) {
   defaultController(ctx, next)
 }
 
-discoverybatch = (ctx, next) => {
-  success = () => {
-    findDiscoverybatch = $.grep(loadedJson[config.spApiDiscoverybatch], (discoverybatch, index) => (
-      discoverybatch.fields.batchNumber === ctx.path.replace(/^\/fournees\/numero|(?:\.html?)?(?:\?.*)?(?:#.*)?$/gi, '')
-    ))
+function discoverybatch (ctx, next) {
+  function success () {
+    findDiscoverybatch = $.grep(loadedJson[config.spApiDiscoverybatch], function (discoverybatch, index) {
+      return discoverybatch.fields.batchNumber === ctx.path.replace(/^\/fournees\/numero|(?:\.html?)?(?:\?.*)?(?:#.*)?$/gi, '')
+    })
     if (!findDiscoverybatch.length > 0) {
       pagejs.redirect(config.sp404Page)
     } else {
@@ -80,11 +80,11 @@ discoverybatch = (ctx, next) => {
       next()
     }
   }
-  $.when($.cachedJson(config.spApiDiscoverybatch)).then(success, defaultError)
+  $.when(cachedJson(config.spApiDiscoverybatch)).then(success, defaultError)
 }
 
-discoverybatches = (ctx, next) => {
-  success = () => {
+function discoverybatches (ctx, next) {
+  function success () {
     ctx.data = {
       contentful: {
         discovery_batches: loadedJson[config.spApiDiscoverybatch]
@@ -92,15 +92,15 @@ discoverybatches = (ctx, next) => {
     }
     next()
   }
-  $.when($.cachedJson(config.spApiDiscoverybatch)).then(success, defaultError)
+  $.when(cachedJson(config.spApiDiscoverybatch)).then(success, defaultError)
 }
 
-home = (ctx, next) => {
+function home (ctx, next) {
   defaultController(ctx, next)
 }
 
-internetkf = (ctx, next) => {
-  success = () => {
+function internetkf (ctx, next) {
+  function success () {
     ctx.data = {
       contentful: {
         internet_facts: loadedJson[config.spApiInternetfact]
@@ -108,22 +108,22 @@ internetkf = (ctx, next) => {
     }
     next()
   }
-  $.when($.cachedJson(config.spApiInternetfact)).then(success, defaultError)
+  $.when(cachedJson(config.spApiInternetfact)).then(success, defaultError)
 }
 
-maintenance = (ctx, next) => {
+function maintenance (ctx, next) {
   defaultController(ctx, next)
 }
 
-p403 = (ctx, next) => {
+function p403 (ctx, next) {
   defaultController(ctx, next)
 }
 
-p404 = (ctx, next) => {
+function p404 (ctx, next) {
   defaultController(ctx, next)
 }
 
-p500 = (ctx, next) => {
+function p500 (ctx, next) {
   defaultController(ctx, next)
 }
 

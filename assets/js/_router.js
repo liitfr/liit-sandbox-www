@@ -10,10 +10,10 @@ const pagejs = require('page')
 var initialRender = true
 var loadedScripts = []
 var pages = require('../../pages.json')
-var previousPath = null
-var nextPath = null
+var previousPath
+var nextPath
 
-$.cachedScript = (url) => {
+function cachedScript (url) {
   if (loadedScripts.indexOf(url) === -1) {
     var options = {
       cache: true,
@@ -26,9 +26,9 @@ $.cachedScript = (url) => {
   }
 }
 
-resolvePath = (path) => {
-  var requestedPage = null
-  $.each(pages, (name, page) => {
+function resolvePath (path) {
+  var requestedPage
+  $.each(pages, function (name, page) {
     if (new RegExp(page.path, 'i').test(path)) {
       requestedPage = name
       return false
@@ -37,10 +37,10 @@ resolvePath = (path) => {
   return requestedPage
 }
 
-prepare = (ctx, next) => {
+function prepare (ctx, next) {
   ctx.handled = true
   if (initialRender) {
-    $('script').each((id, el) => {
+    $('script').each(function (id, el) {
       loadedScripts.push(el.outerHTML)
     })
     initialRender = false
@@ -51,7 +51,7 @@ prepare = (ctx, next) => {
   next()
 }
 
-render = (ctx) => {
+function render (ctx) {
   previousPath = ctx.path
   nextPath = resolvePath(ctx.path)
   window.scrollTo(0, 0)
@@ -64,9 +64,9 @@ render = (ctx) => {
   $('meta[name="robots"]').attr('content', generation.filter('meta[name="robots"]').attr('content'))
   $('main').html(generation.filter('main').html())
   $('body').attr('id', nextPath)
-  $(generation).filter('script').each((id, el) => {
+  $(generation).filter('script').each(function (id, el) {
     if (loadedScripts.indexOf(el.outerHTML) === -1 && $(el).attr('src')) {
-      $.when($.cachedScript($(el).attr('src'))).done(() => {
+      $.when(cachedScript($(el).attr('src'))).done(function () {
         loadedScripts.push(el.outerHTML)
       })
     } else if ($(el).attr('data-hot-reload') === 'true') {
@@ -75,8 +75,8 @@ render = (ctx) => {
   })
 }
 
-run = () => {
-  $.each(pages, (name, page) => {
+function run () {
+  $.each(pages, function (name, page) {
     page.generation = require('!reshape?locals=false!../../views/' + page.view)
     pagejs(new RegExp(page.path, 'i'), prepare, controllers[name], render)
   })

@@ -19,6 +19,7 @@ const pages = require('./pages.json')
 const path = require('path')
 const slug = require('speakingurl')
 const webpack = require('webpack')
+const {DefinePlugin, ProvidePlugin} = require('webpack')
 
 moment.locale('fr')
 
@@ -86,22 +87,22 @@ module.exports = {
       contentTypes: [
 
         {
+          name: 'blog_categories',
           filters: {
             order: 'fields.name'
           },
           id: process.env.CF_MODEL_BLOGCATEGORY,
           json: path.join(process.env.SP_API_DIR, process.env.CF_MODEL_BLOGCATEGORY + '.json'),
-          name: 'blog_categories',
           transform: false
         },
 
         {
+          name: 'blog_posts',
           filters: {
             order: '-fields.lastUpdate'
           },
           id: process.env.CF_MODEL_BLOGPOST,
           json: path.join(process.env.SP_API_DIR, process.env.CF_MODEL_BLOGPOST + '.json'),
-          name: 'blog_posts',
           template: {
             output: (blogpost) => { return 'blog/' + slug(blogpost.fields.blogUrl) + '.html' },
             path: 'views/templates/blogpost.sgr'
@@ -120,12 +121,12 @@ module.exports = {
         },
 
         {
+          name: 'discovery_batches',
           filters: {
             order: '-fields.batchNumber'
           },
           id: process.env.CF_MODEL_DISCOVERYBATCH,
           json: path.join(process.env.SP_API_DIR, process.env.CF_MODEL_DISCOVERYBATCH + '.json'),
-          name: 'discovery_batches',
           template: {
             output: (discoverybatch) => { return 'fournees/numero' + slug(discoverybatch.fields.batchNumber) + '.html' },
             path: 'views/templates/discoverybatch.sgr'
@@ -138,12 +139,12 @@ module.exports = {
         },
 
         {
+          name: 'internet_facts',
           filters: {
             order: 'fields.displayPriority'
           },
           id: process.env.CF_MODEL_INTERNETFACT,
           json: path.join(process.env.SP_API_DIR, process.env.CF_MODEL_INTERNETFACT + '.json'),
-          name: 'internet_facts',
           transform: (internetfact) => {
             internetfact.fields.fact = markdown.render(internetfact.fields.fact)
             return internetfact
@@ -151,22 +152,22 @@ module.exports = {
         },
 
         {
+          name: 'tags',
           filters: {
             order: 'fields.tagName'
           },
           id: process.env.CF_MODEL_TAG,
           json: path.join(process.env.SP_API_DIR, process.env.CF_MODEL_TAG + '.json'),
-          name: 'tags',
           transform: false
         },
 
         {
+          name: 'works',
           filters: {
             order: '-fields.realStartDate'
           },
           id: process.env.CF_MODEL_WORK,
           json: path.join(process.env.SP_API_DIR, process.env.CF_MODEL_WORK + '.json'),
-          name: 'works',
           transform: (work) => {
             work.fields.blogUrl = slug(work.fields.workUrl)
             work.fields.presentation = markdown.render(work.fields.presentation)
@@ -193,7 +194,7 @@ module.exports = {
       recordsPath: path.join(__dirname, '_cache/records.json')
     }),
 
-    new webpack.DefinePlugin({
+    new DefinePlugin({
       config: {
         disqusLanguage: JSON.stringify(process.env.DISQUS_LANGUAGE),
         disqusShortname: JSON.stringify(process.env.DISQUS_SHORTNAME),
@@ -213,7 +214,7 @@ module.exports = {
       }
     }),
 
-    new webpack.ProvidePlugin({
+    new ProvidePlugin({
       THREE: 'three'
     })
 

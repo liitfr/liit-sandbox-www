@@ -1,9 +1,9 @@
 // You can find more details here : http://roots.cx/articles/roots-with-gulp
 // TODO : rajouter watch
 // TODO : supprimer favicons (car ils ne seront pas présents dans le js)
-// TODO : clore les balises </html> (dans le js ?)
 // TODO : supprimer les commentaires du htaccess
 // TODO : déploiement auto ftp
+// TODO : minifier html
 
 const del = require('del')
 const dotEnv = require('dotenv').config()

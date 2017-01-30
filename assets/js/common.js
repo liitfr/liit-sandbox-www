@@ -1,5 +1,5 @@
 const FastClick = require('fastclick')
-const gsap = require('gsap')
+const gsap = require('../../node_modules/gsap/AttrPlugin.js')
 const LogStyle = require('log-with-style')
 const router = require('./_router.js')
 
@@ -28,6 +28,7 @@ while (length--) {
 
 // -----------------------------------------------------------------------------
 
+// Message in log
 var logBold = 'font-weight: bold'
 var logItalic = 'font-style: italic'
 var logTitle = 'font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; color: #fff; font-size: 20px; padding: 15px 20px; background: #444; border-radius: 4px; line-height: 100px; text-shadow: 0 1px #000'
@@ -71,10 +72,8 @@ function generatePoint (random, index) {
   return { x: tx, y: ty }
 }
 
-$('#logo-liit polygon').attr('points', generatePoints(true))
-
 function flickLogo () {
-  TweenMax.to('#logo-liit polygon', updateInterval / 1000, { attr: { points: generatePoints(true) }, onComplete: flickLogo })
+  TweenLite.to('#logo-liit polygon', updateInterval / 1000, { attr: { points: generatePoints(true) }, onComplete: flickLogo })
 }
 
 flickLogo()
