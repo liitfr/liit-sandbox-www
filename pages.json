@@ -7,9 +7,17 @@
     "path": "^\/blog\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:#.*)?$).+$",
     "view": "templates/blogpost.sgr"
   },
+  "businessprofil": {
+    "path": "^\/web-apps-data(?:\\.html?)?(?:\\?.*)?(?:#.*)?$",
+    "view": "web-apps-data.sgr"
+  },
   "comingsoon": {
     "path": "^\/coming-soon(?:\\.html?)?(?:\\?.*)?(?:#.*)?$",
     "view": "coming-soon.sgr"
+  },
+  "contact": {
+    "path": "^\/contacter-developpeur(?:\\.html?)?(?:\\?.*)?(?:#.*)?$",
+    "view": "contacter-developpeur.sgr"
   },
   "discoverybatch": {
     "path": "^\/fournees\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:#.*)?$).+$",
@@ -42,5 +50,29 @@
   "p500": {
     "path": "^\/erreurs\/500(?:\\.html?)?(?:\\?.*)?(?:#.*)?$",
     "view": "erreurs/500.sgr"
+  },
+  "tag": {
+    "path": "^\/tag\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:#.*)?$).+$",
+    "view": "templates/tag.sgr"
+  },
+  "tags": {
+    "path": "^\/tags(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:#.*)?$",
+    "view": "tags/index.sgr"
+  },
+  "technicalprofil": {
+    "path": "^\/freelance-fullstack-lyon(?:\\.html?)?(?:\\?.*)?(?:#.*)?$",
+    "view": "freelance-fullstack-lyon.sgr"
+  },
+  "vision": {
+    "path": "^\/vision-profession(?:\\.html?)?(?:\\?.*)?(?:#.*)?$",
+    "view": "vision-profession.sgr"
+  },
+  "work": {
+    "path": "^\/work\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:#.*)?$).+$",
+    "view": "templates/work.sgr"
+  },
+  "works": {
+    "path": "^\/realisations(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:#.*)?$",
+    "view": "realisations/index.sgr"
   }
 }

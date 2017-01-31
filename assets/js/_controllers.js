@@ -62,7 +62,15 @@ function blogpost (ctx, next) {
   $.when(cachedJson(config.spApiBlogpost)).then(success, defaultError)
 }
 
+function businessprofil (ctx, next) {
+  defaultController(ctx, next)
+}
+
 function comingsoon (ctx, next) {
+  defaultController(ctx, next)
+}
+
+function contact (ctx, next) {
   defaultController(ctx, next)
 }
 
@@ -127,12 +135,38 @@ function p500 (ctx, next) {
   defaultController(ctx, next)
 }
 
+function tag (ctx, next) {
+  defaultController(ctx, next)
+}
+
+function tags (ctx, next) {
+  defaultController(ctx, next)
+}
+
+function technicalprofil (ctx, next) {
+  defaultController(ctx, next)
+}
+
+function vision (ctx, next) {
+  defaultController(ctx, next)
+}
+
+function work (ctx, next) {
+  defaultController(ctx, next)
+}
+
+function works (ctx, next) {
+  defaultController(ctx, next)
+}
+
 // -----------------------------------------------------------------------------
 
 module.exports = {
   blog: blog,
   blogpost: blogpost,
+  businessprofil: businessprofil,
   comingsoon: comingsoon,
+  contact: contact,
   discoverybatch: discoverybatch,
   discoverybatches: discoverybatches,
   home: home,
@@ -140,5 +174,11 @@ module.exports = {
   maintenance: maintenance,
   p403: p403,
   p404: p404,
-  p500: p500
+  p500: p500,
+  tag: tag,
+  tags: tags,
+  technicalprofil: technicalprofil,
+  vision: vision,
+  work: work,
+  works: works
 }

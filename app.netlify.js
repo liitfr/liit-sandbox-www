@@ -2,6 +2,7 @@ require('dotenv').config({ silent: true })
 
 const Contentful = require('spike-contentful')
 const cssStandards = require('spike-css-standards')
+const fs = require('fs')
 const HardSourcePlugin = require('hard-source-webpack-plugin')
 const htmlStandards = require('reshape-standard')
 const jsStandards = require('babel-preset-latest')
@@ -12,13 +13,24 @@ const moment = require('moment')
 const pages = require('./pages.json')
 const path = require('path')
 const slug = require('speakingurl')
-const webpack = require('webpack')
 const {DefinePlugin, ProvidePlugin} = require('webpack')
 const {UglifyJsPlugin, DedupePlugin, OccurrenceOrderPlugin} = require('webpack').optimize
 
 moment.locale('fr')
 
-pageId = (ctx) => {
+var entry = () => {
+  var entry = {}
+  var sourceDir = './assets/js/'
+  var files = fs.readdirSync(sourceDir)
+  files.forEach(file => {
+    if (file.charAt(0) !== '_') {
+      entry['js/' + path.parse(file).name] = [sourceDir + file]
+    }
+  })
+  return entry
+}
+
+var pageId = (ctx) => {
   for (var page in pages) {
     if (pages.hasOwnProperty(page)) {
       if (pages[page].view === ctx.resourcePath.replace(`${path.join(__dirname, '/views/')}`, '')) {
@@ -38,13 +50,7 @@ module.exports = {
 
   dumpDirs: ['views', 'assets', 'misc'],
 
-  entry: {
-    'js/blog': ['./assets/js/blog.js'],
-    'js/blogpost': ['./assets/js/blogpost.js'],
-    'js/common': ['./assets/js/common.js'],
-    'js/isogrid': ['./assets/js/isogrid.js'],
-    'js/waves': ['./assets/js/waves.js']
-  },
+  entry: entry(),
 
   ignore: [
     '.*',
@@ -55,7 +61,9 @@ module.exports = {
     'assets/img/.gitkeep',
     'license.md',
     'pages.json',
-    'readme.md'
+    'readme.md',
+    'misc/.htaccess',
+    'misc/.browserconfig.xml'
   ],
 
   matchers: {
