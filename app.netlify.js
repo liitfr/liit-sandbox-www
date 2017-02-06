@@ -48,7 +48,7 @@ module.exports = {
 
   devtool: false,
 
-  dumpDirs: ['views', 'assets', 'misc'],
+  dumpDirs: ['views', 'assets', 'www'],
 
   entry: entry(),
 
@@ -59,11 +59,12 @@ module.exports = {
     '**/templates/**.sgr',
     '_cache/**',
     'assets/img/.gitkeep',
+    'assets/img/favicons/faviconDescription.json',
     'license.md',
+    'www/.htaccess',
     'pages.json',
-    'readme.md',
-    'misc/.htaccess',
-    'misc/.browserconfig.xml'
+    process.env.GU_OUTPUT_DIR + '/**',
+    'readme.md'
   ],
 
   matchers: {
@@ -220,8 +221,8 @@ module.exports = {
         spApiModeltag: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_TAG + '.json')),
         spApiModelwork: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_WORK + '.json')),
         spAppName: JSON.stringify(process.env.SP_APP_NAME),
-        sp404Page: JSON.stringify(process.env.SP_404_PAGE),
-        sp500Page: JSON.stringify(process.env.SP_500_PAGE),
+        sp404Page: JSON.stringify(path.join('/', process.env.SP_404_PAGE)),
+        sp500Page: JSON.stringify(path.join('/', process.env.SP_500_PAGE)),
         spMetaTitleMaxSize: JSON.stringify(process.env.SP_META_TITLE_MAX_SIZE),
         spMetaDescMaxSize: JSON.stringify(process.env.SP_META_DESC_MAX_SIZE)
       }

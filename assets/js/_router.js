@@ -41,7 +41,7 @@ function prepare (ctx, next) {
   ctx.handled = true
   if (initialRender) {
     $('script').each(function (id, el) {
-      loadedScripts.push(el.outerHTML)
+      loadedScripts.push($(el).attr('src'))
     })
     initialRender = false
     return initialRender
@@ -65,9 +65,9 @@ function render (ctx) {
   $('main').html(generation.filter('main').html())
   $('body').attr('id', nextPath)
   $(generation).filter('script').each(function (id, el) {
-    if (loadedScripts.indexOf(el.outerHTML) === -1 && $(el).attr('src')) {
+    if (loadedScripts.indexOf($(el).attr('src')) === -1 && $(el).attr('src')) {
       $.when(cachedScript($(el).attr('src'))).done(function () {
-        loadedScripts.push(el.outerHTML)
+        loadedScripts.push($(el).attr('src'))
       })
     } else if ($(el).attr('data-hot-reload') === 'true') {
       window[config.spAppName][$(el).attr('data-script-name')][$(el).attr('data-function-name')]()

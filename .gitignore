@@ -1,6 +1,6 @@
 .DS_Store
-node_modules
-public
-dist
-_cache
 .env
+_cache
+_remote
+dist
+node_modules

@@ -56,6 +56,10 @@ controllerName = (ctx, next) => {
 ```
 Remember that controller must have same name as page name in pages.json
 
+## Integrating Spike with Gulp to deploy on a FTP / Apache server
+
+## Making an hybrid SPA with Spike
+
 ## Setup
 
 - make sure [node.js](http://nodejs.org) is at version >= `6`

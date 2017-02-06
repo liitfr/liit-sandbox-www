@@ -1,10 +1,3 @@
-// TODO: Vendor vs webpack require ?
-// BUG : Github doesn't display good technology (linguist) ...
-// TODO : Add link rel canonical in pages ! (https://alexcican.com/post/how-to-remove-php-html-htm-extensions-with-htaccess/)
-// TODO : Add nojs message on all pages
-// TODO : Add twitter card + seo + google business etc
-// TODO : renommer fournées par lectures
-
 require('dotenv').config({ silent: true })
 
 const Contentful = require('spike-contentful')
@@ -21,6 +14,7 @@ const pages = require('./pages.json')
 const path = require('path')
 const slug = require('speakingurl')
 const {DefinePlugin, ProvidePlugin} = require('webpack')
+const {UglifyJsPlugin, DedupePlugin, OccurrenceOrderPlugin} = require('webpack').optimize
 
 moment.locale('fr')
 
@@ -52,7 +46,7 @@ module.exports = {
     presets: [jsStandards]
   },
 
-  devtool: 'source-map',
+  devtool: false,
 
   dumpDirs: ['views', 'assets', 'www'],
 
@@ -65,6 +59,7 @@ module.exports = {
     '**/templates/**.sgr',
     '_cache/**',
     'assets/img/.gitkeep',
+    'assets/img/favicons/faviconDescription.json',
     'license.md',
     'pages.json',
     process.env.GU_OUTPUT_DIR + '/**',
@@ -81,6 +76,10 @@ module.exports = {
       {
         test: /\.json$/,
         loader: 'json'
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: 'image-webpack'
       }
     ]
   },
@@ -196,11 +195,17 @@ module.exports = {
       spaceId: process.env.CF_SPACE_ID
     }),
 
+    new DedupePlugin(),
+
     new HardSourcePlugin({
       cacheDirectory: path.join(__dirname, '_cache/hard_source_cache'),
       environmentPaths: { root: __dirname },
       recordsPath: path.join(__dirname, '_cache/records.json')
     }),
+
+    new OccurrenceOrderPlugin(),
+
+    new UglifyJsPlugin(),
 
     new DefinePlugin({
       config: {
@@ -230,9 +235,11 @@ module.exports = {
 
   postcss: (ctx) => {
     const css = cssStandards({
+      minify: true,
       rucksack: {
         fallbacks: true
       },
+      warnForDuplicates: false,
       webpack: ctx
     })
     css.plugins.push(lost())
@@ -241,6 +248,7 @@ module.exports = {
 
   reshape: (ctx) => {
     return htmlStandards({
+      minify: false,
       locals: Object.assign(
         {config: {
           googleSiteId: process.env.GOOGLE_SITE_ID,

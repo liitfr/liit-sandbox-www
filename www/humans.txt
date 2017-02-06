@@ -1,7 +1,7 @@
 /* TEAM */
 
 Designer: Mathias Hoffmann
-Twitter:  @IntendantsIt
+Twitter:  @liitfr
 Contact:  mathias [at] liit [dot] fr
 From:     Lyon, France
 
@@ -10,13 +10,14 @@ From:     Lyon, France
 Spike community: https://gitter.im/static-dev/spike?utm_source=share-link&utm_medium=link&utm_campaign=share-link
 Carrot : http://carrot.is/
 Jeff Escalante: http://jeffescalante.com
+Codrops : https://tympanus.net/codrops/
 
 /* SITE */
 
 Last update:  2017/01/01
 Standards: HTML5, CSS3, ES6
-Components: Node.js, NPM, Gulp, HTML5Boilerplate, Modernizr, jQuery, Spike, GSAP, Three, Webpack, Contentful, Reshape, PostCSS, ...
-Software: Atom, GitKraken
+Components: Node.js, Spike, Gulp, HTML5Boilerplate, Modernizr, jQuery, Page.js, Isotope, Masonry, GSAP, Three, Webpack, Babel, Reshape, PostCSS, Contentful, Netlify, Disqus, FastClick, LogStyle, Dynamics, ImagesLoaded, ...
+Software: Atom, GitKraken, Inkscape, Chrome, Filezilla, RealFaviconGenerator
 
                 ___       ___          ___
                /  /\     /  /\        /  /\
