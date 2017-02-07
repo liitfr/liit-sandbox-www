@@ -10,7 +10,7 @@ Why "hybrid" ?
 - Because on one hand, Spike will generate all your pages statically.  
 - And because on the other hand, a client-side router called [page.js](https://visionmedia.github.io/page.js/), used with hand-made code will allow you to create a powerfull dynamic website.
 
-Inspiration : [mojotech website](https://www.mojotech.com/) for a porting from Roots to Spike.
+Inspiration : [Mojotech website](https://www.mojotech.com/) for a porting from Roots to Spike.
 
 Bellow you'll find explanations about main components and global logic.
 
@@ -91,9 +91,9 @@ module.exports = {
 **Now you don't need to maintain explicitly the list of your entries anymore.** :rocket:
 
 In `assets/js/`, I would suggest to dispatch your js code this way :
-- `common.js` contains **factorized code used everywhere** (or almost), **client-side router** and **client templates**
+- `common.js` contains **factorized code used everywhere** (or almost), **client-side router** and **client templates**.
 - `xxx.js`, `yyy.js`, ... for one or many **specific** pages.
-- `_lib1.js`, `_lib2.js` for **required librairies**
+- `_lib1.js`, `_lib2.js` for **required librairies**.
 
 If your pages use local variables, then your client templates will have to be able to resolve these variables. **This is made possible by using Webpack [DefinePlugin](https://github.com/webpack/docs/wiki/list-of-plugins)** in `app.js`:
 
@@ -534,7 +534,7 @@ new ProvidePlugin({
 
 ### Vendor
 
-In this project, only are declared as vendor the most common librairies you'll find around Internet : jQuery & Modernizr. This way, we give opportunity for the browser to use its cache. That wouldn't be possible if they were bundled. Other librairies are required in js files. It's opinionated and therefore could easily be discussed. :relaxed:
+In this project, only are declared as vendor the most common librairies you'll find around Internet : jQuery & Modernizr. This way, we give opportunity for the browser to use its cache first. That wouldn't be possible if they were bundled. Other librairies are required in js files. It's opinionated and therefore could easily be discussed. :relaxed:
 
 ## Setup
 
