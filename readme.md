@@ -265,13 +265,13 @@ In this file, router should find **one controller per page** defined in `pages.j
 Basically, a controller is a function responsible for preparing data that are expected by the requested page.  
 Here are three typical kinds of controller :  
 
-1. Your page doesn't need data, use `defaultController` :   
+- Your page doesn't need data, use `defaultController` :   
 ```js   
 function businessprofil (ctx, next) {   
   defaultController(ctx, next)   
 }   
 ```     
-1. Your page need 1 or more collections of data :   
+- Your page need 1 or more collections of data :   
 ```js   
 function blog (ctx, next) {   
   function success () {   
@@ -290,7 +290,7 @@ function blog (ctx, next) {
 }   
 ```   
 In english : once json files have been downloaded, push all necessary data in `ctx.data` and execute router's next step (rendering).   
-1. Your page displays a particular individual :   
+- Your page displays a particular individual :   
 ```js   
 function blogpost (ctx, next) {   
   function success () {   
