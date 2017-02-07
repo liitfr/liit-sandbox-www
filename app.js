@@ -1,9 +1,7 @@
-// TODO: Vendor vs webpack require ?
-// BUG : Github doesn't display good technology (linguist) ...
-// TODO : Add link rel canonical in pages ! (https://alexcican.com/post/how-to-remove-php-html-htm-extensions-with-htaccess/)
 // TODO : Add nojs message on all pages
 // TODO : Add twitter card + seo + google business etc
-// TODO : renommer fournées par lectures
+// TODO : faire le tour de ul / each et mettre un message par défaut si aucune donnée
+// TODO : virer les "class" dans les sgr
 
 require('dotenv').config({ silent: true })
 
@@ -54,7 +52,7 @@ module.exports = {
 
   devtool: 'source-map',
 
-  dumpDirs: ['views', 'assets', 'www'],
+  dumpDirs: ['views', 'assets', process.env.GU_WWW_DIR],
 
   entry: entry(),
 
@@ -136,7 +134,7 @@ module.exports = {
           id: process.env.CF_MODEL_DISCOVERYBATCH,
           json: path.join(process.env.SP_API_DIR, process.env.CF_MODEL_DISCOVERYBATCH + '.json'),
           template: {
-            output: (discoverybatch) => { return 'fournees/numero' + slug(discoverybatch.fields.batchNumber) + '.html' },
+            output: (discoverybatch) => { return 'bookmarks/fournee-numero' + slug(discoverybatch.fields.batchNumber) + '.html' },
             path: 'views/templates/discoverybatch.sgr'
           },
           transform: (discoverybatch) => {
@@ -207,7 +205,6 @@ module.exports = {
         disqusLanguage: JSON.stringify(process.env.DISQUS_LANGUAGE),
         disqusShortname: JSON.stringify(process.env.DISQUS_SHORTNAME),
         googleSiteId: JSON.stringify(process.env.GOOGLE_SITE_ID),
-        pageId: JSON.stringify(pageId),
         spApiBlogcategory: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_BLOGCATEGORY + '.json')),
         spApiBlogpost: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_BLOGPOST + '.json')),
         spApiDiscoverybatch: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_DISCOVERYBATCH + '.json')),

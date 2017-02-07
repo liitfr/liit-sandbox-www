@@ -1,33 +1,3 @@
-// TODO : purger dist pour eviter d'uploader des trucs de dev qui seraient restés !
-// TODO : remove old assets (conn.clean)
-// TODO : Doc : Doesn't support favicons thing
-// TODO : Doc : Run drop-archive from time to time
-// Expected Input :
-// - HTML, JS, CSS files can be anywhere
-// - HTM extension supported
-// - .htaccess file at the root of project
-// - Have a look at .env.sample file :
-// - SP_OUTPUT_DIR
-// - FTP_HOST
-// - FTP_USER
-// - FTP_PASSWORD
-// - FTP_PARALLEL
-// - GU_FAV_DIR
-// - GU_OUTPUT_DIR
-// - GU_SM_SITE_URL
-// - FTP_REMOTE_FOLDER
-// - SM_SITE_URL
-
-// DOC : Explain why this file :
-// 1. apache support
-// 1.1 Deploy a compressed htaccess file
-// 1.2 Hash assets for long term caching
-// 2. what is not simple / possible with spike / webpack
-// 2.1 remove comments in css & js minified
-// 2.2 minify html
-
-// NB : I don't cache JSON files
-// NB : favicons should already exist in favicons. These assets aren't rewritted
 require('dotenv').config({ silent: true })
 
 const del = require('del')
@@ -68,7 +38,7 @@ gulp.task('dump-output-folders', () => {
 // Execute spike compile, but not by using spike API, since spike API and
 // Hard Source Cache aren't compatible !
 gulp.task('compile-spike-project', ['dump-output-folders'], () => {
-  exec('spike compile -e apache', (err, stdout, stderr) => {
+  exec('spike compile -e ' + process.env.GU_ENV_NAME, (err, stdout, stderr) => {
     if (err) {
       console.error(`exec error: ${err}`)
       return
@@ -157,7 +127,7 @@ gulp.task('assets-replace-step-1', ['assets-revision-step-1'], () => {
     .pipe(gulp.dest(gulpOutputDir))
 })
 
-// references of all images have been updated so now we can generate hash for css files
+// references of all images have been updated so now we can generate a hash for css files
 gulp.task('assets-revision-step-2', ['assets-replace-step-1'], () => {
   return gulp.src([
     gulpOutputDir + '/css/*.css'
@@ -181,7 +151,7 @@ gulp.task('assets-replace-step-2', ['assets-revision-step-2'], () => {
     .pipe(gulp.dest(gulpOutputDir))
 })
 
-// all assets have been hashed so now we can generate hash for common.js
+// all assets have been hashed so now we can generate a hash for common.js
 gulp.task('assets-revision-step-3', ['assets-replace-step-2'], () => {
   return gulp.src([
     gulpOutputDir + '/js/common.js'

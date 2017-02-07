@@ -1,7 +1,7 @@
 extends(src="../layout.sgr")
 
   block(name="meta")
-    title Les fournées | LIIT
+    title Lectures & découvertes | LIIT
     meta(name="description" content="Les fournées sont un moyen pour moi de partager régulièrement avec vous le contenu intéressant déniché au cours de mes furieuses chevauchées sur l'Internet")
     meta(name="robots" content="index, follow")
 
@@ -10,4 +10,4 @@ extends(src="../layout.sgr")
     ul
       each(loop="discoverybatch, index in contentful.discovery_batches")
         li
-          a(href="/fournees/numero{{ discoverybatch.fields.batchNumber }}") Fournée #{{ discoverybatch.fields.batchNumber }}
+          a(href="/bookmarks/fournee-numero{{ discoverybatch.fields.batchNumber }}") Fournée #{{ discoverybatch.fields.batchNumber }}

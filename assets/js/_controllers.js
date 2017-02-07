@@ -77,7 +77,7 @@ function contact (ctx, next) {
 function discoverybatch (ctx, next) {
   function success () {
     findDiscoverybatch = $.grep(loadedJson[config.spApiDiscoverybatch], function (discoverybatch, index) {
-      return discoverybatch.fields.batchNumber === ctx.path.replace(/^\/fournees\/numero|(?:\.html?)?(?:\?.*)?(?:#.*)?$/gi, '')
+      return discoverybatch.fields.batchNumber === ctx.path.replace(/^\/bookmarks\/fournee-numero|(?:\.html?)?(?:\?.*)?(?:#.*)?$/gi, '')
     })
     if (!findDiscoverybatch.length > 0) {
       pagejs.redirect(config.sp404Page)

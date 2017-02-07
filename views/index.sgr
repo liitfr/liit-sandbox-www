@@ -5,5 +5,5 @@ extends(src="layout.sgr")
     ul
       li: a(href="/blog") Blog
       li: a(href="/tendances-internet") Tendances internet
-      li: a(href="/fournees") Fournées
+      li: a(href="/bookmarks") Lectures & découvertes
       li: a(href="/fake") Faux lien

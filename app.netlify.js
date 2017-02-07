@@ -48,7 +48,7 @@ module.exports = {
 
   devtool: false,
 
-  dumpDirs: ['views', 'assets', 'www'],
+  dumpDirs: ['views', 'assets', process.env.GU_WWW_DIR],
 
   entry: entry(),
 
@@ -61,7 +61,7 @@ module.exports = {
     'assets/img/.gitkeep',
     'assets/img/favicons/faviconDescription.json',
     'license.md',
-    'www/.htaccess',
+    process.env.GU_WWW_DIR + '/.htaccess',
     'pages.json',
     process.env.GU_OUTPUT_DIR + '/**',
     'readme.md'
@@ -75,12 +75,12 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.json$/,
-        loader: 'json'
-      },
-      {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loader: 'image-webpack'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
       }
     ]
   },
@@ -213,7 +213,6 @@ module.exports = {
         disqusLanguage: JSON.stringify(process.env.DISQUS_LANGUAGE),
         disqusShortname: JSON.stringify(process.env.DISQUS_SHORTNAME),
         googleSiteId: JSON.stringify(process.env.GOOGLE_SITE_ID),
-        pageId: JSON.stringify(pageId),
         spApiBlogcategory: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_BLOGCATEGORY + '.json')),
         spApiBlogpost: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_BLOGPOST + '.json')),
         spApiDiscoverybatch: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_DISCOVERYBATCH + '.json')),

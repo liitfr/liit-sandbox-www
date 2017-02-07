@@ -85,9 +85,9 @@
 # Customize what Apache returns to the client in case of an error.
 # https://httpd.apache.org/docs/current/mod/core.html#errordocument
 
-ErrorDocument 403 __SP_403_PAGE__
-ErrorDocument 404 __SP_404_PAGE__
-ErrorDocument 500 __SP_500_PAGE__
+ErrorDocument 403 /__SP_403_PAGE__
+ErrorDocument 404 /__SP_404_PAGE__
+ErrorDocument 500 /__SP_500_PAGE__
 
 # ----------------------------------------------------------------------
 # | Error prevention                                                   |
@@ -353,11 +353,11 @@ AddDefaultCharset utf-8
 # Redirect from the `http://` to the `https://` version of the URL.
 # https://wiki.apache.org/httpd/RewriteHTTPToHTTPS
 
-# <IfModule mod_rewrite.c>
-#    RewriteEngine On
-#    RewriteCond %{HTTPS} !=on
-#    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
-# </IfModule>
+<IfModule mod_rewrite.c>
+   RewriteEngine On
+   RewriteCond %{HTTPS} !=on
+   RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>
 
 # ----------------------------------------------------------------------
 # | Suppressing / Forcing the `www.` at the beginning of URLs          |

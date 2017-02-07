@@ -48,7 +48,7 @@ module.exports = {
 
   devtool: false,
 
-  dumpDirs: ['views', 'assets', 'www'],
+  dumpDirs: ['views', 'assets', process.env.GU_WWW_DIR],
 
   entry: entry(),
 
@@ -74,12 +74,12 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.json$/,
-        loader: 'json'
-      },
-      {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loader: 'image-webpack'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
       }
     ]
   },
@@ -135,7 +135,7 @@ module.exports = {
           id: process.env.CF_MODEL_DISCOVERYBATCH,
           json: path.join(process.env.SP_API_DIR, process.env.CF_MODEL_DISCOVERYBATCH + '.json'),
           template: {
-            output: (discoverybatch) => { return 'fournees/numero' + slug(discoverybatch.fields.batchNumber) + '.html' },
+            output: (discoverybatch) => { return 'bookmarks/fournee-numero' + slug(discoverybatch.fields.batchNumber) + '.html' },
             path: 'views/templates/discoverybatch.sgr'
           },
           transform: (discoverybatch) => {
@@ -212,7 +212,6 @@ module.exports = {
         disqusLanguage: JSON.stringify(process.env.DISQUS_LANGUAGE),
         disqusShortname: JSON.stringify(process.env.DISQUS_SHORTNAME),
         googleSiteId: JSON.stringify(process.env.GOOGLE_SITE_ID),
-        pageId: JSON.stringify(pageId),
         spApiBlogcategory: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_BLOGCATEGORY + '.json')),
         spApiBlogpost: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_BLOGPOST + '.json')),
         spApiDiscoverybatch: JSON.stringify(path.join('/', process.env.SP_API_DIR, process.env.CF_MODEL_DISCOVERYBATCH + '.json')),

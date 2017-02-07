@@ -20,12 +20,12 @@
     "view": "contacter-developpeur.sgr"
   },
   "discoverybatch": {
-    "path": "^\/fournees\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:#.*)?$).+$",
+    "path": "^\/bookmarks\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:#.*)?$).+$",
     "view": "templates/discoverybatch.sgr"
   },
   "discoverybatches": {
-    "path": "^\/fournees(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:#.*)?$",
-    "view": "fournees/index.sgr"
+    "path": "^\/bookmarks(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:#.*)?$",
+    "view": "bookmarks/index.sgr"
   },
   "home": {
     "path": "^(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:#.*)?$",
