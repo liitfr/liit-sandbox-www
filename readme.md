@@ -138,7 +138,7 @@ reshape: (ctx) => {
 ...
 ```
 
-**To avoid data enrichment & cleansing on client side**, I use Contentful plugin transformations to do it during build rather than during web browsing. This way, **bundled js are also lighter** since you won't have to require librairies such as slugify or moment to reproduce expected behavior on client side ! :metal:
+**To avoid data enrichment & cleansing on client side**, Contentful plugin transformations are used to do it during build rather than during web browsing. This way, **bundled js are also lighter** since you won't have to require librairies such as slugify or moment to reproduce expected behavior on client side ! :metal:
 
 For example, the blogpost model :
 
@@ -205,7 +205,7 @@ html(class="no-js" lang="fr")
   head
     ...
     block(name="meta")
-      title My website !
+      title My website
       meta(name="description" content="Hello World !")
       meta(name="robots" content="index, follow")
     block(name="js-head")
@@ -253,9 +253,9 @@ The **core of your single page application**. If you follow rules described in t
 
 PS : It's good to have a look at it though. Simply speaking, router works in three steps :  
 
-1. prepare : Init router if it's the first visited page. In that case, stop routing here.
-1. controller : If necessary, grab expected data on remote server with ajax.
-1. render : Generate client template & Update DOM elements.
+1. **Prepare** : Init router if it's the first visited page. In that case, stop routing here.
+1. **Control** : If necessary, grab expected data on remote server with ajax.
+1. **Render** : Generate client template & Update DOM elements.
 
 #### \_controllers.js file
 
@@ -267,7 +267,7 @@ Here are three typical kinds of controller :
 
 - Your page doesn't need data, use `defaultController` :   
 ```js   
-function businessprofil (ctx, next) {   
+function mycontroller (ctx, next) {   
   defaultController(ctx, next)   
 }   
 ```     
@@ -335,13 +335,12 @@ Router will call this function everytime a visitor displays this page.
 So you want to deploy your shiny website to a remote server after publishing a new article or committing developments ?   
 Just type `$ gulp` and :boom: that's it !  
 
-Netlify makes it awesome to use Spike, let's try to do (almost :sweat_smile:) the same with **old school Apache** ! :older_man:  
-I've used Gulp to do that, but it could have been done with webpack or anything else.  
-I just wanted to discover Spike and make something significant with this.
+Netlify makes it awesome to use Spike, let's try to do (almost :sweat_smile:) the same with **old school Apache** :older_man:  
+I've used Gulp to do that, but it could have been done with webpack or anything else; I just wanted to discover Spike and make something significant with this.
 
 Gulp will cover three topics :
 
-1. Deploy your up-to-date website.
+1. Deploy your up-to-date website to a remote server.
 1. Apache support & www concerns :
   - Deploy a generated `.htaccess`.
   - Deploy a generated `sitemap.xml`.
@@ -399,7 +398,7 @@ Spike output folder is dumped in order to avoid dev artfacts to get uploaded to 
 
 #### 2. compile-spike-project
 
-Executes Spike compile in `GU_ENV_NAME` environment :sparkles:
+Executes Spike compile in `GU_ENV_NAME` environment. :sparkles:
 
 #### 3. generate-deploy-folder
 
@@ -427,7 +426,7 @@ Therefore I'll need three steps to :
 1. Add a hash to assets name.
 1. Update files that refer to these assets.
 
-NB : Since I built favicons outside of Spike and Gulp, I excluded these files (inside `GU_FAV_DIR`) from these steps.
+NB : Since I built favicons outside of Spike and Gulp, these files (inside `GU_FAV_DIR`) are excluded from these steps. If you need to update your favicons, you'll have to manage hashing directly on http://realfavicongenerator.net/ and update layout's metas manually.
 
 ##### 4.1 assets-revision-step-1
 
@@ -478,14 +477,14 @@ We can now start to upload files to your FTP server. First we'll only upload ass
 
 #### 9. deploy-ftp-pages
 
-Once assets have been uploaded first, we can deploy pages ... And that's it :v:
+Once assets have been uploaded first, we can deploy pages ... And that's it ! :v:
 
 #### Occasional Tasks
 
 ##### drop-former-assets
 
 :toilet: Remove old hashed assets, use it from time to time to save some room on your FTP server.  
-:warning: double check that `GU_OUTPUT_DIR` is still here ! If not, everything will vanish from your server ...
+:warning: double check that `GU_OUTPUT_DIR` is still here : if not, everything will vanish from your server ...
 
 ##### drop-remote
 
@@ -497,7 +496,7 @@ Think twice !
 ### Favicons
 
 I didn't find a clean way to integrate favicons generation in build process.  
-So I used http://realfavicongenerator.net/ directy on their website. And it's an awesome tool !
+So I used http://realfavicongenerator.net/ directly on their website. And it's an awesome tool.
 
 ### Standards
 
@@ -505,7 +504,7 @@ So I used http://realfavicongenerator.net/ directy on their website. And it's an
 
 ### CSS
 
-I used GPS CSS Methodology explained [here](https://github.com/jescalan/gps).  
+GPS CSS Methodology is explained [here](https://github.com/jescalan/gps).  
 Unlike JS, CSS is located in only one file. It's not that heavy :see_no_evil:
 
 ### Isotope and masonry
@@ -535,7 +534,7 @@ new ProvidePlugin({
 
 ### Vendor
 
-I only declared the most common js librairies you'll find around Internet as vendor : jQuery & modernizr. This way, we give opportunity for the browser to use its cache. That wouldn't be possible if they were bundled. Other librairies are required in js files. It's opinionated and therefore could easily be discussed :relaxed:
+In this project, only are declared as vendor the most common librairies you'll find around Internet : jQuery & Modernizr. This way, we give opportunity for the browser to use its cache. That wouldn't be possible if they were bundled. Other librairies are required in js files. It's opinionated and therefore could easily be discussed. :relaxed:
 
 ## Setup
 
