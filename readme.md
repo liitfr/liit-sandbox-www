@@ -8,9 +8,9 @@ Improvements & PR are welcome !
 
 Why "hybrid" ?  
 - Because on one hand, Spike will generate all your pages statically.  
-- And because on the other hand, a client-side router called [page.js](https://visionmedia.github.io/page.js/), used with hand-made code will allow you to create a powerfull dynamic website
+- And because on the other hand, a client-side router called [page.js](https://visionmedia.github.io/page.js/), used with hand-made code will allow you to create a powerfull dynamic website.
 
-Inspiration : [mojotech website](https://www.mojotech.com/) for a porting from Roots to Spike
+Inspiration : [mojotech website](https://www.mojotech.com/) for a porting from Roots to Spike.
 
 Bellow you'll find explanations about main components and global logic.
 
@@ -22,7 +22,6 @@ Bellow you'll find explanations about main components and global logic.
   1. Index in a folder : `^\/folder(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:#.*)?$`
   1. A page on the root of your website : `^\/page(?:\\.html?)?(?:\\?.*)?(?:#.*)?$`
   1. A generic page for individuals of a template : `\/folder\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:#.*)?$).+$`  
-  As you can see, these RegExp allow you to use fragment identifiers, query strings and make file extension optional
 - `view` is the file that is used to generate your page during build process
 
 An example to start with :
@@ -44,6 +43,8 @@ An example to start with :
 }
 ```
 
+As you can see, these RegExp allow you to use fragment identifiers, query strings and make file extension optional.
+
 ### app.js file
 
 `pages.json` data are necessary for our client-side router, so we'll need to declare Webpack's [json loader](https://github.com/webpack-contrib/json-loader) in `app.js` in order to read json on client-side code.
@@ -62,6 +63,7 @@ module: {
 ```
 
 If you have many pages that use specific (and maybe heavy) js code, you don't want them to be compiled in one single bundled file that would be used everywhere.   
+
 Spike can understand that any file found in `assets/js/` that doesn't start with `_` must be considered as a `1:1` entry. This is made possible by using following piece of custom code :
 
 ```js
@@ -86,11 +88,11 @@ module.exports = {
 ...
 ```
 
-**Now you don't need to maintain explicitly the list of your entries anymore** :rocket:
+**Now you don't need to maintain explicitly the list of your entries anymore.** :rocket:
 
-In `assets/js/`, I would suggest to dispatch your `js` code this way :
+In `assets/js/`, I would suggest to dispatch your js code this way :
 - `common.js` contains **factorized code used everywhere** (or almost), **client-side router** and **client templates**
-- `xxx.js`, `yyy.js` .. for one or many **specific** pages.
+- `xxx.js`, `yyy.js`, ... for one or many **specific** pages.
 - `_lib1.js`, `_lib2.js` for **required librairies**
 
 If your pages use local variables, then your client templates will have to be able to resolve these variables. **This is made possible by using Webpack [DefinePlugin](https://github.com/webpack/docs/wiki/list-of-plugins)** in `app.js`:
@@ -136,8 +138,7 @@ reshape: (ctx) => {
 ...
 ```
 
-**To avoid data enrichment & cleansing on client side**, I use Contentful plugin transformations to do it during build rather than during web browsing !  
-This way, **bundled js are also lighter** since you won't have to require librairies such as slugify or moment to reproduce expected behavior on client side ! :metal:
+**To avoid data enrichment & cleansing on client side**, I use Contentful plugin transformations to do it during build rather than during web browsing. This way, **bundled js are also lighter** since you won't have to require librairies such as slugify or moment to reproduce expected behavior on client side ! :metal:
 
 For example, the blogpost model :
 
@@ -168,8 +169,9 @@ new Contentful({
     ...
 ```
 
-As you can see, I extract Contentful data in separated json files. You'll see later :arrow_down: that it'll give hability to client-side controllers to ajax only necessary data ! :zap:  
-:warning: json files URI must be declared in `DefinePlugin`
+As you can see, Contentful data for this model is extracted in a separated json files. You'll see later :arrow_down: that it'll give hability to client-side controllers to ajax only necessary data. :zap:  
+
+:warning: All json files URI must be declared in `DefinePlugin`
 
 ### .env file
 
@@ -195,7 +197,7 @@ The router can generate two types of errors :
 
 #### The layout
 
-**You need to adopt following structure** :
+You need to adopt following structure :
 
 ```sgr
 doctype html
@@ -221,10 +223,10 @@ html(class="no-js" lang="fr")
 ```
 
 When visitor goes from one page to another, following things will happen :
-- Title, meta description & meta robots will be updated
-- content block will be overwrited
-- body's id will be updated
-- new external scripts appending js-head or js-body blocks will be ajaxed
+- Title, meta description & meta robots will be updated.
+- content block will be overwrited.
+- body's id will be updated.
+- new external scripts appending js-head or js-body blocks will be ajaxed.
 
 :warning: At the present time, **only external scripts are supported** (i.e. router won't load new inline scripts)
 
@@ -239,72 +241,75 @@ block(name="js-body" type="append")
 ...
 ```
 
-`data-hot-reload="true"` tells the router that you want to execute this script everytime the current page is displayed. If `false` or not defined, script will only be executed once.  
-`data-script-name="identifier"` is a unique identifier for this script.  
-`data-function-name="aFunction"` tells the router which function to execute when the current page is displayed again (`data-hot-reload` must be `true`).
+- `data-hot-reload="true"` tells the router that you want to execute this script everytime the current page is displayed. If `false` or not defined, script will only be executed once.  
+- `data-script-name="identifier"` is a unique identifier for this script.  
+- `data-function-name="aFunction"` tells the router which function to execute when the current page is displayed again (`data-hot-reload` must be `true`).
 
 ### In your JS
 
 #### \_router.js file
 
-The **core of your single page application**. If you follow rules described in this document, you won't have to touch it ! Cheers ! :beers::sunglasses:
+The **core of your single page application**. If you follow rules described in this document, you won't have to touch it ! Cheers :beers::sunglasses:
 
-PS : It's good to have a look at it though. Simply speaking, router works in three steps :
+PS : It's good to have a look at it though. Simply speaking, router works in three steps :  
+
 1. prepare : Init router if it's the first visited page. In that case, stop routing here.
-2. controller : If necessary, grab expected data on remote server with ajax.
-3. render : Generate client template & Update DOM elements.
+1. controller : If necessary, grab expected data on remote server with ajax.
+1. render : Generate client template & Update DOM elements.
 
 #### \_controllers.js file
 
 In this file, router should find **one controller per page** defined in `pages.json`. No more, no less.  
 :warning: Controllers must have the same name as page's key in `pages.json`.  
+
 Basically, a controller is a function responsible for preparing data that are expected by the requested page.  
-Here are three typical kinds of controller :
-1. Your page doesn't need data, use `defaultController` :
-```js
-function businessprofil (ctx, next) {
-  defaultController(ctx, next)
-}
-```
-2. Your page need 1 or more collections of data :
-```js
-function blog (ctx, next) {
-  function success () {
-    ctx.data = {
-      contentful: {
-        blog_posts: loadedJson[config.spApiBlogpost],
-        blog_categories: loadedJson[config.spApiBlogcategory]
-      }
-    }
-    next()
+Here are three typical kinds of controller :  
+
+1. Your page doesn't need data, use `defaultController` :   
+  ```js
+  function businessprofil (ctx, next) {
+    defaultController(ctx, next)
   }
-  $.when(
-    cachedJson(config.spApiBlogpost),
-    cachedJson(config.spApiBlogcategory)
-  ).then(success, defaultError)
-}
-```
-In english : once json files have been downloaded, push all necessary data in `ctx.data` and execute router's next step (rendering).
-3. Your page displays a particular individual :
-```js
-function blogpost (ctx, next) {
-  function success () {
-    findBlogpost = $.grep(loadedJson[config.spApiBlogpost], function (blogpost, index) {
-      return blogpost.fields.blogUrl === ctx.path.replace(/^\/blog\/|(?:\.html?)?(?:\?.*)?(?:#.*)?$/gi, '')
-    })
-    if (!findBlogpost.length > 0) {
-      pagejs.redirect(config.sp404Page)
-    } else {
+  ```   
+1. Your page need 1 or more collections of data :   
+  ```js
+  function blog (ctx, next) {
+    function success () {
       ctx.data = {
-        item: findBlogpost[0]
+        contentful: {
+          blog_posts: loadedJson[config.spApiBlogpost],
+          blog_categories: loadedJson[config.spApiBlogcategory]
+        }
       }
       next()
     }
+    $.when(
+      cachedJson(config.spApiBlogpost),
+      cachedJson(config.spApiBlogcategory)
+    ).then(success, defaultError)
   }
-  $.when(cachedJson(config.spApiBlogpost)).then(success, defaultError)
-}
-```
-After downloading related json file, you first need to identify which individual is requested & check if it actually exists before execute router's next step (rendering).
+  ```   
+  In english : once json files have been downloaded, push all necessary data in `ctx.data` and execute router's next step (rendering).   
+1. Your page displays a particular individual :   
+  ```js
+  function blogpost (ctx, next) {
+    function success () {
+      findBlogpost = $.grep(loadedJson[config.spApiBlogpost], function (blogpost, index) {
+        return blogpost.fields.blogUrl === ctx.path.replace(/^\/blog\/|(?:\.html?)?(?:\?.*)?(?:#.*)?$/gi, '')
+      })
+      if (!findBlogpost.length > 0) {
+        pagejs.redirect(config.sp404Page)
+      } else {
+        ctx.data = {
+          item: findBlogpost[0]
+        }
+        next()
+      }
+    }
+    $.when(cachedJson(config.spApiBlogpost)).then(success, defaultError)
+  }
+  ```   
+  After downloading related json file, you first need to identify which individual is requested & check if it actually exists before execute router's next step (rendering).   
 
 #### In your common.js file
 
@@ -313,7 +318,7 @@ That way, router will always be loaded, wherever visitor enters in your website.
 
 #### In any other "specific" js file
 
-If you need to use hot reload feature, you'll have to declare something like this :
+If you need to use **hot reload feature**, you'll have to declare something like this :
 ```js
 window[config.spAppName] = Object.assign(
   {blog: {
@@ -322,17 +327,20 @@ window[config.spAppName] = Object.assign(
   window[config.spAppName]
 )
 ```
-In this example, updateCount is the name of a function in my script.  
-Router will call this function everytime visitor displays this page.  
+In this example, `updateCount` is the name of a function in your script.  
+Router will call this function everytime a visitor displays this page.  
 
 ## Integrating Spike with Gulp to deploy on a FTP / Apache server
 
-So you want to deploy your shiny website to a remote server after publishing a new article or committing developments ? just type `$ gulp` and :boom: that's it !  
+So you want to deploy your shiny website to a remote server after publishing a new article or committing developments ?   
+Just type `$ gulp` and :boom: that's it !  
+
 Netlify makes it awesome to use Spike, let's try to do (almost :sweat_smile:) the same with **old school Apache** ! :older_man:  
 I've used Gulp to do that, but it could have been done with webpack or anything else.  
 I just wanted to discover Spike and make something significant with this.
 
 Gulp will cover three topics.
+
 1. Deploy your up-to-date website
 1. Apache support & www concerns :
   - Deploy a generated .htaccess
@@ -370,7 +378,8 @@ Relax, this file will be generated by Gulp :relaxed:
 
 ### app.apache.js
 
-This file will be used to compile your Spike project with Gulp.  
+This file will be used to compile your Spike project with Gulp.
+
 It is your production file, where you'll probably want to use things such `UglifyJsPlugin`, `DedupePlugin`, `OccurrenceOrderPlugin` and `minify` option in `cssStandards` & `htmlStandards`.  
 You can customize name of this file since it's defined by following environment variables :
 - `GU_ENV_NAME` (e.g. "apache")
@@ -384,23 +393,23 @@ This folders are respectively defined by following environment variables :
 - `SP_OUTPUT_DIR` (e.g. "public")
 - `GU_OUTPUT_DIR` (e.g. "_remote")
 
-:warning: This task never deletes persistence folder : `GU_OUTPUT_DIR/GU_PERSISTENCE_DIR` (e.g. "_persistence") since it's used in order to track `last modification date` :hourglass: of your pages.  
-This information is necessary for `sitemap.xml` generation.
+:warning: This task never deletes persistence folder : `GU_OUTPUT_DIR/GU_PERSISTENCE_DIR` (e.g. "_persistence") since it's used in order to track `last modification date` :hourglass: of your pages. This information is necessary for `sitemap.xml` generation.
 
 Spike output folder is dumped in order to avoid dev artfacts to get uploaded to your production FTP.
 
 #### 2. compile-spike-project
 
-Execute spike compile in `GU_ENV_NAME` environment :sparkles:
+Executes spike compile in `GU_ENV_NAME` environment :sparkles:
 
 #### 3. generate-deploy-folder
 
-Take `SP_OUTPUT_DIR` as source for this stream and create a new deployment folder `GU_OUTPUT_DIR`.  
+Takes `SP_OUTPUT_DIR` as source for this stream and creates a new deployment folder `GU_OUTPUT_DIR`.  
+
 We take opportunity to :
-- remove comments in js & css minified files
-- minify html files
-- remove comments in htaccess
-- htaccess and robots.txt : generate these files by overwriting .env variables
+- remove comments in js & css minified files.
+- minify html files.
+- remove comments in htaccess.
+- htaccess and robots.txt : generate these files by overwriting .env variables.
 
 #### 4. Assets revision & replacement
 
@@ -408,14 +417,15 @@ The following steps depend on your assets dependencies graph. By lack of time an
 It would surely be an elegant solution though :tophat:
 
 In my case :
-- Images and js scripts (different than `common.js`) do not refer to any other asset
-- css refers to images
-- common.js refers to images, js scripts, and css (because it contains client templates)
-- html pages refer to images, css, js scripts and common.js
+- Images and js scripts (different than `common.js`) do not refer to any other asset.
+- css refers to images.
+- common.js refers to images, js scripts, and css (because it contains client templates).
+- html pages refer to images, css, js scripts and common.js.
 
 Therefore I'll need three steps to :
+
 1. Add a hash to assets name.
-2. Update files that refer to these assets.
+1. Update files that refer to these assets.
 
 NB : Since I built favicons outside of Spike and Gulp, I excluded these files (inside `GU_FAV_DIR`) from these steps.
 
@@ -450,18 +460,16 @@ Remove from deployment folder all unecessary files. :toilet:
 
 #### 6. pages-lastmod-update
 
-Pages are always overwrited in `SP_OUTPUT_DIR` folder, so we need a way to keep `last modification dates` :hourglass:, compilations after compilations.   
-This is done by never erasing persistent folder (`GU_PERSISTENCE_DIR` e.g. "_persistence") and updating it at every new compilation.
+Pages are always overwrited in `SP_OUTPUT_DIR` folder, so we need a way to keep `last modification dates` :hourglass:, compilations after compilations. This is done by never erasing persistent folder (`GU_PERSISTENCE_DIR` e.g. "_persistence") and updating it at every new compilation.
 
 #### 7. generate-sitemap
 
 `last modification dates` have been updated, we can now generate `sitemap.xml` :tada: !  
-`GU_SM_SITE_URL` is needed to define site Url (e.g. "http://www.liit.fr" )
+`GU_SM_SITE_URL` is needed to define your website URL (e.g. "http://www.liit.fr" )
 
 #### 8. deploy-ftp-assets
 
-We can now start to upload files to your FTP server. First we'll only upload assets files in order to preserve navigation for concurrent website visitors session.  
-Expected environment variables are :
+We can now start to upload files to your FTP server. First we'll only upload assets files in order to preserve navigation for concurrent website visitors session. Expected environment variables are :
 - `FTP_HOST`
 - `FTP_PARALLEL`
 - `FTP_PASSWORD`
@@ -477,7 +485,7 @@ Once assets have been uploaded first, we can deploy pages ... And that's it :v:
 ##### drop-former-assets
 
 :toilet: Remove old hashed assets, use it from time to time to save some room on your FTP server.  
-:warning: double check that `GU_OUTPUT_DIR` is still here ! If not, everything will vanish from your server
+:warning: double check that `GU_OUTPUT_DIR` is still here ! If not, everything will vanish from your server ...
 
 ##### drop-remote
 
@@ -503,7 +511,7 @@ Unlike JS, CSS is located in only one file. It's not that heavy :see_no_evil:
 ### Isotope and masonry
 
 You want to use isotope and / or masonry with Webpack 1.x ?  
-Add following code in `app.js`
+Add following code in `app.js` :
 
 ```js
 resolve: {
@@ -517,7 +525,7 @@ resolve: {
 ### Three.js
 
 You want to use Three.js with Webpack 1.x ?  
-Add following code in `app.js`
+Add following code in `app.js` :
 
 ```js
 new ProvidePlugin({
@@ -527,8 +535,8 @@ new ProvidePlugin({
 
 ### Vendor
 
-I only declared the most common js librairies you'll find around Internet as vendor : jQuery & masonry.   
-Other librairies are required in js files. It's opinionated and could easily be discussed :relaxed:
+I only declared the most common js librairies you'll find around Internet as vendor : jQuery & modernizr.   
+Other librairies are required in js files. It's opinionated and therefore could easily be discussed :relaxed:
 
 ## Setup
 
