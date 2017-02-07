@@ -4,7 +4,7 @@
 :construction: This document is a draft :heavy_exclamation_mark: I hope it will be helpful.  
 Improvements & PR are welcome !
 
-## Making an hybrid Single Page Application with Spike
+## Making a hybrid Single Page Application with Spike
 
 Why "hybrid" ?  
 - Because on one hand, Spike will generate all your pages statically.  
@@ -17,7 +17,7 @@ Bellow you'll find explanations about main components and global logic.
 ### pages.json file
 
 `pages.json` takes an inventory of all pages of your website. **Here, you'll define routing rules for all of your pages** :
-- `path` is a RegExp that represents urls that will drive visitor to a specific page. There are 4 common patterns of RegExp :
+- `path` is a RegExp that represents urls that will drive a visitor to a specific page. There are 4 common patterns of RegExp :
   1. Index of your website : `^(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:#.*)?$`
   1. Index in a folder : `^\/folder(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:#.*)?$`
   1. A page on the root of your website : `^\/page(?:\\.html?)?(?:\\?.*)?(?:#.*)?$`
@@ -171,7 +171,7 @@ new Contentful({
 
 As you can see, Contentful data for this model is extracted in a separated json files. You'll see later :arrow_down: that it'll give hability to client-side controllers to ajax only necessary data. :zap:  
 
-:warning: All json files URI must be declared in `DefinePlugin`
+:warning: All json files URI must be declared in `DefinePlugin`.
 
 ### .env file
 
@@ -191,7 +191,7 @@ The router can generate two types of errors :
 - 500 error will be raised if for some reason, a controller cannot download remote data.  
 
 `SP_API_DIR` is the name of the server's folder where data will be available for client-side controllers.  
-`SP_APP_NAME` is the name of Window Object's entry where your app will store useful values. Read more below :arrow_down:
+`SP_APP_NAME` is the name of Window Object's entry where your app will store useful values. Read more below. :arrow_down:
 
 ### In your pages
 
@@ -228,7 +228,7 @@ When visitor goes from one page to another, following things will happen :
 - body's id will be updated.
 - new external scripts appending js-head or js-body blocks will be ajaxed.
 
-:warning: At the present time, **only external scripts are supported** (i.e. router won't load new inline scripts)
+:warning: At the present time, **only external scripts are supported** (i.e. router won't load new inline scripts).
 
 #### Views & Templates
 
@@ -266,50 +266,50 @@ Basically, a controller is a function responsible for preparing data that are ex
 Here are three typical kinds of controller :  
 
 1. Your page doesn't need data, use `defaultController` :   
-  ```js
-  function businessprofil (ctx, next) {
-    defaultController(ctx, next)
-  }
-  ```   
+```js   
+function businessprofil (ctx, next) {   
+  defaultController(ctx, next)   
+}   
+```     
 1. Your page need 1 or more collections of data :   
-  ```js
-  function blog (ctx, next) {
-    function success () {
-      ctx.data = {
-        contentful: {
-          blog_posts: loadedJson[config.spApiBlogpost],
-          blog_categories: loadedJson[config.spApiBlogcategory]
-        }
-      }
-      next()
-    }
-    $.when(
-      cachedJson(config.spApiBlogpost),
-      cachedJson(config.spApiBlogcategory)
-    ).then(success, defaultError)
-  }
-  ```   
-  In english : once json files have been downloaded, push all necessary data in `ctx.data` and execute router's next step (rendering).   
+```js   
+function blog (ctx, next) {   
+  function success () {   
+    ctx.data = {   
+      contentful: {   
+        blog_posts: loadedJson[config.spApiBlogpost],   
+        blog_categories: loadedJson[config.spApiBlogcategory]   
+      }   
+    }   
+    next()   
+  }   
+  $.when(   
+    cachedJson(config.spApiBlogpost),   
+    cachedJson(config.spApiBlogcategory)   
+  ).then(success, defaultError)   
+}   
+```   
+In english : once json files have been downloaded, push all necessary data in `ctx.data` and execute router's next step (rendering).   
 1. Your page displays a particular individual :   
-  ```js
-  function blogpost (ctx, next) {
-    function success () {
-      findBlogpost = $.grep(loadedJson[config.spApiBlogpost], function (blogpost, index) {
-        return blogpost.fields.blogUrl === ctx.path.replace(/^\/blog\/|(?:\.html?)?(?:\?.*)?(?:#.*)?$/gi, '')
-      })
-      if (!findBlogpost.length > 0) {
-        pagejs.redirect(config.sp404Page)
-      } else {
-        ctx.data = {
-          item: findBlogpost[0]
-        }
-        next()
-      }
-    }
-    $.when(cachedJson(config.spApiBlogpost)).then(success, defaultError)
-  }
-  ```   
-  After downloading related json file, you first need to identify which individual is requested & check if it actually exists before execute router's next step (rendering).   
+```js   
+function blogpost (ctx, next) {   
+  function success () {   
+    findBlogpost = $.grep(loadedJson[config.spApiBlogpost], function (blogpost, index) {   
+      return blogpost.fields.blogUrl === ctx.path.replace(/^\/blog\/|(?:\.html?)?(?:\?.*)?(?:#.*)?$/gi, '')   
+    })   
+    if (!findBlogpost.length > 0) {   
+      pagejs.redirect(config.sp404Page)   
+    } else {   
+      ctx.data = {   
+        item: findBlogpost[0]   
+      }   
+      next()   
+    }   
+  }   
+  $.when(cachedJson(config.spApiBlogpost)).then(success, defaultError)   
+}   
+```   
+After downloading related json file, you first need to identify which individual is requested & check if it actually exists before execute router's next step (rendering).   
 
 #### In your common.js file
 
@@ -339,17 +339,17 @@ Netlify makes it awesome to use Spike, let's try to do (almost :sweat_smile:) th
 I've used Gulp to do that, but it could have been done with webpack or anything else.  
 I just wanted to discover Spike and make something significant with this.
 
-Gulp will cover three topics.
+Gulp will cover three topics :
 
-1. Deploy your up-to-date website
+1. Deploy your up-to-date website.
 1. Apache support & www concerns :
-  - Deploy a generated .htaccess
-  - Deploy a generated sitemap.xml
-  - Deploy a generated robots.txt
+  - Deploy a generated `.htaccess`.
+  - Deploy a generated `sitemap.xml`.
+  - Deploy a generated `robots.txt`.
   - Hash assets for long term caching. This concerns images (gif, jpeg, jpg, png, svg), js & css. However json & favicons files aren't concerned.
-1. Few things that didn't work with spike :
-  - remove comments in minified css & js files
-  - minify html
+1. Few things that didn't work with Spike :
+  - remove comments in minified css & js files.
+  - minify html.
 
 ### www files
 
@@ -399,7 +399,7 @@ Spike output folder is dumped in order to avoid dev artfacts to get uploaded to 
 
 #### 2. compile-spike-project
 
-Executes spike compile in `GU_ENV_NAME` environment :sparkles:
+Executes Spike compile in `GU_ENV_NAME` environment :sparkles:
 
 #### 3. generate-deploy-folder
 
@@ -414,7 +414,7 @@ We take opportunity to :
 #### 4. Assets revision & replacement
 
 The following steps depend on your assets dependencies graph. By lack of time and laziness, I didn't try to do a recursive task that would converge to a full revision automatically.
-It would surely be an elegant solution though :tophat:
+It would surely be an elegant solution though ! :tophat:
 
 In my case :
 - Images and js scripts (different than `common.js`) do not refer to any other asset.
@@ -465,7 +465,7 @@ Pages are always overwrited in `SP_OUTPUT_DIR` folder, so we need a way to keep 
 #### 7. generate-sitemap
 
 `last modification dates` have been updated, we can now generate `sitemap.xml` :tada: !  
-`GU_SM_SITE_URL` is needed to define your website URL (e.g. "http://www.liit.fr" )
+`GU_SM_SITE_URL` is needed to define your website URL. (e.g. "http://www.liit.fr" )
 
 #### 8. deploy-ftp-assets
 
@@ -535,8 +535,7 @@ new ProvidePlugin({
 
 ### Vendor
 
-I only declared the most common js librairies you'll find around Internet as vendor : jQuery & modernizr.   
-Other librairies are required in js files. It's opinionated and therefore could easily be discussed :relaxed:
+I only declared the most common js librairies you'll find around Internet as vendor : jQuery & modernizr. This way, we give opportunity for the browser to use its cache. That wouldn't be possible if they were bundled. Other librairies are required in js files. It's opinionated and therefore could easily be discussed :relaxed:
 
 ## Setup
 
