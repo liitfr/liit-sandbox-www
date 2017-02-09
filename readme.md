@@ -201,7 +201,7 @@ You need to adopt following structure :
 
 ```sgr
 doctype html
-html(class="no-js" lang="fr")
+html.no-js(lang="fr")
   head
     ...
     block(name="meta")

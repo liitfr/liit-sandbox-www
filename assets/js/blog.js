@@ -1,3 +1,5 @@
+/* global config, DISQUSWIDGETS */
+
 const isotope = require('isotope-layout')
 
 var d = document

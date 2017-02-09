@@ -1,3 +1,5 @@
+/* global $, config, getComputedStyle */
+
 /**
  * main.js
  * http://www.codrops.com

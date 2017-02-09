@@ -1,3 +1,5 @@
+/* global $, config, DISQUS */
+
 var d = document
 var disqus_config = function () {
   this.language = config.disqusLanguage

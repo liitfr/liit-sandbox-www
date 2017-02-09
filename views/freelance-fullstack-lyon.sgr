@@ -1,1 +1,4 @@
-p Les technologies que je creuse en ce moment
+extends(src="layout.sgr")
+
+  block(name="content")
+    h2 Technologies

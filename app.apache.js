@@ -60,6 +60,8 @@ module.exports = {
     '_cache/**',
     'assets/img/.gitkeep',
     'assets/img/favicons/faviconDescription.json',
+    'assets/img/favicons/original-favicon-circle.png',
+    'assets/img/favicons/original-favicon-random.png',
     'license.md',
     'pages.json',
     process.env.GU_OUTPUT_DIR + '/**',

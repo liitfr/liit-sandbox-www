@@ -1,1 +1,4 @@
-h2 Me contacter
+extends(src="layout.sgr")
+
+  block(name="content")
+    h2 Me contacter

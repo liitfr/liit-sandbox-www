@@ -1,5 +1,8 @@
+/* global $, TweenLite, Modernizr */
+
+require('../../node_modules/gsap/AttrPlugin.js')
+
 const FastClick = require('fastclick')
-const gsap = require('../../node_modules/gsap/AttrPlugin.js')
 const LogStyle = require('log-with-style')
 const router = require('./_router.js')
 
@@ -77,3 +80,52 @@ function flickLogo () {
 }
 
 flickLogo()
+
+// -----------------------------------------------------------------------------
+
+// Navigation menu
+var support = { transitions: Modernizr.csstransitions }
+var transEndEventNames = {
+  'WebkitTransition': 'webkitTransitionEnd',
+  'MozTransition': 'transitionend',
+  'OTransition': 'oTransitionEnd',
+  'msTransition': 'MSTransitionEnd',
+  'transition': 'transitionend'
+}
+var transEndEventName = transEndEventNames[Modernizr.prefixed('transition')]
+
+function toggleOverlay () {
+  if ($('.overlay').hasClass('open')) {
+    $('.overlay').removeClass('open')
+    $('.overlay').addClass('close')
+    $('#nav-icon').toggleClass('open')
+    $('header').toggleClass('transparent')
+    var onEndTransitionFn = function (ev) {
+      if (support.transitions) {
+        if (ev.propertyName !== 'visibility') return
+        // this.off(transEndEventName, onEndTransitionFn)
+        this.removeEventListener( transEndEventName, onEndTransitionFn )
+      }
+      $('.overlay').removeClass('close')
+    }
+    if (support.transitions) {
+      // BUG : jQuery doesn't return same event as vanilla addEventListener
+      // $('.overlay').on(transEndEventName, onEndTransitionFn)
+      document.querySelector('div.overlay').addEventListener(transEndEventName, onEndTransitionFn)
+    } else {
+      onEndTransitionFn()
+    }
+  } else if (!$('.overlay').hasClass('close')) {
+    $('#nav-icon').toggleClass('open')
+    $('header').toggleClass('transparent')
+    $('.overlay').addClass('open')
+  }
+}
+
+$('#nav-icon').on('click', toggleOverlay)
+$('#logo-liit').on('click',function () {
+  if ($('.overlay').hasClass('open')) {
+    toggleOverlay()
+  }
+})
+$('.overlay a').on('click', toggleOverlay)

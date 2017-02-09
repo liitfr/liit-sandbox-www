@@ -1,3 +1,5 @@
+/* global $, Modernizr */
+
 /**
  * "loading" effects for grids from/based on: http://tympanus.net/codrops/2013/07/02/loading-effects-for-grid-items-with-css-animations/ (Check it out for more examples and effects)
  *
@@ -28,34 +30,29 @@ function getViewportH () {
 }
 
  // http://stackoverflow.com/a/5598797/989439
-function getOffset (el) {
-  var offsetTop = 0
-  var offsetLeft = 0
-  do {
-    if (!isNaN(el.offsetTop)) {
-      offsetTop += el.offsetTop
-    }
-    if (!isNaN(el.offsetLeft)) {
-      offsetLeft += el.offsetLeft
-    }
-  } while (el = el.offsetParent)
-
-  return {
-    top: offsetTop,
-    left: offsetLeft
-  }
+function getOffset (elem) {
+  var box = elem.getBoundingClientRect()
+  var body = document.body
+  var docEl = document.documentElement
+  var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop
+  var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft
+  var clientTop = docEl.clientTop || body.clientTop || 0
+  var clientLeft = docEl.clientLeft || body.clientLeft || 0
+  var top = box.top + scrollTop - clientTop
+  var left = box.left + scrollLeft - clientLeft
+  return { top: Math.round(top), left: Math.round(left) }
 }
 
-function inViewport (el, h) {
+function inViewport (el, pH) {
   var elH = el.offsetHeight
   var scrolled = scrollY()
   var viewed = scrolled + getViewportH()
   var elTop = getOffset(el).top
-  var elBottom = elTop + elH
+  // var elBottom = elTop + elH
   // if 0, the element is considered in the viewport as soon as it enters.
   // if 1, the element is considered in the viewport only when it's fully inside
   // value in percentage (1 >= h >= 0)
-  var h = h || 0
+  var h = pH || 0
 
   return (elTop + elH * h) <= viewed// && (elBottom - elH * h) >= scrolled
 }

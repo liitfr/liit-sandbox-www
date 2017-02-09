@@ -1,9 +1,11 @@
 extends(src="layout.sgr")
 
   block(name="content")
-    h2 Accueil
-    ul
-      li: a(href="/blog") Blog
-      li: a(href="/tendances-internet") Tendances internet
-      li: a(href="/bookmarks") Lectures & découvertes
-      li: a(href="/fake") Faux lien
+    section#logo
+    section#headline
+    section#techno
+    section#service
+    section#whoami
+    section#contact
+    section#blog
+    section#read

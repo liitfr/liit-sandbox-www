@@ -6,8 +6,10 @@ extends(src="../layout.sgr")
     meta(name="robots" content="noindex, follow")
 
   block(name="content")
-    p Les données nécessaires à l'affichage de la page n'ont pu être téléchargées :'(
-    a(href="/") Retour à l'accueil
+    div.message
+      p Les données nécessaires à l'affichage de la page n'ont pu être téléchargées :'(
+      a(href="/") Retour à l'accueil
+    div.waves
 
   block(name="js-body" type="append")
     script(src="/js/waves.js" data-hot-reload="true" data-script-name="waves" data-function-name="onReload" defer)

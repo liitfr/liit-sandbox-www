@@ -1,3 +1,5 @@
+/* global $, config */
+
 const pagejs = require('page')
 
 var loadedJson = []
@@ -47,7 +49,7 @@ function blog (ctx, next) {
 
 function blogpost (ctx, next) {
   function success () {
-    findBlogpost = $.grep(loadedJson[config.spApiBlogpost], function (blogpost, index) {
+    var findBlogpost = $.grep(loadedJson[config.spApiBlogpost], function (blogpost, index) {
       return blogpost.fields.blogUrl === ctx.path.replace(/^\/blog\/|(?:\.html?)?(?:\?.*)?(?:#.*)?$/gi, '')
     })
     if (!findBlogpost.length > 0) {
@@ -76,7 +78,7 @@ function contact (ctx, next) {
 
 function discoverybatch (ctx, next) {
   function success () {
-    findDiscoverybatch = $.grep(loadedJson[config.spApiDiscoverybatch], function (discoverybatch, index) {
+    var findDiscoverybatch = $.grep(loadedJson[config.spApiDiscoverybatch], function (discoverybatch, index) {
       return discoverybatch.fields.batchNumber === ctx.path.replace(/^\/bookmarks\/fournee-numero|(?:\.html?)?(?:\?.*)?(?:#.*)?$/gi, '')
     })
     if (!findDiscoverybatch.length > 0) {

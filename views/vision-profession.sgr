@@ -1,1 +1,4 @@
-h1 Le travail
+extends(src="layout.sgr")
+
+  block(name="content")
+    h2 Profession

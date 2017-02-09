@@ -1,1 +1,15 @@
-h2 LIIT
+extends(src="layout.sgr")
+
+  block(name="meta")
+    title Coming-soon
+    meta(name="description" content="Coming-soon")
+    meta(name="robots" content="noindex, follow")
+
+  block(name="content")
+    div.message
+      p Coming-soon
+      a(href="/") Retour à l'accueil
+    div.waves
+
+  block(name="js-body" type="append")
+    script(src="/js/waves.js" data-hot-reload="true" data-script-name="waves" data-function-name="onReload" defer)

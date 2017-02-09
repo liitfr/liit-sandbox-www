@@ -4,20 +4,22 @@
 #p404,
 #p500
   background: #000
-  & header
+  /*& header
     padding-top: 200px
     lost-center: var(--page-width)
     & #logo-liit
       & polygon
         fill: #FFF
       & text
-        fill: #000
+        fill: #000*/
   & main
     lost-center: var(--page-width)
     color: white
     & .message
       padding-left: 100px
-  & .background
+    @media screen and (--s)
+      margin-top: 0px
+  & .waves
     position: absolute
     top: 0
     left: 0

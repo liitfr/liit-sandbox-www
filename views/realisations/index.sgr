@@ -1,1 +1,4 @@
-p Realisations
+extends(src="../layout.sgr")
+
+  block(name="content")
+    h2 Réalisation

@@ -1,3 +1,4 @@
+/* global $, config */
 // TODO : Support inline scripts ?
 
 const controllers = require('./_controllers.js')
@@ -58,6 +59,7 @@ function render (ctx) {
   previousPath = ctx.path
   nextPath = resolvePath(ctx.path)
   window.scrollTo(0, 0)
+  // Give config variable to the template
   $.extend(ctx.data, {
     config: config
   })

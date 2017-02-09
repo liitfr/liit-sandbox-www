@@ -1,11 +1,11 @@
-const CanvasRenderer = require('../../node_modules/three/examples/js/renderers/CanvasRenderer.js')
-const Projector = require('../../node_modules/three/examples/js/renderers/Projector.js')
+/* global $, THREE, config, requestAnimationFrame */
 
-var neverDisplayed = true
+require('../../node_modules/three/examples/js/renderers/CanvasRenderer.js')
+require('../../node_modules/three/examples/js/renderers/Projector.js')
+
 var SEPARATION = 100
 var AMOUNTX = 50
 var AMOUNTY = 50
-var container
 var camera
 var scene
 var renderer
@@ -18,9 +18,6 @@ var windowHalfX = window.innerWidth / 2
 var windowHalfY = window.innerHeight / 2
 
 function init () {
-  container = document.createElement('div')
-  $(container).addClass('background')
-  $('main').append(container)
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000)
   camera.position.z = 1000
   scene = new THREE.Scene()
@@ -46,7 +43,7 @@ function init () {
   renderer = new THREE.CanvasRenderer()
   renderer.setPixelRatio(window.devicePixelRatio)
   renderer.setSize(window.innerWidth, window.innerHeight)
-  container.appendChild(renderer.domElement)
+  $('.waves').append(renderer.domElement)
   document.addEventListener('mousemove', onDocumentMouseMove, false)
   document.addEventListener('touchstart', onDocumentTouchStart, false)
   document.addEventListener('touchmove', onDocumentTouchMove, false)
@@ -68,7 +65,6 @@ function onDocumentMouseMove (event) {
 
 function onDocumentTouchStart (event) {
   if (event.touches.length === 1) {
-    event.preventDefault()
     mouseX = event.touches[ 0 ].pageX - windowHalfX
     mouseY = event.touches[ 0 ].pageY - windowHalfY
   }
@@ -76,7 +72,6 @@ function onDocumentTouchStart (event) {
 
 function onDocumentTouchMove (event) {
   if (event.touches.length === 1) {
-    event.preventDefault()
     mouseX = event.touches[ 0 ].pageX - windowHalfX
     mouseY = event.touches[ 0 ].pageY - windowHalfY
   }
@@ -106,7 +101,7 @@ function render () {
 }
 
 function onReload () {
-  $('main').append(container)
+  $('.waves').append(renderer.domElement)
 }
 
 init()

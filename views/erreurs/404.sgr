@@ -6,9 +6,10 @@ extends(src="../layout.sgr")
     meta(name="robots" content="noindex, follow")
 
   block(name="content")
-    div(class="message")
+    div.message
       p Oups ! La page demandée est introuvable. Peut-être une abduction ?
       a(href="/") Retour à l'accueil
+    div.waves
 
   block(name="js-body" type="append")
     script(src="/js/waves.js" data-hot-reload="true" data-script-name="waves" data-function-name="onReload" defer)

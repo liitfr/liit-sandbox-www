@@ -1,1 +1,4 @@
-h2 Fonctionnel
+extends(src="layout.sgr")
+
+  block(name="content")
+    h2 Services
