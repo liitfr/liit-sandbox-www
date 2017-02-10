@@ -263,9 +263,18 @@ module.exports = {
   },
 
   resolve: {
+    root: path.resolve('./node_modules'),
     alias: {
+      'animation.gsap': path.resolve('node_modules', 'scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js'),
+      'CanvasRenderer': path.resolve('node_modules', 'three/examples/js/renderers/CanvasRenderer.js'),
       'isotope': 'isotope-layout',
-      'masonry': 'masonry-layout'
+      'masonry': 'masonry-layout',
+      'Projector': path.resolve('node_modules', 'three/examples/js/renderers/Projector.js'),
+      'ScrollMagic': path.resolve('node_modules', 'scrollmagic/scrollmagic/uncompressed/ScrollMagic.js'),
+      'TimelineLite': path.resolve('node_modules', 'gsap/src/uncompressed/TimelineLite.js'),
+      'TimelineMax': path.resolve('node_modules', 'gsap/src/uncompressed/TimelineMax.js'),
+      'TweenMax': path.resolve('node_modules', 'gsap/src/uncompressed/TweenMax.js'),
+      'TweenLite': path.resolve('node_modules', 'gsap/src/uncompressed/TweenLite.js')
     }
   },
 

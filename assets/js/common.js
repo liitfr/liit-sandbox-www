@@ -1,16 +1,16 @@
-/* global $, TweenLite, Modernizr */
+/* global $, TweenMax, Modernizr */
 
-require('../../node_modules/gsap/AttrPlugin.js')
-
+require('animation.gsap')
 const FastClick = require('fastclick')
 const LogStyle = require('log-with-style')
 const router = require('./_router.js')
+const ScrollMagic = require('ScrollMagic')
 
 // -----------------------------------------------------------------------------
 
 // Avoid `console` errors in browsers that lack a console.
 var method
-var noop = () => {}
+var noop = function () {}
 var methods = [
   'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
   'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
@@ -76,7 +76,7 @@ function generatePoint (random, index) {
 }
 
 function flickLogo () {
-  TweenLite.to('#logo-liit polygon', updateInterval / 1000, { attr: { points: generatePoints(true) }, onComplete: flickLogo })
+  TweenMax.to('#logo-liit polygon', updateInterval / 1000, { attr: { points: generatePoints(true) }, onComplete: flickLogo })
 }
 
 flickLogo()
@@ -103,8 +103,9 @@ function toggleOverlay () {
     var onEndTransitionFn = function (ev) {
       if (support.transitions) {
         if (ev.propertyName !== 'visibility') return
+        // BUG : jQuery doesn't return same event as vanilla addEventListener
         // this.off(transEndEventName, onEndTransitionFn)
-        this.removeEventListener( transEndEventName, onEndTransitionFn )
+        this.removeEventListener(transEndEventName, onEndTransitionFn)
       }
       $('.overlay').removeClass('close')
     }
@@ -122,10 +123,40 @@ function toggleOverlay () {
   }
 }
 
-$('#nav-icon').on('click', toggleOverlay)
-$('#logo-liit').on('click',function () {
+$('#nav-icon, .overlay a').on('click', toggleOverlay)
+$('#logo-liit').on('click', function (ev) {
   if ($('.overlay').hasClass('open')) {
     toggleOverlay()
   }
+  if ($('#home').length) {
+    ev.preventDefault()
+    TweenMax.to(window, 1, {scrollTo: 0})
+  }
 })
-$('.overlay a').on('click', toggleOverlay)
+
+window.addEventListener('keydown', function (event) {
+  if (event.defaultPrevented) {
+    return
+  }
+  switch (event.key) {
+    case 'Escape':
+      if ($('.overlay').hasClass('open')) {
+        toggleOverlay()
+      }
+      break
+    default:
+      return
+  }
+  event.preventDefault()
+}, true)
+
+// -----------------------------------------------------------------------------
+
+// Home animations
+var smController = new ScrollMagic.Controller()
+new ScrollMagic.Scene({
+  triggerElement: '#anim-logo',
+  duration: 100
+})
+  .setTween(TweenMax.to('#logo-liit', 0.5, {x: 100}))
+  .addTo(smController)

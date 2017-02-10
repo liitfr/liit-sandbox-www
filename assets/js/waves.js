@@ -1,7 +1,7 @@
 /* global $, THREE, config, requestAnimationFrame */
 
-require('../../node_modules/three/examples/js/renderers/CanvasRenderer.js')
-require('../../node_modules/three/examples/js/renderers/Projector.js')
+require('CanvasRenderer')
+require('Projector')
 
 var SEPARATION = 100
 var AMOUNTX = 50

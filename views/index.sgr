@@ -2,6 +2,7 @@ extends(src="layout.sgr")
 
   block(name="content")
     section#logo
+      div.trigger#anim-logo
     section#headline
     section#techno
     section#service
