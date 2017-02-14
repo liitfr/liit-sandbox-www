@@ -1,5 +1,7 @@
 extends(src="../layout.sgr")
-
+  // TODO : h1 / h2 / etc
+  // TODO : Use section, aside & article + google tags
+  // TODO : Use it on any concerned page
   block(name="meta")
     title {{ item.fields.title.length > config.spMetaTitleMaxSize ? item.fields.title.substring(0, config.spMetaTitleMaxSize - 19) + " ..." : item.fields.title }} | Article LIIT
     meta(name="description" content="{{ item.fields.descriptionMeta.length > config.spMetaDescMaxSize ? item.fields.descriptionMeta.substring(0, config.spMetaDescMaxSize - 4) + ' ...' : item.fields.descriptionMeta }}")

@@ -267,10 +267,12 @@ module.exports = {
     alias: {
       'animation.gsap': path.resolve('node_modules', 'scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js'),
       'CanvasRenderer': path.resolve('node_modules', 'three/examples/js/renderers/CanvasRenderer.js'),
+      'CssPlugin': path.resolve('node_modules', 'gsap/src/uncompressed/plugins/CSSPlugin.js'),
       'isotope': 'isotope-layout',
       'masonry': 'masonry-layout',
       'Projector': path.resolve('node_modules', 'three/examples/js/renderers/Projector.js'),
       'ScrollMagic': path.resolve('node_modules', 'scrollmagic/scrollmagic/uncompressed/ScrollMagic.js'),
+      'ScrollToPlugin': path.resolve('node_modules', 'gsap/src/uncompressed/plugins/ScrollToPlugin.js'),
       'TimelineLite': path.resolve('node_modules', 'gsap/src/uncompressed/TimelineLite.js'),
       'TimelineMax': path.resolve('node_modules', 'gsap/src/uncompressed/TimelineMax.js'),
       'TweenMax': path.resolve('node_modules', 'gsap/src/uncompressed/TweenMax.js'),

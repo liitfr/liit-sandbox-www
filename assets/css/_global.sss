@@ -1,8 +1,10 @@
-/*TODO : CSS Byebye (https://github.com/AoDev/css-byebye)*/
-/*TODO : css2modernizr (https://github.com/vovanbo/css2modernizr)*/
-/*TODO : Text highlight */
+/* TODO : CSS Byebye (https://github.com/AoDev/css-byebye)*/
+/* TODO : css2modernizr (https://github.com/vovanbo/css2modernizr)*/
+/* TODO : Text highlight */
+/* TODO : Nettoyer les fonts inutilisées */
+/* TODO : transitions: controler tout ça */
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat')
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:600,800|Roboto:900|Montserrat|Ubuntu|Raleway|PT+Sans')
 
 @font-face
   font-family: 'breeze'
@@ -16,8 +18,8 @@
 @custom-media --reverse-threshold (max-width: 1060px)
 
 ::selection
-  color: red
-  background: yellow
+  color: #FFF
+  background: #DA727E
 
 html
   -webkit-tap-highlight-color: rgba(0,0,0,0)
@@ -32,24 +34,13 @@ body
   position: relative
   lost-center: var(--page-width)
 
-header
-  position: fixed
-  /* Avoid page jump when scrollbar appears */
-  width: 100vw
-  top: 0
-  left: 0
-  z-index: 2
-  padding: 30px 15px 0
-  @media screen and (--s)
-    padding-top: 0
-    transition: .5s cubic-bezier(0.95, 0.05, 0.795, 0.035)
-    background: rgba(0,0,0,0.3)
-  &.transparent
-    transition: .5s cubic-bezier(0.19, 1, 0.22, 1)
-    background: rgba(0,0,0,0)
-    & #logo-liit
-      & polygon
-        fill: #ff328c
+.show
+  visibility: visible !important
+
+.trigger
+  position: absolute
+  width: 100%
+  height: 1px
 
 main
   position: relative
@@ -59,14 +50,10 @@ main
     /*margin-top: 60px*/ /* not in home */
     /*padding: 10px*/ /* not in home */
 
-#logo-liit
-  width: 80px
-  height: 80px
-  transition: .5s ease-in-out
-  & polygon
-    transition: 0.4s ease-in-out
-    fill: #41B883
-  & text,
+svg.logo
+  overflow: visible
+  & path
+    fill: #FFAA5C
   & text
     font-family: 'breeze'
     fill: #FFF
@@ -78,11 +65,37 @@ main
       text-anchor: middle
       alignment-baseline: middle
   @media screen and (--s)
-    width: 50px
-    height: 50px
-    margin: 10px 15px
     & text tspan
       display: none
+
+header
+  position: fixed
+  /* Avoid page jump when scrollbar appears */ /* not in home */
+  /* width: 100vw */
+  width: 100%
+  top: 0
+  left: 0
+  z-index: 2
+  padding: 30px 15px 0
+  & svg.logo
+    width: 80px
+    height: 80px
+    transition: .5s ease-in-out
+    transition-property: width, height
+    @media screen and (--s)
+      width: 50px
+      height: 50px
+      margin: 10px 15px
+  @media screen and (--s)
+    padding-top: 0
+    transition: .5s cubic-bezier(0.95, 0.05, 0.795, 0.035)
+    background: rgba(0,0,0,0.3)
+  &.transparent
+    transition: .5s cubic-bezier(0.19, 1, 0.22, 1)
+    background: transparent
+    & #logo-banner
+      & path
+        fill: #ff328c
 
 /* from https://codepen.io/designcouch/pen/Atyop */
 #nav-icon
@@ -133,13 +146,20 @@ main
       left: 50%
 
 /* from https://tympanus.net/codrops/2014/02/06/fullscreen-overlay-effects/ */
-.overlay
+.menu
   position: fixed
   width: 100%
   height: 100%
   top: 0
   left: 0
   background: rgba(153,204,51,0.9)
+  visibility: hidden
+  transform: translateY(-100%)
+  transition: transform 0.4s ease-in-out, visibility 0s 0.4s
+  &.open
+    visibility: visible
+    transform: translateY(0%)
+    transition: transform 0.4s ease-in-out
   & nav
     text-align: center
     position: relative
@@ -173,12 +193,3 @@ main
         &:hover,
         &:focus
           color: #e3fcb1
-
-.overlay-slidedown
-  visibility: hidden
-  transform: translateY(-100%)
-  transition: transform 0.4s ease-in-out, visibility 0s 0.4s
-  &.open
-    visibility: visible
-    transform: translateY(0%)
-    transition: transform 0.4s ease-in-out
