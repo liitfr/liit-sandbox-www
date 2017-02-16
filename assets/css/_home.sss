@@ -23,8 +23,6 @@
       overflow: hidden
       lost-utility: clearfix
       min-height: 360px
-      @media screen and (--reverse-threshold)
-        height: 100vh
       @media screen and (--s)
         height: 200vh
       &.first
@@ -94,6 +92,19 @@
           font-weight: 800
         & #signature
           color: #ffaa5c
+      & #whoami
+        /*lost-align: reset*/
+        /*& #photo,
+        & #map
+          display: block
+          lost-row: 1/2 0 0*/
+        /*& #photo
+          background-image: url('/img/portraitMHO.jpg')
+          background-size: cover*/
+        /*& #map*/
+        background: #455C7B
+        background-image: url('/img/map.svg')
+        background-size: cover
   & #trigger-1
     top: calc(50% + 1px)
   & #trigger-2

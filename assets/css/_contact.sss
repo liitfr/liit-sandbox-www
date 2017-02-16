@@ -1,0 +1,230 @@
+.simform
+  position: relative
+  margin: 0 auto
+  padding: 2em 0
+  max-width: 860px
+  width: 100%
+  text-align: left
+  font-size: 2.5em
+  & .submit
+    display: none
+  & ol
+    margin: 0
+    padding: 0
+    list-style: none
+    position: relative
+    transition: height 0.4s
+    &::before
+      content: ''
+      background-color: rgba(0,0,0,0.1)
+      position: absolute
+      left: 0
+      bottom: 0
+      width: 100%
+      height: 2.35em
+
+.questions li
+  z-index: 100
+  position: relative
+  visibility: hidden
+  height: 0
+  transition: visibility 0s 0.4s, height 0s 0.4s
+  & > span
+    display: block
+    overflow: hidden
+    & label
+      display: block
+      transition: transform 0.4s
+      transform: translateY(-100%)
+
+.questions li.current,
+.no-js .questions li
+  visibility: visible
+  height: auto
+  transition: none
+  & > span label
+    transition: none
+    transform: translateY(0)
+
+.show-next .questions li.current > span label
+  animation: moveUpFromDown 0.4s both
+
+@keyframes moveUpFromDown
+  from
+    transform: translateY(100%)
+  to
+    transform: translateY(0)
+
+.questions input
+  display: block
+  margin: 0.3em 0 0 0
+  padding: 0.5em 1em 0.5em 0.7em
+  width: calc(100% - 2em)
+  border: none
+  background: transparent
+  color: rgba(0,0,0,0.8)
+  font-size: 1em
+  line-height: 1
+  opacity: 0
+  transition: opacity 0.3s
+
+.questions .current input,
+.no-js .questions input
+  opacity: 1
+
+.questions input:focus,
+.simform button:focus
+  outline: none
+
+.next
+  position: absolute
+  right: 0
+  bottom: 2.15em
+  display: block
+  padding: 0
+  width: 2em
+  height: 2em
+  border: none
+  background: none
+  color: rgba(0,0,0,0.4)
+  text-align: center
+  opacity: 0
+  z-index: 100
+  cursor: pointer
+  transition: transform 0.3s, opacity 0.3s
+  transform: translateX(-20%)
+  pointer-events: none
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+.next:hover
+  color: rgba(0,0,0,0.5)
+
+.next::after
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  content: '\e600'
+  text-transform: none
+  font-weight: normal
+  font-style: normal
+  font-variant: normal
+  font-family: 'icomoon'
+  line-height: 2
+  speak: none
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+.next.show
+  opacity: 1
+  transform: translateX(0)
+  pointer-events: auto
+
+.simform .progress
+  width: 0%
+  height: 0.15em
+  background: rgba(0,0,0,0.3)
+  transition: width 0.4s ease-in-out
+  &::before
+    position: absolute
+    top: auto
+    width: 100%
+    height: inherit
+    background: rgba(0,0,0,0.05)
+    content: ''
+
+.simform .number
+  position: absolute
+  right: 0
+  overflow: hidden
+  margin: 0.4em 0
+  width: 3em
+  font-weight: 700
+  font-size: 0.4em
+  &::after
+    position: absolute
+    left: 50%
+    content: '/'
+    opacity: 0.4
+    transform: translateX(-50%)
+  & span
+    float: right
+    width: 40%
+    text-align: center
+  & .number-current
+    float: left
+
+.simform .number-next
+  position: absolute
+  left: 0
+
+.simform.show-next .number-current
+  transition: transform 0.4s
+  transform: translateY(-100%)
+
+.simform.show-next .number-next
+  animation: moveUpFromDown 0.4s both
+
+.simform .error-message,
+.simform .final-message
+  position: absolute
+  visibility: hidden
+  opacity: 0
+  transition: opacity 0.4s
+
+.simform .error-message
+  padding: 0.4em 3.5em 0 0
+  width: 100%
+  color: rgba(0,0,0,0.7)
+  font-style: italic
+  font-size: 0.4em
+
+.final-message
+  top: 50%
+  left: 0
+  padding: 0.5em
+  width: 100%
+  text-align: center
+  transform: translateY(-50%)
+
+.error-message.show,
+.final-message.show
+  visibility: visible
+  opacity: 1
+
+.final-message.show
+  transition-delay: 0.5s
+
+.simform-inner.hide
+  visibility: hidden
+  opacity: 0
+  transition: opacity 0.3s, visibility 0s 0.3s
+
+.no-js .simform
+  font-size: 1.75em
+
+.no-js .questions li
+  padding: 0 0 2em
+
+.no-js .simform .submit
+  display: block
+  float: right
+  padding: 10px 20px
+  border: none
+  background: rgba(0,0,0,0.3)
+  color: rgba(0,0,0,0.4)
+
+.no-js .simform .controls
+  display: none
+
+input[type=text]::-ms-clear
+  display: none
+
+@media screen and (max-width: 44.75em)
+  .simform
+    font-size: 1.8em
+
+@media screen and (max-width: 33.5625em)
+  .simform
+    font-size: 1.2em

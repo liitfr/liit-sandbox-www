@@ -1,5 +1,5 @@
 extends(src="layout.sgr")
-
+  // TODO : upper case headlines
   block(name="content")
     div.first.part#intro
       div#logo
@@ -7,7 +7,7 @@ extends(src="layout.sgr")
           pattern(id="transformedPattern" x="10" y="10" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(35)")
             circle.particles(cx="2" cy="2" r="2")
           circle#aura(cx="100" cy="100" r="200")
-          path#background(d="M -3000 -1000 h 7000 v 6000 h -7000 v 6000 Z")
+          path#background(d="M -3000 -3000 h 15000 v 15000 h -15000 v -15000 Z")
           path.polylogo(d="M 100 200 L 114.54840524874149 191.8550156753478 L 129.66563145999498 191.30142556433475 L 144.03707847473606 186.42763284627168 L 154.07624321090753 174.42956348249515 L 165.76093065034894 165.76093065034888 L 178.4746484543699 157.01516947236988 L 189.1006524188368 145.39904997395467 L 189.39931253174444 129.04759747124504 L 197.78114571891865 115.48701203898284 L 193 99.99999999999999 L 198.76883405951378 84.3565534959769 L 191.30142556433475 70.33436854000503 L 183.75461327370658 57.32489302448259 L 176.85661446562 44.16040103221504 L 168.5893577750951 31.410642224904876 L 153.48845795861504 26.379453511879788 L 142.22111647577785 17.136393250481788 L 129.66563145999493 8.69857443566525 L 115.48701203898284 2.218854281081363L 99.99999999999999 0 L 85.13872582117806 6.169607643461916 L 69.4073175568802 5.845404886779804 L 55.96292152526395 13.572367153728322 L 42.397045275337625 20.71633455125516 L 35.65328291202417 35.65328291202418 L 23.952402528754945 44.74818628450753L 15.354380202105048 56.87090252474306L 4.894348370484636 69.09830056250527 L 2.218854281081363 84.51298796101715 L 8 100 L 8.144984324652185 114.54840524874147 L 4.89434837048465 130.90169943749476 L 13.572367153728322 144.03707847473606 L 23.143385534379988 155.83959896778495 L 32.117749006091444 167.88225099390857 L 45.335971536799995 175.2385804768701 L 55.962921525263965 186.4276328462717 L 70.95240252875494 189.39931253174444 L 85.764463681339 189.87963899415752 Z")
           text.show(x="50%" y="50%" transform="translate(-5,5)")
             | L
@@ -28,15 +28,65 @@ extends(src="layout.sgr")
     div.second.part
       section#techno
         // h2 Vous êtes professionnel de l'informatique
-        h2 Vous avez besoin d'outils
+        // h2 Vous avez besoin d'outils
+        div(style="text-align: center")
+          img(src="/img/tech.svg" width="200px")
+          p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          p Vous êtes un professionnel de l'informatique et souhaitez
+          a(href="") Découvrir
       section#service
-        h2 Vous avez besoin d'outils
+        // h2 Vous avez besoin d'outils
+        div(style="text-align: center")
+          img(src="/img/bus.svg" width="200px")
+          p Vous êtes un utilisateur et vous êtes à la recherche d'un prestataire pour la réalisation d'un site, d'une application, ou pour le traitement de vos données ? Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          a(href="") En savoir +
     div.third.part
       section#whoami
-        div#photo
+        // div#photo
         div#map
       section#contact
-        h2 Me contacter
+        // p
+        //   strong
+        //     Ingénieur freelance à LYON
+        //   | (+33) 6.62.46.70.82 ou mathias@liit.fr
+
+        // h2 Me contacter
+        // form#theForm.simform(autocomplete="off")
+        //   div.simform-inner
+        //     ol.questions
+				// 			li
+				// 				span
+        //           label(for="q1") What's your favorite movie?
+				// 				input#q1(name="q1" type="text")
+        //       li
+				// 				span
+        //           label(for="q2") Where do you live?
+				// 				input#q2(name="q2" type="text")
+        //       li
+				// 				span
+        //           label(for="q3") What time do you go to work?
+				// 				input#q3(name="q3" type="text")
+        //       li
+				// 				span
+        //           label(for="q4") How do you like your veggies?
+				// 				input#q4(name="q4" type="text")
+        //       li
+				// 				span
+        //           label(for="q5") What book inspires you?
+				// 				input#q5(name="q5" type="text")
+        //       li
+				// 				span
+        //           label(for="q6") What's your profession?
+				// 				input#q6(name="q6" type="text")
+				// 		button.submit(type="submit") Send answers
+				// 		div.controls
+				// 			button.next
+				// 			div.progress
+				// 			span.number
+				// 				span.number-current
+				// 				span.number-total
+				// 			span.error-message
+				// 	span.final-message
     div.fourfh.part
       section#blog
         h2 Derniers articles
