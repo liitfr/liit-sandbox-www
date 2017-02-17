@@ -3,13 +3,11 @@
 // TODO : faire le tour de ul / each et mettre un message par défaut si aucune donnée
 // TODO : virer les "class" dans les sgr
 // TODO : client templates sans header ?
-// TODO : utiliser alias au lieu de require('../../')
 // TODO : reexpliquer pourquoi THREE & masonry
 // TODO : reexpliquer pourquoi vendor
 // BUG : scrollmagic is so heavy ...
 // TODO : Doc no es6
 // TODO : multilingual
-// BUG : canno't deploy on Netlify
 
 require('dotenv').config({ silent: true })
 
