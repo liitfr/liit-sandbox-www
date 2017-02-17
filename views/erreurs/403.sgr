@@ -6,10 +6,10 @@ extends(src="../layout.sgr")
     meta(name="robots" content="noindex, follow")
 
   block(name="content")
-    div.message
+    .message
       p Damned ! L'accès à cette ressource n'est pas autorisé !
       a(href="/") Retour à l'accueil
-    div.waves
+    .waves
 
   block(name="js-body" type="append")
     script(src="/js/waves.js" data-hot-reload="true" data-script-name="waves" data-function-name="onReload" defer)

@@ -268,6 +268,7 @@ module.exports = {
       'animation.gsap': path.resolve('node_modules', 'scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js'),
       'CanvasRenderer': path.resolve('node_modules', 'three/examples/js/renderers/CanvasRenderer.js'),
       'CssPlugin': path.resolve('node_modules', 'gsap/src/uncompressed/plugins/CSSPlugin.js'),
+      'EasePack': path.resolve('node_modules', 'gsap/src/uncompressed/easing/EasePack.js'),
       'isotope': 'isotope-layout',
       'masonry': 'masonry-layout',
       'Projector': path.resolve('node_modules', 'three/examples/js/renderers/Projector.js'),

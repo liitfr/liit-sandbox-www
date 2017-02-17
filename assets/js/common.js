@@ -1,15 +1,15 @@
-/* global $, TweenLite, Modernizr */
+/* global $, TweenMax, Modernizr, Quad, Elastic */
 
-// TODO : utiliser xPercent gsap !
 // TODO : trigger toggle des deux icones
 // TODO : trigger colors menu + icone
 
+require('EasePack')
 const FastClick = require('fastclick')
 const generatePath = require('./_generatePath.js')
 const LogStyle = require('log-with-style')
 const router = require('./_router.js')
-require('TweenMax')
 require('ScrollToPlugin')
+require('TweenMax')
 
 // -----------------------------------------------------------------------------
 // Avoid `console` errors in browsers that lack a console.
@@ -53,6 +53,44 @@ $(function () {
 // -----------------------------------------------------------------------------
 // Navigation menu
 
+// Found here : http://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
+var keys = {37: 1, 38: 1, 39: 1, 40: 1}
+
+function preventDefault (e) {
+  e = e || window.event
+  if (e.preventDefault) {
+    e.preventDefault()
+  }
+  e.returnValue = false
+}
+
+function preventDefaultForScrollKeys (e) {
+  if (keys[e.keyCode]) {
+    preventDefault(e)
+    return false
+  }
+}
+
+function disableScroll () {
+  if (window.addEventListener) {
+    window.addEventListener('DOMMouseScroll', preventDefault, false)
+  }
+  window.onwheel = preventDefault
+  window.onmousewheel = document.onmousewheel = preventDefault
+  window.ontouchmove = preventDefault
+  document.onkeydown = preventDefaultForScrollKeys
+}
+
+function enableScroll () {
+  if (window.removeEventListener) {
+    window.removeEventListener('DOMMouseScroll', preventDefault, false)
+  }
+  window.onmousewheel = document.onmousewheel = null
+  window.onwheel = null
+  window.ontouchmove = null
+  document.onkeydown = null
+}
+
 var support = { transitions: Modernizr.csstransitions }
 var transEndEventNames = {
   'WebkitTransition': 'webkitTransitionEnd',
@@ -77,6 +115,7 @@ function toggleOverlay () {
         this.removeEventListener(transEndEventName, onEndTransitionFn)
       }
       $('.menu').removeClass('close')
+      enableScroll()
     }
     if (support.transitions) {
       // BUG : jQuery doesn't return same event as vanilla addEventListener
@@ -89,6 +128,7 @@ function toggleOverlay () {
     $('#nav-icon').toggleClass('open')
     $('header').toggleClass('transparent')
     $('.menu').addClass('open')
+    disableScroll()
   }
 }
 
@@ -99,7 +139,7 @@ $('#logo-banner').on('click', function (ev) {
   }
   if ($('#home').length) {
     ev.preventDefault()
-    TweenLite.to(window, 1, {scrollTo: 0})
+    TweenMax.to(window, 1, {scrollTo: 0})
   }
 })
 
@@ -125,7 +165,108 @@ window.addEventListener('keydown', function (event) {
 var updateInterval = 1351
 
 function flickLogo () {
-  TweenLite.to('.polylogo', updateInterval / 1000, { attr: { d: generatePath.generate(true) }, onComplete: flickLogo })
+  TweenMax.to('.polylogo', updateInterval / 1000, { attr: { d: generatePath.generate(true) }, onComplete: flickLogo })
 }
 
 flickLogo()
+
+// -----------------------------------------------------------------------------
+// Network
+
+var $networkButtons = $('.network-button')
+var $toggleButton = $('.network-toggle-button')
+var menuOpen = false
+var buttonsNum = $networkButtons.length
+var buttonsMid = (buttonsNum / 2)
+var spacing = 75
+
+function openShareMenu () {
+  TweenMax.to($toggleButton, 0.1, {
+    scaleX: 1.2,
+    scaleY: 0.6,
+    ease: Quad.easeOut,
+    onComplete: function () {
+      TweenMax.to($toggleButton, 0.8, {
+        // scale: 0.6,
+        scale: 1,
+        ease: Elastic.easeOut,
+        easeParams: [1.1, 0.6]
+      })
+      TweenMax.to($toggleButton.children('.network-icon'), 0.8, {
+        scale: 1.4,
+        ease: Elastic.easeOut,
+        easeParams: [1.1, 0.6]
+      })
+    }
+  })
+  $networkButtons.each(function (i) {
+    var $cur = $(this)
+    // var pos=i-buttonsMid
+    var pos = i
+    if (pos >= 0) pos += 1
+    var dist = Math.abs(pos)
+    $cur.css({
+      zIndex: buttonsMid - dist
+    })
+    TweenMax.to($cur, 1.1 * (dist), {
+      y: pos * spacing,
+      // scaleY: 0.6,
+      scaleY: 1,
+      scaleX: 1.1,
+      ease: Elastic.easeOut,
+      easeParams: [1.01, 0.5]
+    })
+    TweenMax.to($cur, 0.8, {
+      delay: (0.2 * (dist)) - 0.1,
+      // scale: 0.6,
+      scale: 1,
+      ease: Elastic.easeOut,
+      easeParams: [1.1, 0.6]
+    })
+
+    TweenMax.fromTo($cur.children('.network-icon'), 0.2, {
+      scale: 0
+    }, {
+      delay: (0.2 * dist) - 0.1,
+      scale: 1,
+      ease: Quad.easeInOut
+    })
+  })
+}
+function closeShareMenu () {
+  TweenMax.to([$toggleButton, $toggleButton.children('.network-icon')], 1.4, {
+    delay: 0.1,
+    scale: 1,
+    ease: Elastic.easeOut,
+    easeParams: [1.1, 0.3]
+  })
+  $networkButtons.each(function (i) {
+    var $cur = $(this)
+    var pos = i - buttonsMid
+    if (pos >= 0) pos += 1
+    var dist = Math.abs(pos)
+    $cur.css({
+      zIndex: dist
+    })
+
+    TweenMax.to($cur, 0.4 + ((buttonsMid - dist) * 0.1), {
+      y: 0,
+      scale: 0.95,
+      ease: Quad.easeInOut
+    })
+
+    TweenMax.to($cur.children('.network-icon'), 0.2, {
+      scale: 0,
+      ease: Quad.easeIn
+    })
+  })
+}
+
+function toggleShareMenu () {
+  menuOpen = !menuOpen
+
+  menuOpen ? openShareMenu() : closeShareMenu()
+}
+$toggleButton.on('mousedown', function () {
+  toggleShareMenu()
+})

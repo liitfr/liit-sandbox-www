@@ -7,14 +7,14 @@ extends(src="layout.sgr")
 
   block(name="content")
     p Connaitre les tendances du web, c'est avant tout se donner les moyens de prendre les décisions les plus cohérentes
-    div.isolayer
+    .isolayer
       ul.grid
         each(loop="internetfact, index in contentful.internet_facts")
           li.grid__item
-            div.grid__link
-              div.layer.third
-              div.layer.second
-              div.layer.fact
+            .grid__link
+              .layer.third
+              .layer.second
+              .layer.fact
                 | {{{ internetfact.fields.fact }}}
                 if(condition="internetfact.fields.source")
                   span {{ internetfact.fields.source }}

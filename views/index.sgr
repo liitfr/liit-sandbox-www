@@ -1,8 +1,8 @@
 extends(src="layout.sgr")
   // TODO : upper case headlines
   block(name="content")
-    div.first.part#intro
-      div#logo
+    .first.part#intro
+      #logo
         svg.logo#logo-fat(viewbox="0 0 200 200")
           pattern(id="transformedPattern" x="10" y="10" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(35)")
             circle.particles(cx="2" cy="2" r="2")
@@ -14,7 +14,7 @@ extends(src="layout.sgr")
             tspan(transform="translate(-5,5)") iit
         div
           // h2 Ensemble, développons nos qualités
-      div#headline
+      #headline
         div
           h1#title
             span FULL&nbsp;
@@ -25,25 +25,24 @@ extends(src="layout.sgr")
           p#signature
             span MATHIAS HOFFMANN
             span (+33) 6.62.46.70.82
-    div.second.part
+    .second.part
       section#techno
         // h2 Vous êtes professionnel de l'informatique
         // h2 Vous avez besoin d'outils
-        div(style="text-align: center")
-          img(src="/img/tech.svg" width="200px")
-          p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        div
+          img(src="/img/technical.svg" width="200px")
           p Vous êtes un professionnel de l'informatique et souhaitez
           a(href="") Découvrir
       section#service
         // h2 Vous avez besoin d'outils
-        div(style="text-align: center")
-          img(src="/img/bus.svg" width="200px")
+        div
+          img(src="/img/business.svg" width="200px")
           p Vous êtes un utilisateur et vous êtes à la recherche d'un prestataire pour la réalisation d'un site, d'une application, ou pour le traitement de vos données ? Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           a(href="") En savoir +
-    div.third.part
+    .third.part
       section#whoami
-        // div#photo
-        div#map
+        // #photo
+        #map
       section#contact
         // p
         //   strong
@@ -52,7 +51,7 @@ extends(src="layout.sgr")
 
         // h2 Me contacter
         // form#theForm.simform(autocomplete="off")
-        //   div.simform-inner
+        //   .simform-inner
         //     ol.questions
 				// 			li
 				// 				span
@@ -79,15 +78,15 @@ extends(src="layout.sgr")
         //           label(for="q6") What's your profession?
 				// 				input#q6(name="q6" type="text")
 				// 		button.submit(type="submit") Send answers
-				// 		div.controls
+				// 		.controls
 				// 			button.next
-				// 			div.progress
+				// 			.progress
 				// 			span.number
 				// 				span.number-current
 				// 				span.number-total
 				// 			span.error-message
 				// 	span.final-message
-    div.fourfh.part
+    .fourfh.part
       section#blog
         h2 Derniers articles
       section#read

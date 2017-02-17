@@ -1,4 +1,11 @@
-// TODO : cacher les background avant le premier scroll sur portable
+// TODO : sur mobile, mettre les liens externes tout en bas
+// TODO : rajouter #home dans tous les selecteurs
+// BUG : MAJ affichage OK quand je ne change pas le type de support !! Mais sinon KO ...
+// BUG : menu : portable touch => plantage Unable to preventDefault inside passive event listener due to target being treated as passive.
+// BUG : left not defined. Reproduction ? en affichage mobile, de home aller à services. Changer d'affichage => desktop
+// BUG : dans home, scroller jusqu'au second part. passer à services. revenir à home. le logo est toujours là
+// BUG : sur vrai mobile : l'affichage de l'animation d'intro foire completement !
+// TODO : use scrollmagic not as vendor ?
 
 /* global $, config, ScrollMagic, TweenMax */
 
@@ -33,111 +40,151 @@ if (isMobile) {
 // -----------------------------------------------------------------------------
 // Home background creation
 
-var offsetSize = 300
-var maxX = 13
-var minX = -6
-var maxY = 9
-var minY = -2
+var backgroundPath
+var backgroundCreation
 
-if (isMobile) {
-  maxY = 25
-  minY = -4
-}
+(backgroundCreation = function () {
+  var offsetSize = 300
+  var maxX = 13
+  var minX = -6
+  var maxY = 9
+  var minY = -2
 
-for (var x = minX; x < maxX; x++) {
-  for (var y = minY; y < maxY; y++) {
-    if (x !== 0 || y !== 0) {
-      var offset = {
-        x: x * offsetSize,
-        y: y * offsetSize
+  if (isMobile) {
+    maxY = 25
+    minY = -4
+  } else {
+    $('#home #logo-fat #background').addClass('draw')
+  }
+
+  for (var x = minX; x < maxX; x++) {
+    for (var y = minY; y < maxY; y++) {
+      if (x !== 0 || y !== 0) {
+        var offset = {
+          x: x * offsetSize,
+          y: y * offsetSize
+        }
+        $('#home #logo-fat #background').attr('d', $('#home #logo-fat #background').attr('d') + ' ' + generatePath.generate(true, 100, offset))
       }
-      $('#logo-fat #background').attr('d', $('#logo-fat #background').attr('d') + ' ' + generatePath.generate(true, 100, offset))
     }
   }
-}
 
-$('#logo').html($('#logo').html())
+  backgroundPath = $('#home #logo-fat #background').attr('d')
+
+  $('#home #logo').html($('#home #logo').html())
+}())
 
 // -----------------------------------------------------------------------------
-// intro animation with scrolling
+// TweenMax & ScrollMagic animations
 
-function defineDuration () {
-  return '100%'
-}
+var smController
+var tweenMoveLogo
+var smScenes = []
+var createScenes
 
-var tweenMoveLogo = TweenMax.to('#logo-fat', 5,
-  {
-    left: $('#logo-banner .polylogo').position().left + $('#logo-banner').width() / 2,
-    top: $('#logo-banner .polylogo').position().top + $('#logo-banner').height() / 2 - $(window).scrollTop(),
-    width: $('#logo-banner').innerWidth()
-  }
-)
+(createScenes = function () {
 
-var smController = new ScrollMagic.Controller()
+  smController = new ScrollMagic.Controller()
 
-var sceneMoveLogo = new ScrollMagic.Scene({
-  triggerElement: '#trigger-1',
-  duration: defineDuration()
-})
-  .setTween(tweenMoveLogo)
-  .addTo(smController)
-  .on('end', function (event) {
-    $('#logo-banner, #logo-fat text').toggleClass('show')
-  })
-
-var tweenAura = TweenMax.to('#aura', 5, {scale: 50})
-var sceneAura = new ScrollMagic.Scene({
-  triggerElement: '#trigger-1',
-  duration: defineDuration()
-})
-  .setTween(tweenAura)
-  .addTo(smController)
-
-var sceneStaticIntro = new ScrollMagic.Scene({
-  triggerElement: '#trigger-1',
-  duration: defineDuration()
-})
-  .setPin('#intro')
-  .addTo(smController)
-
-$(window).resize(function () {
-  TweenMax.killTweensOf('#logo-fat')
-  $('#logo-fat').removeAttr('style')
   tweenMoveLogo = TweenMax.to('#logo-fat', 5,
     {
-      left: $('#logo-banner .polylogo').position().left + $('#logo-banner').width() / 2 + $('#logo-banner').css('marginLeft').replace('px', ''),
-      top: $('#logo-banner .polylogo').position().top + $('#logo-banner').height() / 2 - $(window).scrollTop() + $('#logo-banner').css('marginTop').replace('px', ''),
-      width: $('#logo-banner').innerWidth()
+      left: $('#home #logo-banner .polylogo').position().left + $('#home #logo-banner').width() / 2,
+      top: $('#home #logo-banner .polylogo').position().top + $('#home #logo-banner').height() / 2 - $(window).scrollTop(),
+      width: $('#home #logo-banner').innerWidth()
     }
   )
-  sceneMoveLogo.setTween(tweenMoveLogo)
-  sceneMoveLogo.duration(defineDuration())
-  sceneStaticIntro.duration(defineDuration())
-  sceneAura.duration(defineDuration())
-})
 
-new ScrollMagic.Scene({
-  triggerElement: '.second',
-  triggerPosition: 0,
-  triggerHook: 0.10,
-  duration: 0.01
-})
-  .setTween(TweenMax.to('#logo-banner .polylogo', 0.5, {fill: '#FFF'}))
-  .addTo(smController)
+  var tweenAura = TweenMax.to('#home #aura', 5, {scale: 50})
 
-$('.part').not('.first').each(function (idx, ele) {
-  new ScrollMagic.Scene({
-    triggerElement: ele,
+  smScenes.push(new ScrollMagic.Scene({
+    triggerElement: '#home #trigger-1',
+    duration: '100%'
+  })
+    .setTween(tweenMoveLogo)
+    .addTo(smController)
+    .on('end', function (event) {
+      $('#home #logo-banner, #home #logo-fat text').toggleClass('show')
+    })
+    .on('enter', function (event) {
+      if (isMobile) {
+        $('#home #logo-fat #background').addClass('draw')
+      }
+    }))
+
+  smScenes.push(new ScrollMagic.Scene({
+    triggerElement: '#home #trigger-1',
+    duration: '100%'
+  })
+    .setTween(tweenAura)
+    .addTo(smController))
+
+  smScenes.push(new ScrollMagic.Scene({
+    triggerElement: '#home #trigger-1',
+    duration: '100%'
+  })
+    .setPin('#home #intro')
+    .addTo(smController))
+
+  smScenes.push(new ScrollMagic.Scene({
+    triggerElement: '.second',
     triggerPosition: 0,
-    triggerHook: 0.10,
+    triggerHook: 0.05,
     duration: 0.01
   })
-    .setTween(TweenMax.to('#logo-banner text', 0.5, {fill: $(ele).css('background')}))
-    .addTo(smController)
+    .setTween(TweenMax.to('#home #logo-banner .polylogo', 0.5, {fill: '#fff'}))
+    .addTo(smController))
+
+  $('#home .part').not('#home .first').each(function (idx, ele) {
+    smScenes.push(new ScrollMagic.Scene({
+      triggerElement: ele,
+      triggerPosition: 0,
+      triggerHook: 0.05,
+      duration: 0.01
+    })
+      .setTween(TweenMax.to('#home #logo-banner text', 0.5, {fill: $(ele).css('background')}))
+      .addTo(smController))
+  })
+
+}())
+
+var handleWindowResize
+
+(handleWindowResize = function () {
+  $(window).resize(function () {
+    TweenMax.killTweensOf('#home #logo-fat')
+    $('#home #logo-fat').removeAttr('style')
+    tweenMoveLogo = TweenMax.to('#home #logo-fat', 5, {
+      left: $('#home #logo-banner .polylogo').position().left + $('#home #logo-banner').width() / 2,
+      top: $('#home #logo-banner .polylogo').position().top + $('#home #logo-banner').height() / 2 - $(window).scrollTop(),
+      width: $('#home #logo-banner').innerWidth()
+    })
+    smScenes[0].setTween(tweenMoveLogo)
+  })
+}())
+
+// -----------------------------------------------------------------------------
+// Before leaving home page
+
+$('#home a').on('click', function () {
+  smController.destroy()
+  $(window).off('resize')
 })
 
-function onReload () {
+// -----------------------------------------------------------------------------
+// On reload
 
+function onReload () {
+  if (isMobile) {
+    $(window).on('orientationchange', function (event) {
+      staticifyHeight()
+    })
+    staticifyHeight()
+  }
+  // smController.enabled(true)
+  $('#home #logo-fat #background').addClass('draw').attr('d', backgroundPath)
+  $('#home #logo').html($('#home #logo').html())
+  createScenes()
+  // handleWindowResize()
 }
 
 window[config.spAppName] = Object.assign(

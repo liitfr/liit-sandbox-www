@@ -1,13 +1,15 @@
 var logoCenter = 100
 var logoSides = 40
 
-function generate (random, radius = 100, offset = {x: 0, y: 0}) {
-  return 'M ' + Array.apply(null, { length: logoSides }).map((obj, index) => {
+function generate (random, radius, offset) {
+  var offset = (typeof offset !== 'undefined') ? offset : {x: 0, y: 0}
+  var radius = (typeof radius !== 'undefined') ? radius : 100
+  return 'M ' + Array.apply(null, { length: logoSides }).map(function (obj, index) {
     var point = generatePoint(random, index, radius)
     point.x += offset.x
     point.y += offset.y
     return point.x + ' ' + point.y
-  }).reverse().join(' L ') + ' Z'
+  }).reverse().join(' L') + ' Z'
 }
 
 function generatePoint (random, index, radius) {

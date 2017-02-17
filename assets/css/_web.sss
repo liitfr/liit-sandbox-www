@@ -1,8 +1,10 @@
 /* from: https://tympanus.net/codrops/2016/05/25/isometric-and-3d-grids/ */
 #internetkf
   overflow-x: hidden
+
   & .pseudo-scroller
     pointer-events: none
+
   & .isolayer
     position: absolute
     top: 0
@@ -11,6 +13,7 @@
     width: 70vw
     max-width: 1200px
     height: calc(100vh - 280px)
+
     @media screen and (--m)
       top: -38vh
 
@@ -20,17 +23,23 @@
     & .grid__item,
     & .grid__link
       transform-style: preserve-3d
+
     & .grid__item
       backface-visibility: hidden
+
     & .grid__item
       opacity: 0
+
     & .grid__item.shown
       opacity: 1
+
     & .grid
       opacity: 0
       transition: opacity 0.3s
-    &  .grid.grid--loaded
+
+    & .grid.grid--loaded
       opacity: 1
+
   & #internetkf::after
     content: ''
     position: fixed
@@ -46,6 +55,7 @@
     border-radius: 50%
     transition: opacity 0.3s
     animation: rotateCircle 0.7s linear infinite forwards
+
   & #internetkf.grid-loaded::after
     opacity: 0
 
@@ -55,23 +65,29 @@
     margin: 0 auto
     padding: 0
     list-style: none
+
   & .grid__img
     display: block
     max-width: 100%
+
   & .grid__item
     width: 300px
     padding: 15px
+
   & .grid__item:hover .grid__link::before
     opacity: 0.2
-    box-shadow: 0 0 20px 10px rgba(0,0,0,0.8)
+    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.8)
     transform: translateZ(-1px) scale(1)
+
   & .grid__item.animate
     transform: translateY(800px)
-    animation: moveUp 1s cubic-bezier(0.2,1,0.3,1) forwards
+    animation: moveUp 1s cubic-bezier(0.2, 1, 0.3, 1) forwards
+
   & .grid__link
     position: relative
     z-index: 1
     display: block
+
   & .grid__link::before
     content: ''
     position: absolute
@@ -81,8 +97,8 @@
     bottom: 5px
     left: 5px
     opacity: 0.6
-    background: rgba(0,0,0,0.8)
-    box-shadow: 0 0 0 0 rgba(0,0,0,0.8)
+    background: rgba(0, 0, 0, 0.8)
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.8)
     transform: translateZ(-1px) scale(0.95)
     transition: transform 0.3s, opacity 0.3s, box-shadow 0.3s
     backface-visibility: hidden
@@ -91,33 +107,38 @@
   & .layer
     position: relative
     display: block
+
   & .layer:not(:last-child)
     position: absolute
     top: 0
     left: 0
     width: 100%
     height: 100%
+
   & .layer:last-child
-    border: 7px #1695A3 solid
-    background: #1695A3
-    color: #FFFFFF
+    border: 7px #1695a3 solid
+    background: #1695a3
+    color: #fff
     font-family: 'Montserrat', sans-serif
     padding: 15px
+
     & p
       margin-top: 0
+
   & .layer.second,
   & .layer.third
     background-image: url('../img/wireframe.png')
     background-repeat: no-repeat
     background-position: left top
     background-size: 100% auto
+
   & .studyDate
     display: inline-block
 
 @keyframes moveUp
   100%
     opacity: 1
-    transform: translateY(0px)
+    transform: translateY(0)
 
 @keyframes rotateCircle
   to

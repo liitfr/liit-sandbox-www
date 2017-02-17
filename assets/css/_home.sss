@@ -1,111 +1,166 @@
 /* TODO : Menu external click support */
-/* TODO : Menu disable scrolling */
+
 /* TODO : Logo : first click goes up. second click does nothing, investigate */
+
 /* TODO : <!> 100vw on cellphones : header moves and change vh value ! */
+
 /* TODO : certainly have to manually specify heigh for small and medium devices */
+
 /* TODO : anime logo (think about medium and small and think about coming back from another page) */
+
 /* TODO : mouse and scroll auto */
+
 /* TODO : change colors of logo and menu when section changes */
+
 /* TODO : Tween easings */
+
 /* TODO : css Transitions */
+
 /* TODO : images portraits */
+
 /* TODO : attention au js : width avec ou sans scrollbar */
+
+/* TODO : rajouter les polices par défaut pour toutes les fonts google */
 
 #home
   & header
     & #logo-banner
       visibility: hidden
+
   & main
     lost-utility: clearfix
+
     & .part
       lost-column: 1/1 0 0
       height: 100vh
       overflow: hidden
       lost-utility: clearfix
       min-height: 360px
+
+      /* <!> If you change height value, change staticifyHeight() values in home.js <!> */
       @media screen and (--s)
         height: 200vh
+
       &.first
-        background: #455C7B
+        background: #455c7b
+
       &.second
-        background: #DA727E
+        background: #da727e
+        color: #fff
+        font-family: 'Lato'
+        font-size: 1.5em
+
+        /* & section
+          @media screen and (--reverse-threshold)
+            margin: 3em 0 */
+
       &.third
-        background: #FFAA5C
+        background: #ffaa5c
+
       &.fourfh
-        background: #AC6C82
+        background: #ac6c82
+
       & section,
       & #logo,
       & #headline
         height: 100%
         lost-column: 1/2 0 0
         lost-align: center
+
         @media screen and (--reverse-threshold)
           lost-row: 1/2 0 0
+
         @media screen and (--s)
           lost-row: 1/2 0 0
+
         @media screen and (--m) and (--landscape)
           lost-column: 1/2 0 0
+
       & #logo
         & #logo-fat
           touch-action: pan-y
           width: 40%
           height: auto
+
           @media screen and (--reverse-threshold)
             height: 40%
             width: auto
+
           @media screen and (--s)
             width: 60%
             height: auto
+
           & .polyanonymous
-            stroke: #E9ECEF
+            stroke: #e9ecef
             fill: transparent
             stroke-width: 3px
+
           & #background
-            fill: #455C7B
-            stroke: #E9ECEF
+            fill: #455c7b
+            stroke: #455c7b
             stroke-width: 3px
+            transition: 0.5s ease-in-out
+
+            &.draw
+              stroke: #e9ecef
+
           & #aura
-            fill: url(#transformedPattern)
+            fill: url("#transformedPattern")
             transform-origin: 200px 200px
+
           & .particles
-            fill: #FFAA5C
+            fill: #ffaa5c
+
           & text
             visibility: hidden
+
       & #headline
         & div
           padding-top: 20px
+
           @media screen and (--s)
             padding-top: 0
             width: 75%
+
           @media screen and (--reverse-threshold)
             padding-top: 0
             padding-left: 30px
+
         & span
           display: block
           font-family: 'Open Sans', sans-serif
           background: rgba(69, 92, 123, 0.7)
+
         & #title
           font-size: 3.5em
-          margin: 0px
+          margin: 0
           line-height: 0.8em
-          color: #FFF
+          color: #fff
           font-weight: 800
+
         & #signature
           color: #ffaa5c
+
       & #whoami
-        /*lost-align: reset*/
-        /*& #photo,
+        /* lost-align: reset */
+
+        /* & #photo,
         & #map
           display: block
-          lost-row: 1/2 0 0*/
-        /*& #photo
+          lost-row: 1/2 0 0 */
+
+        /* & #photo
           background-image: url('/img/portraitMHO.jpg')
-          background-size: cover*/
-        /*& #map*/
-        background: #455C7B
+          background-size: cover */
+
+        /* & #map */
+
+        background: #455c7b
         background-image: url('/img/map.svg')
         background-size: cover
+
   & #trigger-1
     top: calc(50% + 1px)
+
   & #trigger-2
     top: 900px
