@@ -78,10 +78,6 @@ module.exports = {
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loader: 'image-webpack'
-      },
-      {
-        test: /\.json$/,
-        loader: 'json'
       }
     ]
   },

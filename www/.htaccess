@@ -1093,18 +1093,18 @@ DefaultLanguage __GU_HTACCESS_LANG__
 # | Construction page                                                  |
 # ----------------------------------------------------------------------
 
-<IfModule mod_rewrite.c>
-    RewriteEngine on
-    RewriteCond %{REQUEST_URI} !/coming-soon.html$ [NC]
-    RewriteCond %{REQUEST_URI} !/google8a2b06a9867fca33.html$ [NC]
-    RewriteCond %{REQUEST_URI} !/crossdomain.xml$ [NC]
-    RewriteCond %{REQUEST_URI} !/sitemap.xml$ [NC]
-    RewriteCond %{REQUEST_URI} !/humans.txt$ [NC]
-    RewriteCond %{REQUEST_URI} !/robots.txt$ [NC]
-    RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|gif|svg|css|js)$ [NC]
-    RewriteCond %{REMOTE_ADDR} !^82\.230\.133\.51
-    RewriteRule ^(.*)$ /coming-soon.html [R=302,L]
-</IfModule>
+# <IfModule mod_rewrite.c>
+#     RewriteEngine on
+#     RewriteCond %{REQUEST_URI} !/coming-soon.html$ [NC]
+#     RewriteCond %{REQUEST_URI} !/google8a2b06a9867fca33.html$ [NC]
+#     RewriteCond %{REQUEST_URI} !/crossdomain.xml$ [NC]
+#     RewriteCond %{REQUEST_URI} !/sitemap.xml$ [NC]
+#     RewriteCond %{REQUEST_URI} !/humans.txt$ [NC]
+#     RewriteCond %{REQUEST_URI} !/robots.txt$ [NC]
+#     RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|gif|svg|css|js)$ [NC]
+#     RewriteCond %{REMOTE_ADDR} !^82\.230\.133\.51
+#     RewriteRule ^(.*)$ /coming-soon.html [R=302,L]
+# </IfModule>
 
 # ----------------------------------------------------------------------
 # | Force files to be downloaded                                       |

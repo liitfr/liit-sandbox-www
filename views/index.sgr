@@ -30,15 +30,15 @@ extends(src="layout.sgr")
         // h2 Vous êtes professionnel de l'informatique
         // h2 Vous avez besoin d'outils
         div
-          img(src="/img/technical.svg" width="200px")
+          img.fellow(src="/img/technical.svg" alt="Profil technique" aria-label="Le dessin d'un personnage en habits casual pour représenter un professionnel au profil technique")
           p Vous êtes un professionnel de l'informatique et souhaitez
-          a(href="") Découvrir
-      section#service
+          a(href="/freelance-fullstack-lyon" aria-label="Découvrez mon profil technique, mes services en tant que freelance et comment je pourrais intégrer votre projet") Découvrir
+      section#services
         // h2 Vous avez besoin d'outils
         div
-          img(src="/img/business.svg" width="200px")
-          p Vous êtes un utilisateur et vous êtes à la recherche d'un prestataire pour la réalisation d'un site, d'une application, ou pour le traitement de vos données ? Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          a(href="") En savoir +
+          img.fellow(src="/img/business.svg" alt="Profil fonctionnel" aria-label="Le dessin d'un personnage en costume pour représenter un professionnel utilisateur de solutions informatiques")
+          p Vous êtes un utilisateur et vous êtes à la recherche d'un prestataire pour la réalisation d'un site, d'une application, ou pour le traitement de vos données ? Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          a(href="/web-apps-data" aria-label="Découvrez mon profil fonctionnel, mes services en tant que prestataire et comment je peux vous aider à la réalisation de votre projet") En savoir +
     .third.part
       section#whoami
         // #photo

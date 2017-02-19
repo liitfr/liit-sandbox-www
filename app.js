@@ -1,13 +1,17 @@
 // TODO : Add nojs message on all pages
 // TODO : Add twitter card + seo + google business etc
 // TODO : faire le tour de ul / each et mettre un message par défaut si aucune donnée
-// TODO : virer les "class" dans les sgr
 // TODO : client templates sans header ?
 // TODO : reexpliquer pourquoi THREE & masonry
 // TODO : reexpliquer pourquoi vendor
 // BUG : scrollmagic is so heavy ...
-// TODO : Doc no es6
+// TODO : Doc no es6 : error when use with minify : es6 code isn't minified
 // TODO : multilingual
+// TODO : sur netlify. accueil puis service puis accueil => erreur Uncaught TypeError: s is not a function
+// TODO : centrage des éléments avec / sans scrollmagic
+// BUG : scroll auto pour revenir au top de home ne MARCHE PLUS ...
+// TODO : bundled css performance issue ?
+// TODO : router, only extract necessary content
 
 require('dotenv').config({ silent: true })
 
@@ -78,15 +82,6 @@ module.exports = {
   matchers: {
     css: '*(**/)*.sss',
     html: '*(**/)*.sgr'
-  },
-
-  module: {
-    loaders: [
-      {
-        test: /\.json$/,
-        loader: 'json'
-      }
-    ]
   },
 
   outputDir: process.env.SP_OUTPUT_DIR,

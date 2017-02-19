@@ -1,8 +1,5 @@
 /* global $, TweenMax, Modernizr, Quad, Elastic */
 
-// TODO : trigger toggle des deux icones
-// TODO : trigger colors menu + icone
-
 require('EasePack')
 const FastClick = require('fastclick')
 const generatePath = require('./_generatePath.js')
@@ -139,7 +136,7 @@ $('#logo-banner').on('click', function (ev) {
   }
   if ($('#home').length) {
     ev.preventDefault()
-    TweenMax.to(window, 1, {scrollTo: 0})
+    TweenMax.to(window, 1, {scrollTo: '#intro'})
   }
 })
 

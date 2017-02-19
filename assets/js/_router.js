@@ -7,7 +7,7 @@ const pagejs = require('page')
 // initialRender = true when website is displayed for the first time
 var initialRender = true
 var loadedScripts = []
-var pages = require('../../pages.json')
+var pages = require('json!../../pages.json')
 var previousPath
 var nextPath
 

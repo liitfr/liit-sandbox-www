@@ -10,10 +10,10 @@ html.no-js(lang="fr")
       title Invenieur Informatifien | LIIT
       meta(name="description" content="Freelance. Full stack: Front, Back, Data")
       meta(name="robots" content="index, follow")
+      meta(name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0")
 
-    meta(name="author" content="liit.fr")
-    meta(name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0")
-    link(rel="author" href="/humans.txt")
+    link(rel="dns-prefetch" href="https://fonts.googleapis.com")
+
     link(rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png")
     link(rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32")
     link(rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16")
@@ -22,6 +22,91 @@ html.no-js(lang="fr")
     link(rel="shortcut icon" href="/img/favicons/favicon.ico")
     meta(name="msapplication-config" content="/img/favicons/browserconfig.xml")
     meta(name="theme-color" content="#2b5797")
+
+    meta(name="author" content="liit.fr")
+    link(rel="author" href="/humans.txt")
+    meta(name="copyright" content="Tous droits réservés - LIIT")
+
+    meta(name="DC.title" content="Invenieur Informatifien |&nbsp;LIIT")
+    meta(name="geo.region" content="FR-69")
+    meta(name="geo.placename" content="Caluire-et-Cuire")
+    meta(name="geo.position" content="45.8;4.8")
+    meta(name="ICBM" content="45.8, 4.8")
+
+    meta(property="og:type" content="business.business")
+    meta(property="og:title" content="LIIT, invenieur informatifien")
+    meta(property="og:url" content="https://liit.fr")
+    meta(property="og:image" content="https://liit.fr/img/facebook-card.png")
+    meta(property="og:description" content="Freelance. Full stack: Front, Back, Data")
+    meta(property="og:locale:locale" content="fr_FR")
+    meta(property="og:image:type" content="image/png")
+    meta(property="og:image:width" content="1200")
+    meta(property="og:image:height" content="631")
+    meta(property="og:image:alt" content="LIIT, invenieur informatifien")
+
+    meta(property="business:contact_data:locality" content="Caluire-et-Cuire")
+    meta(property="business:contact_data:postal_code" content="69300")
+    meta(property="business:contact_data:country_name" content="France")
+    meta(property="business:contact_data:website" content="https://liit.fr")
+    meta(property="place:location:latitude" content="45.8")
+    meta(property="place:location:longitude" content="4.8")
+
+    meta(property="business:hours:day" content="monday")
+    meta(property="business:hours:start" content="08:00")
+    meta(property="business:hours:end" content="18:00")
+    meta(property="business:hours:day" content="tuesday")
+    meta(property="business:hours:start" content="08:00")
+    meta(property="business:hours:end" content="18:00")
+    meta(property="business:hours:day" content="wednesday")
+    meta(property="business:hours:start" content="08:00")
+    meta(property="business:hours:end" content="18:00")
+    meta(property="business:hours:day" content="thursday")
+    meta(property="business:hours:start" content="08:00")
+    meta(property="business:hours:end" content="18:00")
+    meta(property="business:hours:day" content="friday")
+    meta(property="business:hours:start" content="08:00")
+    meta(property="business:hours:end" content="18:00")
+
+    meta(name="twitter:card" content="summary_large_image")
+    meta(name="twitter:site" content="@liitfr")
+    meta(name="twitter:creator" content="@liitfr")
+    meta(name="twitter:title" content="LIIT, invenieur informatifien")
+    meta(name="twitter:description" content="Freelance. Full stack: Front, Back, Data")
+    meta(name="twitter:url" content="https://liit.fr")
+    meta(name="twitter:image" content="https://liit.fr/img/twitter-large-card.png")
+    meta(name="twitter:image:alt" content="LIIT, invenieur informatifien")
+
+    script(type="application/ld+json").
+      {
+          "@context": "http://schema.org",
+          "@type": "ProfessionalService",
+          "additionalType": "http://www.productontology.org/id/Software_development",
+          "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Caluire-et-Cuire",
+              "addressRegion": "FR-69",
+              "postalCode":"69300"
+           },
+          "description": "Freelance. Full stack: Front, Back, Data",
+          "name": "LIIT",
+          "openingHours": "Mo,Tu,We,Th,Fr 08:00-18:00",
+          "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": "45.8",
+              "longitude": "4.8"
+          },
+          "sameAs" : [
+              "https://twitter.com/liitfr",
+              "https://plus.google.com/100394573647163560665"
+          ],
+          "logo": "http://www.metamorphose.garden/img/logo.png",
+          "isicV4": "6201",
+          "hasMap": "https://goo.gl/maps/j6EJCke2UV82",
+          "founder": "Mathias Hoffmann",
+          "foundingDate": "2017-01-01",
+          "legalName": "LIIT",
+          "url": "https://liit.fr"
+      }
 
     block(name="stylesheets")
       link(rel="stylesheet" href="/css/bundle.css")
@@ -49,18 +134,21 @@ html.no-js(lang="fr")
           span
           span
           span
-        .network
-          button.network-toggle-button
-            i.network-icon.fa.fa-network-alt
+        nav.network
+          button.network-toggle-button(aria-label="Afficher les liens exterieurs")
           ul.network-items
             li.network-item
-              a.network-button#to-mail(href="mailto:mathias@liit.fr" target="_blank")
+              a.network-button#to-mail(href="mailto:mathias@liit.fr" target="_blank" aria-label="Ouvrir votre outil de messagerie pour m'écrire un message")
+                span Mail
             li.network-item
-              a.network-button#to-twitter(href="https://twitter.com/" target="_blank")
+              a.network-button#to-twitter(href="https://twitter.com/" target="_blank" aria-label="Consulter ma page Twitter")
+                span Twitter
             li.network-item
-              a.network-button#to-github(href="https://github.com/liitfr" target="_blank")
+              a.network-button#to-github(href="https://github.com/liitfr" target="_blank" aria-label="Consulter mon repository Github")
+                span Github
             li.network-item
-              a.network-button#to-dribbble(href="https://dribbble.com/liit" target="_blank")
+              a.network-button#to-dribbble(href="https://dribbble.com/liit" target="_blank" aria-label="Consulter ma page Dribbble")
+                span Dribble
 
     main(role="main")
       block(name="content")
