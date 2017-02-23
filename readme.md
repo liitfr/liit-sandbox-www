@@ -1,5 +1,6 @@
 # liit-www
 
+:warning: Work in progress :warning:
 :beginner: Single Page Application with Spike :cactus: [http://liit.fr](http://liit.fr)  
 :construction: This document is a draft :heavy_exclamation_mark: I hope it will be helpful.  
 Improvements & PR are welcome !
@@ -548,6 +549,20 @@ In this project, only are declared as vendor the most common librairies you'll f
 Tests are located in `test/**` and are powered by [ava](https://github.com/sindresorhus/ava)
 - `npm install` to ensure devDeps are installed
 - `npm test` to run test suite
+
+Then you can :
+
+- Run following plugins on Chrome :
+  1. Lighthouse
+  2. James - Analytic/SEO Auditor
+  3. Accessibility Developer Tools
+  4. Open Graph Preview
+  5. YSlow
+  6. DevTools Audits
+- Run on Firefox, IE & Edge to check potential errors and display differences
+- Run Google's PageSpeed Insights
+- Run Google's Mobile Optimisation Test Tool
+- Run online validity tests for html & css
 
 ```
                 ___       ___          ___   

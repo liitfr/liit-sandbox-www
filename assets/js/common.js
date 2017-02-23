@@ -134,10 +134,6 @@ $('#logo-banner').on('click', function (ev) {
   if ($('.menu').hasClass('open')) {
     toggleOverlay()
   }
-  if ($('#home').length) {
-    ev.preventDefault()
-    TweenMax.to(window, 1, {scrollTo: '#intro'})
-  }
 })
 
 window.addEventListener('keydown', function (event) {

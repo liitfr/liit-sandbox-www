@@ -80,11 +80,19 @@ var backgroundCreation
 var smController
 var tweenMoveLogo
 var smScenes = []
-var createScenes
 
-(createScenes = function () {
+function createScenes () {
 
   smController = new ScrollMagic.Controller()
+    .scrollTo(function(target) {
+      TweenMax.to(window, 0.5, {
+        scrollTo : {
+          y : target,
+          autoKill : true
+        },
+        ease : Cubic.easeInOut
+      })
+    })
 
   tweenMoveLogo = TweenMax.to('#logo-fat', 5,
     {
@@ -125,8 +133,17 @@ var createScenes
     .setPin('#home #intro')
     .addTo(smController))
 
+  // smScenes.push(new ScrollMagic.Scene({
+  //   triggerElement: '#home .first',
+  //   triggerPosition: 0,
+  //   triggerHook: 0.05,
+  //   duration: 0.01
+  // })
+  //   .setTween(TweenMax.to('#home #logo-banner .polylogo', 0.5, {fill: 'red'}))
+  //   .addTo(smController))
+
   smScenes.push(new ScrollMagic.Scene({
-    triggerElement: '.second',
+    triggerElement: '#home .second',
     triggerPosition: 0,
     triggerHook: 0.05,
     duration: 0.01
@@ -141,15 +158,15 @@ var createScenes
       triggerHook: 0.05,
       duration: 0.01
     })
-      .setTween(TweenMax.to('#home #logo-banner text', 0.5, {fill: $(ele).css('background')}))
+      .setTween(TweenMax.to('#home #logo-banner text', 0.5, {fill: $(ele).css('background-color')}))
       .addTo(smController))
   })
 
-}())
+}
 
-var handleWindowResize
+createScenes()
 
-(handleWindowResize = function () {
+function handleWindowResize () {
   $(window).resize(function () {
     TweenMax.killTweensOf('#home #logo-fat')
     $('#home #logo-fat').removeAttr('style')
@@ -160,31 +177,42 @@ var handleWindowResize
     })
     smScenes[0].setTween(tweenMoveLogo)
   })
-}())
+}
+
+handleWindowResize()
+
+$('#logo-banner').on('click', function (ev) {
+  if ($('#home').length) {
+    ev.preventDefault()
+    smController.scrollTo(0)
+  }
+})
 
 // -----------------------------------------------------------------------------
 // Before leaving home page
 
-$('#home a').on('click', function () {
-  smController.destroy()
+$('#home .menu nav a').on('click', function () {
+  smController.destroy(true)
   $(window).off('resize')
 })
 
 // -----------------------------------------------------------------------------
 // On reload
 
+$('#logo-banner').removeClass('show')
+
 function onReload () {
+  $('#logo-banner').removeClass('show')
   if (isMobile) {
     $(window).on('orientationchange', function (event) {
       staticifyHeight()
     })
     staticifyHeight()
   }
-  // smController.enabled(true)
   $('#home #logo-fat #background').addClass('draw').attr('d', backgroundPath)
   $('#home #logo').html($('#home #logo').html())
   createScenes()
-  // handleWindowResize()
+  handleWindowResize()
 }
 
 window[config.spAppName] = Object.assign(

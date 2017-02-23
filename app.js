@@ -1,17 +1,19 @@
-// TODO : Add nojs message on all pages
-// TODO : Add twitter card + seo + google business etc
+// ASAP
+// TODO : Add nojs message on all pages + erreur version IE
 // TODO : faire le tour de ul / each et mettre un message par défaut si aucune donnée
-// TODO : client templates sans header ?
 // TODO : reexpliquer pourquoi THREE & masonry
 // TODO : reexpliquer pourquoi vendor
 // BUG : scrollmagic is so heavy ...
-// TODO : Doc no es6 : error when use with minify : es6 code isn't minified
+// BUG : Doc no es6 : error when use with minify : es6 code isn't minified
+// BUG : sur netlify. accueil puis service puis accueil => erreur Uncaught TypeError: s is not a function
+// BUG : centrage des éléments avec / sans scrollbar
+// TODO : keep or remove first svg generation (header & home ) to save room ?
+
+// Later
 // TODO : multilingual
-// TODO : sur netlify. accueil puis service puis accueil => erreur Uncaught TypeError: s is not a function
-// TODO : centrage des éléments avec / sans scrollmagic
-// BUG : scroll auto pour revenir au top de home ne MARCHE PLUS ...
 // TODO : bundled css performance issue ?
-// TODO : router, only extract necessary content
+// TODO : router, only extract necessary content ? no header
+// TODO : env variables for title & description for all meta fb twitter etc etc
 
 require('dotenv').config({ silent: true })
 

@@ -1,16 +1,16 @@
+/* ASAP */
+
+/* TODO : Text highlight */
+
+/* TODO : transitions: controler tout ça */
+
+/* LATER */
+
 /* TODO : CSS Byebye (https://github.com/AoDev/css-byebye)*/
 
 /* TODO : css2modernizr (https://github.com/vovanbo/css2modernizr)*/
 
-/* TODO : Text highlight */
-
 /* TODO : Nettoyer les fonts inutilisées */
-
-/* TODO : transitions: controler tout ça */
-
-/* BUG : Firefox : logo devient noir et blanc dans l'accueil en scollant */
-
-/* BUG : Firefox : LIIT n'apparait pas au centre dans le logo */
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:600,800|Roboto:900|Montserrat|Ubuntu|Raleway|PT+Sans|Lato')
 
@@ -76,14 +76,14 @@ svg.logo
     font-size: 6em
     pointer-events: none
     text-anchor: middle
-    alignment-baseline: middle
+    dominant-baseline: middle
 
     & tspan
       text-anchor: middle
-      alignment-baseline: middle
+      dominant-baseline: middle
 
   @media screen and (--s)
-    & text tspan
+    & text tspan:nth-child(2)
       display: none
 
 header
