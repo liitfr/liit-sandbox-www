@@ -23,8 +23,8 @@ function generatePoint (random, index, radius) {
   var angle = Math.PI * 2 / logoSides * index
   var cos = Math.cos(angle)
   var sin = Math.sin(angle)
-  var tx = x * cos - y * sin + logoCenter
-  var ty = x * sin + y * cos + logoCenter
+  var tx = Math.round(x * cos - y * sin + logoCenter)
+  var ty = Math.round(x * sin + y * cos + logoCenter)
   return { x: tx, y: ty }
 }
 

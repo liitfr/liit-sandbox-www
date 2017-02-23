@@ -6,6 +6,8 @@
 // BUG : dans home, scroller jusqu'au second part. passer à services. revenir à home. le logo est toujours là
 // BUG : sur vrai mobile : l'affichage de l'animation d'intro foire completement !
 // TODO : use scrollmagic not as vendor ?
+// TODO : put 4 icons in one single file
+// BUG : affichage progressif du background sur mobile ne fonctionne pas
 
 /* global $, config, ScrollMagic, TweenMax */
 
@@ -43,7 +45,7 @@ if (isMobile) {
 var backgroundPath
 var backgroundCreation
 
-(backgroundCreation = function () {
+backgroundCreation = function () {
   var offsetSize = 300
   var maxX = 13
   var minX = -6
@@ -72,7 +74,9 @@ var backgroundCreation
   backgroundPath = $('#home #logo-fat #background').attr('d')
 
   $('#home #logo').html($('#home #logo').html())
-}())
+}
+
+backgroundCreation()
 
 // -----------------------------------------------------------------------------
 // TweenMax & ScrollMagic animations

@@ -127,7 +127,7 @@ html.no-js(lang="fr")
       .centered
         a(href="/")
           svg.logo#logo-banner(viewbox="0 0 200 200")
-            path.polylogo(d="M 100 200 L 114.54840524874149 191.8550156753478 L 129.66563145999498 191.30142556433475 L 144.03707847473606 186.42763284627168 L 154.07624321090753 174.42956348249515 L 165.76093065034894 165.76093065034888 L 178.4746484543699 157.01516947236988 L 189.1006524188368 145.39904997395467 L 189.39931253174444 129.04759747124504 L 197.78114571891865 115.48701203898284 L 193 99.99999999999999 L 198.76883405951378 84.3565534959769 L 191.30142556433475 70.33436854000503 L 183.75461327370658 57.32489302448259 L 176.85661446562 44.16040103221504 L 168.5893577750951 31.410642224904876 L 153.48845795861504 26.379453511879788 L 142.22111647577785 17.136393250481788 L 129.66563145999493 8.69857443566525 L 115.48701203898284 2.218854281081363L 99.99999999999999 0 L 85.13872582117806 6.169607643461916 L 69.4073175568802 5.845404886779804 L 55.96292152526395 13.572367153728322 L 42.397045275337625 20.71633455125516 L 35.65328291202417 35.65328291202418 L 23.952402528754945 44.74818628450753L 15.354380202105048 56.87090252474306L 4.894348370484636 69.09830056250527 L 2.218854281081363 84.51298796101715 L 8 100 L 8.144984324652185 114.54840524874147 L 4.89434837048465 130.90169943749476 L 13.572367153728322 144.03707847473606 L 23.143385534379988 155.83959896778495 L 32.117749006091444 167.88225099390857 L 45.335971536799995 175.2385804768701 L 55.962921525263965 186.4276328462717 L 70.95240252875494 189.39931253174444 L 85.764463681339 189.87963899415752 Z")
+            path.polylogo(d="M 100 200 L 114 191 L 129 191 L 144 186 L 154 174 L 165 165 L 178 157 L 189 145 L 189 129 L 197 115 L 193 99 L 198 84 L 191 70 L 183 57 L 176 44 L 168 31 L 153 26 L 142 17 L 129 8 L 115 2 L 99 0 L 85 6 L 69 5 L 55 13 L 42 20 L 35 35 L 23 44 L 15 56 L 4 69 L 2 84 L 8 100 L 8 114 L 4 130 L 13 144 L 23 155 L 32 167 L 45 175 L 55 186 L 70 189 L 85 189 Z")
             text(x="50%" y="50%" transform="translate(-5,5)")
               tspan L
               tspan iit
@@ -140,16 +140,16 @@ html.no-js(lang="fr")
           button.network-toggle-button(aria-label="Afficher les liens exterieurs")
           ul.network-items
             li.network-item
-              a.network-button#to-mail(href="mailto:mathias@liit.fr" target="_blank" aria-label="Ouvrir votre outil de messagerie pour m'écrire un message")
+              a.network-button#to-mail(href="mailto:mathias@liit.fr" rel="noopener" target="_blank" aria-label="Ouvrir votre outil de messagerie pour m'écrire un message")
                 span Mail
             li.network-item
-              a.network-button#to-twitter(href="https://twitter.com/" target="_blank" aria-label="Consulter ma page Twitter")
+              a.network-button#to-twitter(href="https://twitter.com/" rel="noopener" target="_blank" aria-label="Consulter ma page Twitter")
                 span Twitter
             li.network-item
-              a.network-button#to-github(href="https://github.com/liitfr" target="_blank" aria-label="Consulter mon repository Github")
+              a.network-button#to-github(href="https://github.com/liitfr" rel="noopener" target="_blank" aria-label="Consulter mon repository Github")
                 span Github
             li.network-item
-              a.network-button#to-dribbble(href="https://dribbble.com/liit" target="_blank" aria-label="Consulter ma page Dribbble")
+              a.network-button#to-dribbble(href="https://dribbble.com/liit" rel="noopener" target="_blank" aria-label="Consulter ma page Dribbble")
                 span Dribble
 
     main(role="main")
