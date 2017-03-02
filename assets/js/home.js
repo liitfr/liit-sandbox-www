@@ -1,222 +1,107 @@
-// TODO : sur mobile, mettre les liens externes tout en bas
-// TODO : rajouter #home dans tous les selecteurs
-// BUG : MAJ affichage OK quand je ne change pas le type de support !! Mais sinon KO ...
-// BUG : menu : portable touch => plantage Unable to preventDefault inside passive event listener due to target being treated as passive.
-// BUG : left not defined. Reproduction ? en affichage mobile, de home aller à services. Changer d'affichage => desktop
-// BUG : dans home, scroller jusqu'au second part. passer à services. revenir à home. le logo est toujours là
-// BUG : sur vrai mobile : l'affichage de l'animation d'intro foire completement !
-// TODO : use scrollmagic not as vendor ?
-// TODO : put 4 icons in one single file
-// BUG : affichage progressif du background sur mobile ne fonctionne pas
-
-/* global $, config, ScrollMagic, TweenMax */
-
-// require('./_contactform.js')
-const generatePath = require('./_generatePath.js')
+/* global ScrollMagic, TweenMax, Cubic, $, Power0, config, Back */
 
 // -----------------------------------------------------------------------------
-// Avoid `page jumps` on mobiles, because of adress bar
+// Scrolling Effect
 
-// http://detectmobilebrowsers.com
-var isMobile = (function (a) { return /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw-(n|u)|c55\/|capi|ccwa|cdm-|cell|chtm|cldc|cmd-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc-s|devi|dica|dmob|do(c|p)o|ds(12|-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(-|_)|g1 u|g560|gene|gf-5|g-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd-(m|p|t)|hei-|hi(pt|ta)|hp( i|ip)|hs-c|ht(c(-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i-(20|go|ma)|i230|iac( |-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|-[a-w])|libw|lynx|m1-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|-([1-8]|c))|phil|pire|pl(ay|uc)|pn-2|po(ck|rt|se)|prox|psio|pt-g|qa-a|qc(07|12|21|32|60|-[2-7]|i-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h-|oo|p-)|sdk\/|se(c(-|0|1)|47|mc|nd|ri)|sgh-|shar|sie(-|m)|sk-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h-|v-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl-|tdg-|tel(i|m)|tim-|t-mo|to(pl|sh)|ts(70|m-|m3|m5)|tx-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas-|your|zeto|zte-/i.test(a.substr(0, 4)) })(navigator.userAgent || navigator.vendor || window.opera)
-
-function staticifyHeight () {
-  $('#home .part').height(
-    window.innerHeight * 2 < $('#home .part').css('min-height').replace('px', '')
-    ? $('#home .part').css('min-height').replace('px', '')
-    : ($('#home .part').height(
-        window.innerHeight * 2 > $('#home .part').css('max-height').replace('px', '')
-        ? $('#home .part').css('max-height').replace('px', '')
-        : window.innerHeight * 2
-    ))
-  )
-}
-
-if (isMobile) {
-  $(window).on('orientationchange', function (event) {
-    staticifyHeight()
-  })
-  staticifyHeight()
-}
-
-// -----------------------------------------------------------------------------
-// Home background creation
-
-var backgroundPath
-var backgroundCreation
-
-backgroundCreation = function () {
-  var offsetSize = 300
-  var maxX = 13
-  var minX = -6
-  var maxY = 9
-  var minY = -2
-
-  if (isMobile) {
-    maxY = 25
-    minY = -4
-  } else {
-    $('#home #logo-fat #background').addClass('draw')
-  }
-
-  for (var x = minX; x < maxX; x++) {
-    for (var y = minY; y < maxY; y++) {
-      if (x !== 0 || y !== 0) {
-        var offset = {
-          x: x * offsetSize,
-          y: y * offsetSize
-        }
-        $('#home #logo-fat #background').attr('d', $('#home #logo-fat #background').attr('d') + ' ' + generatePath.generate(true, 100, offset))
-      }
-    }
-  }
-
-  backgroundPath = $('#home #logo-fat #background').attr('d')
-
-  $('#home #logo').html($('#home #logo').html())
-}
-
-backgroundCreation()
-
-// -----------------------------------------------------------------------------
-// TweenMax & ScrollMagic animations
-
-var smController
 var tweenMoveLogo
-var smScenes = []
+var tweenResizeHero
+var scMoveLogo
+var scResizeHero
+var smController
 
-function createScenes () {
-
+function scrollSupport () {
   smController = new ScrollMagic.Controller()
-    .scrollTo(function(target) {
+    .scrollTo(function (target) {
       TweenMax.to(window, 0.5, {
-        scrollTo : {
-          y : target,
-          autoKill : true
+        scrollTo: {
+          y: target,
+          autoKill: true
         },
-        ease : Cubic.easeInOut
+        ease: Cubic.easeInOut
       })
     })
 
-  tweenMoveLogo = TweenMax.to('#logo-fat', 5,
-    {
-      left: $('#home #logo-banner .polylogo').position().left + $('#home #logo-banner').width() / 2,
-      top: $('#home #logo-banner .polylogo').position().top + $('#home #logo-banner').height() / 2 - $(window).scrollTop(),
-      width: $('#home #logo-banner').innerWidth()
-    }
-  )
+  tweenMoveLogo = TweenMax.to('#hero .to-home', 2, {left: $('#home header .to-home').offset().left, ease: Power0.easeNone})
+  tweenResizeHero = TweenMax.to('#hero', 2, {height: $('header').height(), ease: Power0.easeNone})
 
-  var tweenAura = TweenMax.to('#home #aura', 5, {scale: 50})
+  scResizeHero = new ScrollMagic.Scene({
+    duration: $('#hero').height() - $('header').height()
+  })
+    .setTween(tweenResizeHero)
+    .addTo(smController)
+    .on('progress', function (ev) {
+      if(ev.progress === 0.5) {
+        console.log('mathias')
+      }
+    })
 
-  smScenes.push(new ScrollMagic.Scene({
-    triggerElement: '#home #trigger-1',
-    duration: '100%'
+  scMoveLogo = new ScrollMagic.Scene({
+    duration: $('#hero').height() - $('header').height()
   })
     .setTween(tweenMoveLogo)
     .addTo(smController)
-    .on('end', function (event) {
-      $('#home #logo-banner, #home #logo-fat text').toggleClass('show')
-    })
-    .on('enter', function (event) {
-      if (isMobile) {
-        $('#home #logo-fat #background').addClass('draw')
-      }
-    }))
-
-  smScenes.push(new ScrollMagic.Scene({
-    triggerElement: '#home #trigger-1',
-    duration: '100%'
-  })
-    .setTween(tweenAura)
-    .addTo(smController))
-
-  smScenes.push(new ScrollMagic.Scene({
-    triggerElement: '#home #trigger-1',
-    duration: '100%'
-  })
-    .setPin('#home #intro')
-    .addTo(smController))
-
-  // smScenes.push(new ScrollMagic.Scene({
-  //   triggerElement: '#home .first',
-  //   triggerPosition: 0,
-  //   triggerHook: 0.05,
-  //   duration: 0.01
-  // })
-  //   .setTween(TweenMax.to('#home #logo-banner .polylogo', 0.5, {fill: 'red'}))
-  //   .addTo(smController))
-
-  smScenes.push(new ScrollMagic.Scene({
-    triggerElement: '#home .second',
-    triggerPosition: 0,
-    triggerHook: 0.05,
-    duration: 0.01
-  })
-    .setTween(TweenMax.to('#home #logo-banner .polylogo', 0.5, {fill: '#fff'}))
-    .addTo(smController))
-
-  $('#home .part').not('#home .first').each(function (idx, ele) {
-    smScenes.push(new ScrollMagic.Scene({
-      triggerElement: ele,
-      triggerPosition: 0,
-      triggerHook: 0.05,
-      duration: 0.01
-    })
-      .setTween(TweenMax.to('#home #logo-banner text', 0.5, {fill: $(ele).css('background-color')}))
-      .addTo(smController))
-  })
-
 }
 
-createScenes()
+scrollSupport()
 
-function handleWindowResize () {
-  $(window).resize(function () {
-    TweenMax.killTweensOf('#home #logo-fat')
-    $('#home #logo-fat').removeAttr('style')
-    tweenMoveLogo = TweenMax.to('#home #logo-fat', 5, {
-      left: $('#home #logo-banner .polylogo').position().left + $('#home #logo-banner').width() / 2,
-      top: $('#home #logo-banner .polylogo').position().top + $('#home #logo-banner').height() / 2 - $(window).scrollTop(),
-      width: $('#home #logo-banner').innerWidth()
-    })
-    smScenes[0].setTween(tweenMoveLogo)
-  })
+// -----------------------------------------------------------------------------
+// Logo Anim when hovering
+
+function hoverHero () {
+  TweenMax.set('#hero .logo .headlines', {transformOrigin: '100px -1000px', rotationZ: '-90'})
+  TweenMax.set('#hero .logo .headlines', {autoAlpha: 1})
+  $('#hero .to-home.anim-enabled').hover(
+    function () {
+      window[config.spAppName].common.killLogoTween()
+      window[config.spAppName].common.setUpdateInterval(50)
+      window[config.spAppName].common.setLogoSides(100)
+      $('.polylogo').attr('d', window[config.spAppName].common.generate(true))
+      window[config.spAppName].common.flickLogo()
+      TweenMax.to('#hero .logo .brand', 1, {transformOrigin: '100px -1000px', ease: Back.easeInOut.config(1.3), rotationZ: 90})
+      TweenMax.to('#hero .logo .headlines', 1, {transformOrigin: '100px -1000px', ease: Back.easeInOut.config(1.3), rotationZ: 0})
+    },
+    function () {
+      window[config.spAppName].common.killLogoTween()
+      window[config.spAppName].common.setUpdateInterval(1351)
+      window[config.spAppName].common.setLogoSides(40)
+      $('.polylogo').attr('d', window[config.spAppName].common.generate(true))
+      window[config.spAppName].common.flickLogo()
+      TweenMax.to('#hero .logo .brand', 1, {transformOrigin: '100px -1000px', ease: Back.easeInOut.config(1.3), rotationZ: 0})
+      TweenMax.to('#hero .logo .headlines', 1, {transformOrigin: '100px -1000px', ease: Back.easeInOut.config(1.3), rotationZ: -90})
+    }
+  )
 }
 
-handleWindowResize()
+hoverHero()
 
-$('#logo-banner').on('click', function (ev) {
-  if ($('#home').length) {
-    ev.preventDefault()
-    smController.scrollTo(0)
-  }
+// -----------------------------------------------------------------------------
+// ScrollTo Anim
+
+$('#home header .to-home').on('click', function (ev) {
+  ev.preventDefault()
+  smController.scrollTo(0)
 })
 
 // -----------------------------------------------------------------------------
-// Before leaving home page
+// Window resize
 
-$('#home .menu nav a').on('click', function () {
-  smController.destroy(true)
-  $(window).off('resize')
+$(window).resize(function () {
+  tweenMoveLogo.kill()
+  $('#hero .to-home').removeAttr('style')
+  tweenMoveLogo = TweenMax.to('#hero .to-home', 2, {left: $('#home header .to-home').offset().left, ease: Power0.easeNone})
+  scMoveLogo.setTween(tweenMoveLogo)
+  tweenResizeHero.kill()
+  $('#hero').removeAttr('style')
+  tweenResizeHero = TweenMax.to('#hero', 2, {height: $('header').height(), ease: Power0.easeNone})
+  scResizeHero.setTween(tweenResizeHero)
 })
 
 // -----------------------------------------------------------------------------
-// On reload
-
-$('#logo-banner').removeClass('show')
+// on reload
 
 function onReload () {
-  $('#logo-banner').removeClass('show')
-  if (isMobile) {
-    $(window).on('orientationchange', function (event) {
-      staticifyHeight()
-    })
-    staticifyHeight()
-  }
-  $('#home #logo-fat #background').addClass('draw').attr('d', backgroundPath)
-  $('#home #logo').html($('#home #logo').html())
-  createScenes()
-  handleWindowResize()
+  scrollSupport()
+  hoverHero()
 }
 
 window[config.spAppName] = Object.assign(

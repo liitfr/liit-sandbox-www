@@ -6,22 +6,23 @@ extends(src="layout.sgr")
     meta(name="robots" content="index, follow")
 
   block(name="content")
-    p Connaitre les tendances du web, c'est avant tout se donner les moyens de prendre les décisions les plus cohérentes
-    .isolayer
-      ul.grid
-        each(loop="internetfact, index in contentful.internet_facts")
-          li.grid__item
-            .grid__link
-              .layer.third
-              .layer.second
-              .layer.fact
-                | {{{ internetfact.fields.fact }}}
-                if(condition="internetfact.fields.source")
-                  span {{ internetfact.fields.source }}
-                if(condition="internetfact.fields.studyDate")
+    .narrow
+      p Connaitre les tendances du web, c'est avant tout se donner les moyens de prendre les décisions les plus cohérentes
+      .isolayer
+        ul.grid
+          each(loop="internetfact, index in contentful.internet_facts")
+            li.grid__item
+              .grid__link
+                .layer.third
+                .layer.second
+                .layer.fact
+                  | {{{ internetfact.fields.fact }}}
                   if(condition="internetfact.fields.source")
-                    span ,&nbsp;
-                  span.studyDate {{ internetfact.fields.studyDate }}
+                    span {{ internetfact.fields.source }}
+                  if(condition="internetfact.fields.studyDate")
+                    if(condition="internetfact.fields.source")
+                      span ,&nbsp;
+                    span.studyDate {{ internetfact.fields.studyDate }}
 
   block(name="js-body" type="append")
     script(src="/js/isogrid.js" data-hot-reload="true" data-script-name="isogrid" data-function-name="onReload" defer)

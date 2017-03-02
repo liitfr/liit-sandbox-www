@@ -6,8 +6,9 @@ extends(src="../layout.sgr")
     meta(name="robots" content="index, follow")
 
   block(name="content")
-    h2 Les fournées
-    ul
-      each(loop="discoverybatch, index in contentful.discovery_batches")
-        li
-          a(href="/bookmarks/fournee-numero{{ discoverybatch.fields.batchNumber }}") Fournée #{{ discoverybatch.fields.batchNumber }}
+    .narrow
+      h1 Les fournées
+      ul
+        each(loop="discoverybatch, index in contentful.discovery_batches")
+          li
+            a(href="/bookmarks/fournee-numero{{ discoverybatch.fields.batchNumber }}") Fournée #{{ discoverybatch.fields.batchNumber }}

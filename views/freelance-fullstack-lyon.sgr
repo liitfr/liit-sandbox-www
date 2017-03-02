@@ -1,4 +1,5 @@
 extends(src="layout.sgr")
 
   block(name="content")
-    h2 Technologies
+    .narrow
+      h1 Technologies

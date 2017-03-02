@@ -1,4 +1,5 @@
 extends(src="layout.sgr")
 
   block(name="content")
-    h2 Me contacter
+    .narrow
+      h1 Me contacter

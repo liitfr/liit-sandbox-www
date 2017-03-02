@@ -1,18 +1,5 @@
-/* ASAP */
-
-/* TODO : Text highlight */
-
-/* TODO : transitions: controler tout ça */
-
-/* LATER */
-
-/* TODO : CSS Byebye (https://github.com/AoDev/css-byebye)*/
-
-/* TODO : css2modernizr (https://github.com/vovanbo/css2modernizr)*/
-
-/* TODO : Nettoyer les fonts inutilisées */
-
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:600,800|Roboto:900|Montserrat|Ubuntu|Raleway|PT+Sans|Lato')
+@import 'nombredor'
+@import url('https://fonts.googleapis.com/css?family=Amiko|Roboto:900')
 
 @font-face
   font-family: 'breeze'
@@ -21,302 +8,258 @@
   font-style: normal
 
 :root
-  --page-width: 980px
-
-@custom-media --reverse-threshold (max-width: 1060px)
+  --page-width: 920px
+  --page-padding: 15px
+  --header-height: 100px
+  --mobile-header-height: 70px
+  --large-nbdor: calc(var(--base-nbdor) - 2 * var(--nbdor-4))
+  --menu-color: rgba(52, 152, 219, 0.9)
 
 ::selection
-  color: #fff
-  background: #da727e
+  color: #ecf0f1
+  background: #e74c3c
 
 html
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
-
-  /* Avoid page jump when scrollbar appears */
-
-  /* margin-left: calc(100vw - 100%) */ /* not in home */
 
 body
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   overflow-y: scroll
-
-.centered
+  background: #fff
   position: relative
-  lost-center: var(--page-width)
+  padding-bottom: 300px
 
-.show
-  visibility: visible !important
-
-.trigger
-  position: absolute
+html,
+body
+  min-height: 100vh
   width: 100%
-  height: 1px
 
-main
-  position: relative
+footer
+  background: #e0e0e0
+  color: rgba(0, 0, 0, 0.54)
+  position: absolute
+  right: 0
+  bottom: 0
+  left: 0
+  z-index: 5
 
-  /* lost-center: var(--page-width) */ /* not in home */
+  & h4
+    text-decoration: underline
 
-  /* margin-top: 110px */ /* not in home */
-  @media screen and (--s)
-    /* margin-top: 60px*/ /* not in home */
+  & .narrow div
+    lost-column: 1/2
 
-    /* padding: 10px*/ /* not in home */
+    @media screen and (--m)
+      lost-column: 1/1
 
-svg.logo
-  overflow: visible
+    &:nth-child(1)
+      & ul
+        list-style-type: square
+        padding: 0 20px
 
-  & path
-    fill: #ffaa5c
+    &:nth-child(2)
+      text-align: right
 
-  & text
-    font-family: 'breeze'
-    fill: #fff
-    font-size: 6em
-    pointer-events: none
-    text-anchor: middle
-    dominant-baseline: middle
+      & ul
+        list-style-type: none
+        padding: 0
 
-    & tspan
-      text-anchor: middle
-      dominant-baseline: middle
-
-  @media screen and (--s)
-    & text tspan:nth-child(2)
-      display: none
+      @media screen and (--m)
+        text-align: left
 
 header
   position: fixed
-
-  /* Avoid page jump when scrollbar appears */ /* not in home */
-
-  /* width: 100vw */
-  width: 100%
   top: 0
   left: 0
-  z-index: 2
-  padding: 30px 15px 0
+  width: 100%
+  height: var(--header-height)
+  background: #2c3e50
+  overflow: hidden
 
-  @media screen and (--reverse-threshold)
-    padding: 30px 55px 0 40px
+  @media screen and (--m)
+    height: var(--mobile-header-height)
 
-  & svg.logo
-    width: 80px
-    height: 80px
-    transition: 0.5s ease-in-out
-    transition-property: width, height
+  /* ------------------------------------------------------------------------ */
+  /* Logo                                                                     */
 
-    @media screen and (--s)
-      width: 50px
-      height: 50px
-      margin: 10px 15px
-
-  @media screen and (--s)
-    padding-top: 0
-    transition: 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035)
-    background: rgba(0, 0, 0, 0.3)
-
-  &.transparent
-    transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1)
-    background: transparent
-
-    & #logo-banner
-      visibility: visible !important
-      & path
-        fill: #fff !important
-      & text
-        fill: #ff328c !important
-
-/* from https://codepen.io/designcouch/pen/Atyop */
-#nav-icon
-  width: 25px
-  height: 20px
-  position: absolute
-  right: 0
-  top: 0
-  transform: rotate(0deg)
-  transition: 0.5s ease-in-out
-  cursor: pointer
-  margin: 30px 0
-  z-index: 15
-
-  @media screen and (--s)
-    margin: 25px
-
-  & span
-    display: block
+  & .logo
     position: absolute
-    height: 4px
-    width: 100%
-    background: #fff
-    border-radius: 9px
-    opacity: 1
-    left: 0
-    transform: rotate(0deg)
-    transition: 0.25s ease-in-out
+    z-index: 10
+    top: calc((100% - var(--large-nbdor)) / 2)
+    left: calc((((100% - var(--page-width)) / 2) * 2 / 3) - (var(--header-height) * 0.8) / 2)
+    height: var(--large-nbdor)
+    width: calc(var(--header-height) * 0.8)
 
-    &:nth-child(1)
-      top: 0
+    & .to-home
+      display: inline-block
+      height: 100%
+      width: 100%
 
-    &:nth-child(2),
-    &:nth-child(3)
-      top: 8px
+      & svg
+        overflow: visible
+        height: 100%
+        width: 100%
+        pointer-events: none
 
-    &:nth-child(4)
-      top: 16px
+        & .background
+          fill: #e74c3c
 
-#nav-icon.open
-  & span
-    background: #ff328c
+        & .polylogo
+          fill: #2c3e50
 
-    &:nth-child(1)
-      top: 8px
-      width: 0%
-      left: 50%
+        & .brand
+          font-family: 'breeze', sans-serif
+          fill: #ecf0f1
+          font-size: 6em
+          text-anchor: middle
+          dominant-baseline: middle
 
-    &:nth-child(2)
-      transform: rotate(45deg)
+          & tspan
+            text-anchor: middle
+            dominant-baseline: middle
 
-    &:nth-child(3)
-      transform: rotate(-45deg)
+    &.over-menu
+      & .to-home
+        visibility: visible !important
 
-    &:nth-child(4)
-      top: 8px
-      width: 0%
-      left: 50%
+        & .polylogo
+          fill: #328fcd !important
 
-/* from https://tympanus.net/codrops/2014/02/06/fullscreen-overlay-effects/ */
-.menu
-  position: fixed
-  width: 100%
-  height: 100%
-  top: 0
-  left: 0
-  background: rgba(1, 176, 240, 0.9)
-  visibility: hidden
-  transform: translateY(-100%)
-  transition: transform 0.4s ease-in-out, visibility 0s 0.4s
+        & .background
+          fill: #fff !important
 
-  &.open
-    visibility: visible
-    transform: translateY(0%)
-    transition: transform 0.4s ease-in-out
+  /* ------------------------------------------------------------------------ */
+  /* Nav-icon                                                                 */
 
-  & nav
-    text-align: center
-    position: relative
-    top: 50%
-    height: 60%
-    transform: translateY(-50%)
+  & #nav-icon
+    position: absolute
+    top: calc((var(--header-height) - 20px) / 2)
+    right: calc((((100% - var(--page-width)) / 2) * 2 / 3) - 12.5px)
+    width: 25px
+    height: 20px
+    transition: 0.5s ease-in-out
+    cursor: pointer
+    z-index: 15
 
-    @media screen and (max-height: 30.5em)
-      height: 70%
-      font-size: 34px
+    &.open
+      & span
+        &:nth-child(1)
+          top: 8px
+          width: 0%
+          left: 50%
 
-  & ul
-    list-style: none
-    padding: 0
-    margin: 0 auto
-    display: inline-block
-    height: 100%
-    position: relative
+        &:nth-child(2)
+          transform: rotate(45deg)
 
-    & li
+        &:nth-child(3)
+          transform: rotate(-45deg)
+
+        &:nth-child(4)
+          top: 8px
+          width: 0%
+          left: 50%
+
+    & span
       display: block
-      /*height: 10%*/
-      height: calc(100% / 7)
-      min-height: 54px
-      backface-visibility: hidden
+      position: absolute
+      height: 4px
+      width: 100%
+      background: #fff
+      border-radius: 9px
+      opacity: 1
+      left: 0
+      transform: rotate(0deg)
+      transition: 0.25s ease-in-out
+
+      &:nth-child(1)
+        top: 0
+
+      &:nth-child(2),
+      &:nth-child(3)
+        top: 8px
+
+      &:nth-child(4)
+        top: 16px
+
+  /* ------------------------------------------------------------------------ */
+  /* Menu                                                                     */
+
+  & #menu
+    position: fixed
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    background: var(--menu-color)
+    visibility: hidden
+    transform: translateY(-100%)
+    transition: transform 0.4s ease-in-out, visibility 0s 0.4s
+
+    &.open
+      visibility: visible
+      transform: translateY(0%)
+      transition: transform 0.4s ease-in-out
+
+    & nav
+      text-align: center
+      position: relative
+      top: 50%
+      height: 60%
+      transform: translateY(-50%)
 
       @media screen and (max-height: 30.5em)
-        min-height: 34px
+        height: 70%
+        font-size: 34px
 
-      & a
-        font-size: 54px
-        font-weight: 300
+    & ul
+      list-style: none
+      padding: 0
+      margin: 0 auto
+      display: inline-block
+      height: 100%
+      position: relative
+
+      & li
         display: block
-        color: #fff
-        transition: color 0.2s
+        height: calc(100% / 7)
+        min-height: 54px
+        backface-visibility: hidden
 
-        &:hover,
-        &:focus
-          color: #e3fcb1
+        @media screen and (max-height: 30.5em)
+          min-height: 34px
 
-// -----------------------------------------------------------------------------
-// Network
+        & a
+          font-size: 54px
+          font-weight: 300
+          display: block
+          color: #fff
+          transition: color 0.2s
 
-.network
-  filter: url("../img/goofilter.svg")
-  position: absolute
-  top: 20px
-  right: -7px
-  width: 40px
-  height: 40px
+          &:hover,
+          &:focus
+            color: #e3fcb1
 
-.network-button,
-.network-toggle-button
-  position: absolute
-  display: inline-block
-  left: 50%
-  top: 50%
-  border-radius: 50%
-  width: 40px
-  height: 40px
-  line-height: 40px
-  margin-left: -20px
-  margin-top: -20px
-  background: #ccc
-  text-align: center
+/* -------------------------------------------------------------------------- */
+/* Main                                                                       */
+
+main
+  margin-top: var(--header-height)
+  margin-bottom: 3em
+  width: 100%
+  font-size: responsive 16px 21px
+  font-family: 'Amiko', sans-serif
+  color: #2c3e50
+
+.narrow
+  padding: 0 var(--page-padding)
+  lost-center: var(--page-width)
+
+h1
+  color: #e74c3c
+
+.important
+  border-radius: 5px
+  padding: 0.5em 1em
+  background: #3498db
   color: #fff
-  border: none
-  outline: none
-
-  &:hover
-    color: #fff
-
-.network-button
-  font-size: 30px
-  background: #fff
-  transform: scale(0.95, 0.95)
-  color: #222
-  background-repeat: no-repeat
-  background-position: center
-  background-size: 25px 25px
-
-  &#to-mail
-    background-image: url('../img/contact.svg')
-    background-size: 40px 40px
-    background-position: -2px
-
-  &#to-twitter
-    background-image: url('../img/twitter.svg')
-
-  &#to-github
-    background-image: url('../img/github.svg')
-
-  &#to-dribbble
-    background-image: url('../img/dribbble.svg')
-
-a.network-button
-  color: #3d4444
-
-  &:hover,
-  &:focus
-    color: #dfd7d7
-
-  & span
-    visibility: hidden
-
-.network-toggle-button
-  z-index: 9
-  background: #fff
-  font-size: 20px
-
-.network-items
-  list-style-type: none
-  padding: 0
-  margin: 0
-
-.network-item
-  display: inline-block

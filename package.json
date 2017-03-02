@@ -25,6 +25,7 @@
     "markdown-it": "^8.2.2",
     "masonry-layout": "^4.1.1",
     "moment": "^2.17.1",
+    "nombredor": "^0.2.0",
     "normalize.css": "^5.0.0",
     "page": "^1.7.1",
     "reshape-standard": "^0.5.0",

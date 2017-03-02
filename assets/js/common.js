@@ -1,8 +1,7 @@
-/* global $, TweenMax, Modernizr, Quad, Elastic */
+/* global $, TweenMax, Modernizr, Quad, Elastic, config */
 
 require('EasePack')
 const FastClick = require('fastclick')
-const generatePath = require('./_generatePath.js')
 const LogStyle = require('log-with-style')
 const router = require('./_router.js')
 require('ScrollToPlugin')
@@ -36,7 +35,7 @@ while (length--) {
 
 var logBold = 'font-weight: bold'
 var logItalic = 'font-style: italic'
-var logTitle = 'font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; color: #fff; font-size: 20px; padding: 15px 20px; background: #444; border-radius: 4px; line-height: 100px; text-shadow: 0 1px #000'
+var logTitle = 'font-family: Helvetica, Arial, sans-serif; color: #fff; font-size: 20px; padding: 15px 20px; background: #444; border-radius: 4px; line-height: 100px; text-shadow: 0 1px #000'
 
 LogStyle('%cBienvenue !', logTitle)
 LogStyle('%cVous voyez ce message ?%c Nous pouvons travailler ensemble !', logItalic, logBold)
@@ -99,39 +98,35 @@ var transEndEventNames = {
 var transEndEventName = transEndEventNames[Modernizr.prefixed('transition')]
 
 function toggleOverlay () {
-  if ($('.menu').hasClass('open')) {
-    $('.menu').removeClass('open')
-    $('.menu').addClass('close')
+  if ($('#menu').hasClass('open')) {
+    $('#menu').removeClass('open')
+    $('#menu').addClass('close')
     $('#nav-icon').toggleClass('open')
-    $('header').toggleClass('transparent')
+    $('header .logo').toggleClass('over-menu')
     var onEndTransitionFn = function (ev) {
       if (support.transitions) {
         if (ev.propertyName !== 'visibility') return
-        // BUG : jQuery doesn't return same event as vanilla addEventListener
-        // this.off(transEndEventName, onEndTransitionFn)
         this.removeEventListener(transEndEventName, onEndTransitionFn)
       }
-      $('.menu').removeClass('close')
+      $('#menu').removeClass('close')
       enableScroll()
     }
     if (support.transitions) {
-      // BUG : jQuery doesn't return same event as vanilla addEventListener
-      // $('.menu').on(transEndEventName, onEndTransitionFn)
-      document.querySelector('div.menu').addEventListener(transEndEventName, onEndTransitionFn)
+      document.querySelector('div#menu').addEventListener(transEndEventName, onEndTransitionFn)
     } else {
       onEndTransitionFn()
     }
-  } else if (!$('.menu').hasClass('close')) {
+  } else if (!$('#menu').hasClass('close')) {
     $('#nav-icon').toggleClass('open')
-    $('header').toggleClass('transparent')
-    $('.menu').addClass('open')
+    $('header .logo').toggleClass('over-menu')
+    $('#menu').addClass('open')
     disableScroll()
   }
 }
 
-$('#nav-icon, .menu a').on('click', toggleOverlay)
-$('#logo-banner').on('click', function (ev) {
-  if ($('.menu').hasClass('open')) {
+$('#nav-icon, #menu a').on('click', toggleOverlay)
+$('.to-home').on('click', function (ev) {
+  if ($('#menu').hasClass('open')) {
     toggleOverlay()
   }
 })
@@ -142,7 +137,7 @@ window.addEventListener('keydown', function (event) {
   }
   switch (event.key) {
     case 'Escape':
-      if ($('.menu').hasClass('open')) {
+      if ($('#menu').hasClass('open')) {
         toggleOverlay()
       }
       break
@@ -156,15 +151,44 @@ window.addEventListener('keydown', function (event) {
 // logo animation
 
 var updateInterval = 1351
+var logoSize = 200
+var logoSides = 40
+var logoTween
+
+function generate (random, rad) {
+  var radius = (typeof rad !== 'undefined') ? rad : 100
+  return 'M -5000 -5000 h 10000 v 10000 h -10000 v -10000 Z  M ' +
+    Array.apply(null, { length: logoSides }).map(function (obj, index) {
+      var point = generatePoint(random, logoSides - index, radius)
+      return point.x + ' ' + point.y
+    }).join(' L ') +
+    ' Z'
+}
+
+function generatePoint (random, index, radius) {
+  var logoRadius = radius
+  var minRadius = radius * 0.9
+  var x = 0
+  var y = -logoRadius * 0.9
+  if (random) {
+    y = Math.ceil(minRadius + Math.random() * (logoRadius - minRadius))
+  }
+  var angle = Math.PI * 2 / logoSides * index
+  var cos = Math.cos(angle)
+  var sin = Math.sin(angle)
+  var tx = Math.floor(x * cos - y * sin + logoSize / 2)
+  var ty = Math.floor(x * sin + y * cos + logoSize / 2)
+  return { x: tx, y: ty }
+}
 
 function flickLogo () {
-  TweenMax.to('.polylogo', updateInterval / 1000, { attr: { d: generatePath.generate(true) }, onComplete: flickLogo })
+  logoTween = TweenMax.to('.polylogo', updateInterval / 1000, { attr: { d: generate(true) }, onComplete: flickLogo })
 }
 
 flickLogo()
 
 // -----------------------------------------------------------------------------
-// Network
+// Social Networks
 
 var $networkButtons = $('.network-button')
 var $toggleButton = $('.network-toggle-button')
@@ -257,9 +281,35 @@ function closeShareMenu () {
 
 function toggleShareMenu () {
   menuOpen = !menuOpen
-
   menuOpen ? openShareMenu() : closeShareMenu()
 }
+
 $toggleButton.on('mousedown', function () {
   toggleShareMenu()
 })
+
+// -----------------------------------------------------------------------------
+// Setters
+
+function setUpdateInterval (ui) {
+  updateInterval = ui
+}
+
+function setLogoSides (ls) {
+  logoSides = ls
+}
+
+function killLogoTween () {
+  logoTween.kill()
+}
+
+window[config.spAppName] = Object.assign(
+  {common: {
+    killLogoTween: killLogoTween,
+    setUpdateInterval: setUpdateInterval,
+    setLogoSides: setLogoSides,
+    generate: generate,
+    flickLogo: flickLogo
+  }},
+  window[config.spAppName]
+)

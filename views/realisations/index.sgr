@@ -1,4 +1,5 @@
 extends(src="../layout.sgr")
 
   block(name="content")
-    h2 Réalisation
+    .narrow
+      h1 Réalisation

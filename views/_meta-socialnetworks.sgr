@@ -1,0 +1,86 @@
+meta(name="author" content="liit.fr")
+link(rel="author" href="/humans.txt")
+meta(name="copyright" content="Tous droits réservés - LIIT")
+
+meta(name="DC.title" content="Invenieur Informatifien |&nbsp;LIIT")
+meta(name="geo.region" content="FR-69")
+meta(name="geo.placename" content="Caluire-et-Cuire")
+meta(name="geo.position" content="45.8;4.8")
+meta(name="ICBM" content="45.8, 4.8")
+
+meta(property="og:type" content="business.business")
+meta(property="og:title" content="LIIT, invenieur informatifien")
+meta(property="og:url" content="https://liit.fr")
+meta(property="og:image" content="https://liit.fr/img/facebook-card.png")
+meta(property="og:description" content="Freelance. Full stack: Web, Apps, Data")
+meta(property="og:locale:locale" content="fr_FR")
+meta(property="og:image:type" content="image/png")
+meta(property="og:image:width" content="1200")
+meta(property="og:image:height" content="631")
+meta(property="og:image:alt" content="LIIT, invenieur informatifien")
+
+meta(property="business:contact_data:street_address" content="rue de Margnolles")
+meta(property="business:contact_data:locality" content="Caluire-et-Cuire")
+meta(property="business:contact_data:region" content="Auvergne Rhône-Alpes")
+meta(property="business:contact_data:postal_code" content="69300")
+meta(property="business:contact_data:country_name" content="France")
+meta(property="business:contact_data:website" content="https://liit.fr")
+meta(property="place:location:latitude" content="45.8")
+meta(property="place:location:longitude" content="4.8")
+
+meta(property="business:hours:day" content="monday")
+meta(property="business:hours:start" content="08:00")
+meta(property="business:hours:end" content="19:00")
+meta(property="business:hours:day" content="tuesday")
+meta(property="business:hours:start" content="08:00")
+meta(property="business:hours:end" content="19:00")
+meta(property="business:hours:day" content="wednesday")
+meta(property="business:hours:start" content="08:00")
+meta(property="business:hours:end" content="19:00")
+meta(property="business:hours:day" content="thursday")
+meta(property="business:hours:start" content="08:00")
+meta(property="business:hours:end" content="19:00")
+meta(property="business:hours:day" content="friday")
+meta(property="business:hours:start" content="08:00")
+meta(property="business:hours:end" content="19:00")
+
+meta(name="twitter:card" content="summary_large_image")
+meta(name="twitter:site" content="@liitfr")
+meta(name="twitter:creator" content="@liitfr")
+meta(name="twitter:title" content="LIIT, invenieur informatifien")
+meta(name="twitter:description" content="Freelance. Full stack: Web, Apps, Data")
+meta(name="twitter:url" content="https://liit.fr")
+meta(name="twitter:image" content="https://liit.fr/img/twitter-large-card.png")
+meta(name="twitter:image:alt" content="LIIT, invenieur informatifien")
+
+script(type="application/ld+json").
+  {
+      "@context": "http://schema.org",
+      "@type": "ProfessionalService",
+      "additionalType": "http://www.productontology.org/id/Software_development",
+      "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Caluire-et-Cuire",
+          "addressRegion": "FR-69",
+          "postalCode":"69300"
+       },
+      "description": "Freelance. Full stack: Web, Apps, Data",
+      "name": "LIIT",
+      "openingHours": "Mo,Tu,We,Th,Fr 08:00-19:00",
+      "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "45.8",
+          "longitude": "4.8"
+      },
+      "sameAs" : [
+          "https://twitter.com/liitfr",
+          "https://plus.google.com/100394573647163560665"
+      ],
+      "logo": "http://www.metamorphose.garden/img/logo.png",
+      "isicV4": "6201",
+      "hasMap": "https://goo.gl/maps/j6EJCke2UV82",
+      "founder": "Mathias Hoffmann",
+      "foundingDate": "2017-01-01",
+      "legalName": "LIIT",
+      "url": "https://liit.fr"
+  }

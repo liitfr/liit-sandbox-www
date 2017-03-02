@@ -97,7 +97,7 @@ gulp.task('generate-deploy-folder', ['compile-spike-project'], () => {
 // hash all images and js files that aren't common.js
 // Hash them first since they do not depend on any other asset.
 // Css files will be hashed in next step.
-// Common.js will be hashed in last step. It needs particular attention because it
+// common.js will be hashed in last step. It needs particular attention because it
 // contains templates (and therefore refers to css, img, and js)
 gulp.task('assets-revision-step-1', ['generate-deploy-folder'], () => {
   return gulp.src([

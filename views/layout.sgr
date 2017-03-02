@@ -23,127 +23,44 @@ html.no-js(lang="fr")
     meta(name="msapplication-config" content="/img/favicons/browserconfig.xml")
     meta(name="theme-color" content="#2b5797")
 
-    meta(name="author" content="liit.fr")
-    link(rel="author" href="/humans.txt")
-    meta(name="copyright" content="Tous droits réservés - LIIT")
-
-    meta(name="DC.title" content="Invenieur Informatifien |&nbsp;LIIT")
-    meta(name="geo.region" content="FR-69")
-    meta(name="geo.placename" content="Caluire-et-Cuire")
-    meta(name="geo.position" content="45.8;4.8")
-    meta(name="ICBM" content="45.8, 4.8")
-
-    meta(property="og:type" content="business.business")
-    meta(property="og:title" content="LIIT, invenieur informatifien")
-    meta(property="og:url" content="https://liit.fr")
-    meta(property="og:image" content="https://liit.fr/img/facebook-card.png")
-    meta(property="og:description" content="Freelance. Full stack: Web, Apps, Data")
-    meta(property="og:locale:locale" content="fr_FR")
-    meta(property="og:image:type" content="image/png")
-    meta(property="og:image:width" content="1200")
-    meta(property="og:image:height" content="631")
-    meta(property="og:image:alt" content="LIIT, invenieur informatifien")
-
-    meta(property="business:contact_data:street_address" content="rue de Margnolles")
-    meta(property="business:contact_data:locality" content="Caluire-et-Cuire")
-    meta(property="business:contact_data:region" content="Auvergne Rhône-Alpes")
-    meta(property="business:contact_data:postal_code" content="69300")
-    meta(property="business:contact_data:country_name" content="France")
-    meta(property="business:contact_data:website" content="https://liit.fr")
-    meta(property="place:location:latitude" content="45.8")
-    meta(property="place:location:longitude" content="4.8")
-
-    meta(property="business:hours:day" content="monday")
-    meta(property="business:hours:start" content="08:00")
-    meta(property="business:hours:end" content="19:00")
-    meta(property="business:hours:day" content="tuesday")
-    meta(property="business:hours:start" content="08:00")
-    meta(property="business:hours:end" content="19:00")
-    meta(property="business:hours:day" content="wednesday")
-    meta(property="business:hours:start" content="08:00")
-    meta(property="business:hours:end" content="19:00")
-    meta(property="business:hours:day" content="thursday")
-    meta(property="business:hours:start" content="08:00")
-    meta(property="business:hours:end" content="19:00")
-    meta(property="business:hours:day" content="friday")
-    meta(property="business:hours:start" content="08:00")
-    meta(property="business:hours:end" content="19:00")
-
-    meta(name="twitter:card" content="summary_large_image")
-    meta(name="twitter:site" content="@liitfr")
-    meta(name="twitter:creator" content="@liitfr")
-    meta(name="twitter:title" content="LIIT, invenieur informatifien")
-    meta(name="twitter:description" content="Freelance. Full stack: Web, Apps, Data")
-    meta(name="twitter:url" content="https://liit.fr")
-    meta(name="twitter:image" content="https://liit.fr/img/twitter-large-card.png")
-    meta(name="twitter:image:alt" content="LIIT, invenieur informatifien")
-
-    script(type="application/ld+json").
-      {
-          "@context": "http://schema.org",
-          "@type": "ProfessionalService",
-          "additionalType": "http://www.productontology.org/id/Software_development",
-          "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Caluire-et-Cuire",
-              "addressRegion": "FR-69",
-              "postalCode":"69300"
-           },
-          "description": "Freelance. Full stack: Web, Apps, Data",
-          "name": "LIIT",
-          "openingHours": "Mo,Tu,We,Th,Fr 08:00-19:00",
-          "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": "45.8",
-              "longitude": "4.8"
-          },
-          "sameAs" : [
-              "https://twitter.com/liitfr",
-              "https://plus.google.com/100394573647163560665"
-          ],
-          "logo": "http://www.metamorphose.garden/img/logo.png",
-          "isicV4": "6201",
-          "hasMap": "https://goo.gl/maps/j6EJCke2UV82",
-          "founder": "Mathias Hoffmann",
-          "foundingDate": "2017-01-01",
-          "legalName": "LIIT",
-          "url": "https://liit.fr"
-      }
-
     block(name="stylesheets")
       link(rel="stylesheet" href="/css/bundle.css")
-
-    block(name="js-head")
-      script(src="/vendor/modernizr/modernizr-3.3.1.min.js")
 
   body(role="document" id="{{ pageId }}")
 
     // [if lt IE 9]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 
-    .trigger#trigger-1
-    .trigger#trigger-2
-
     header
-      .centered
-        a(href="/")
-          svg.logo#logo-banner(viewbox="0 0 200 200")
-            path.polylogo(d="M 100 200 L 114 191 L 129 191 L 144 186 L 154 174 L 165 165 L 178 157 L 189 145 L 189 129 L 197 115 L 193 99 L 198 84 L 191 70 L 183 57 L 176 44 L 168 31 L 153 26 L 142 17 L 129 8 L 115 2 L 99 0 L 85 6 L 69 5 L 55 13 L 42 20 L 35 35 L 23 44 L 15 56 L 4 69 L 2 84 L 8 100 L 8 114 L 4 130 L 13 144 L 23 155 L 32 167 L 45 175 L 55 186 L 70 189 L 85 189 Z")
-            text(x="50%" y="50%" transform="translate(-5,5)")
+      .logo
+        a.to-home(href="/")
+          svg(viewbox="0 0 200 200")
+            path.background(d="M 1 1 h 198 v 198 h -198 v -198 Z")
+            text.brand(x="50%" y="50%" transform="translate(-5,5)")
               tspan L
-              tspan iit
-        #nav-icon
-          span
-          span
-          span
-          span
+            path.polylogo(d="M -5000 -5000 h 10000 v 10000 h -10000 v -10000 Z M 100 200 L 114 191 L 129 191 L 144 186 L 154 174 L 165 165 L 178 157 L 189 145 L 189 129 L 197 115 L 193 99 L 198 84 L 191 70 L 183 57 L 176 44 L 168 31 L 153 26 L 142 17 L 129 8 L 115 2 L 99 0 L 85 6 L 69 5 L 55 13 L 42 20 L 35 35 L 23 44 L 15 56 L 4 69 L 2 84 L 8 100 L 8 114 L 4 130 L 13 144 L 23 155 L 32 167 L 45 175 L 55 186 L 70 189 L 85 189 Z")
+      #nav-icon
+        span
+        span
+        span
+        span
+      #menu
+        nav
+          ul
+            li: a(href="/") Accueil
+            li: a(href="/web-apps-data") Services
+            li: a(href="/realisations/") Réalisations
+            li: a(href="/freelance-fullstack-lyon") Technologies
+            li: a(href="/blog") Articles
+            li: a(href="/bookmarks") Lectures
+            li: a(href="/contacter-developpeur") Contact
         nav.network
           button.network-toggle-button(aria-label="Afficher les liens exterieurs")
           ul.network-items
             li.network-item
-              a.network-button#to-mail(href="mailto:mathias@liit.fr" rel="noopener" target="_blank" aria-label="Ouvrir votre outil de messagerie pour m'écrire un message")
+              a.network-button#to-mail(href="mailto:hello@liit.fr" rel="noopener" target="_blank" aria-label="Ouvrir votre outil de messagerie pour m'écrire un message")
                 span Mail
             li.network-item
-              a.network-button#to-twitter(href="https://twitter.com/" rel="noopener" target="_blank" aria-label="Consulter ma page Twitter")
+              a.network-button#to-twitter(href="https://twitter.com/liitfr" rel="noopener" target="_blank" aria-label="Consulter ma page Twitter")
                 span Twitter
             li.network-item
               a.network-button#to-github(href="https://github.com/liitfr" rel="noopener" target="_blank" aria-label="Consulter mon repository Github")
@@ -156,19 +73,25 @@ html.no-js(lang="fr")
       block(name="content")
 
     footer
-
-    .menu
-      nav
-        ul
-          li: a(href="/") Accueil
-          li: a(href="/web-apps-data") Services
-          li: a(href="/realisations/") Réalisations
-          li: a(href="/freelance-fullstack-lyon") Technologies
-          li: a(href="/blog") Articles
-          li: a(href="/bookmarks") Lectures
-          li: a(href="/contacter-developpeur") Contact
+      .narrow
+        div
+          h4 Services en ingénierie informatique
+          ul
+            li Création de sites web performants et adaptés aux mobiles
+            li Développement d'applications fonctionnelles et ergonomiques
+            li Traitement des données et Reporting
+        div
+          h4 LIIT
+          ul
+            li hello@liit.fr
+            li 0033662467082
+            li 32 rue de Margnolles
+            li 69300, Caluire-et-Cuire
+            li France
+            li SIRET: 81425984200015
 
     block(name="js-body")
+      script(src="/vendor/modernizr/modernizr-3.3.1.min.js")
       script(src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous")
       script.
         window.jQuery || document.write('<script src="/vendor/jquery/jquery-3.1.1.min.js"><\/script>')

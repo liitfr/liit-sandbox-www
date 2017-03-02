@@ -8,38 +8,39 @@ extends(src="../layout.sgr")
     meta(name="robots" content="index, follow")
 
   block(name="content")
-    h2 {{ item.fields.title }}
-    p {{ item.fields.dateLabel }}
-    if(condition="item.fields.readingTime")
-      p Temps de lecture : {{ item.fields.readingTime }} {{ item.fields.readingTime > 1 ? "minutes" : "minute" }}
-    p
-      | Publié dans {{ item.fields.categories.length > 1 ? "les catégories" : "la catégorie" }} :
-      each(loop="category, index of item.fields.categories")
-        | {{ index > 0 ? ", " : "" }} {{ category.fields.name }}
-    if(condition="item.fields.tags")
+    .narrow
+      h1 {{ item.fields.title }}
+      p {{ item.fields.dateLabel }}
+      if(condition="item.fields.readingTime")
+        p Temps de lecture : {{ item.fields.readingTime }} {{ item.fields.readingTime > 1 ? "minutes" : "minute" }}
       p
-        | {{ item.fields.tags.length > 1 ? "Tags" : "Tag" }} :
-        each(loop="tag, index of item.fields.tags")
-          | {{ index > 0 ? ", " : "" }} {{ tag.fields.tagName }}
-    p Rédigé par {{ item.fields.author.fields.firstName }}
-    p {{{ item.fields.content }}}
-    if(condition="item.fields.relatedBlogPosts")
-      p À lire également :
-      ul
-        each(loop="blogpost, index of item.fields.relatedBlogPosts")
-          li {{ blogpost.fields.title }}
-    if(condition="item.fields.relatedWorks")
-      p Découvrez {{ item.fields.relatedWorks.length > 1 ? "ces réalisations" : "cette réalisation" }} :
-      ul
-        each(loop="work, index of item.fields.relatedWorks")
-          li {{ work.fields.title }}
-    if(condition="item.fields.relatedDiscoveries")
-      p Cet article fait référence à {{ item.fields.relatedDiscoveries.length > 1 ? "ces découvertes" : "cette découverte" }} :
-      ul
-        each(loop="discovery, index of item.fields.relatedDiscoveries")
-          li {{ discovery.fields.title }}
+        | Publié dans {{ item.fields.categories.length > 1 ? "les catégories" : "la catégorie" }} :
+        each(loop="category, index of item.fields.categories")
+          | {{ index > 0 ? ", " : "" }} {{ category.fields.name }}
+      if(condition="item.fields.tags")
+        p
+          | {{ item.fields.tags.length > 1 ? "Tags" : "Tag" }} :
+          each(loop="tag, index of item.fields.tags")
+            | {{ index > 0 ? ", " : "" }} {{ tag.fields.tagName }}
+      p Rédigé par {{ item.fields.author.fields.firstName }}
+      p {{{ item.fields.content }}}
+      if(condition="item.fields.relatedBlogPosts")
+        p À lire également :
+        ul
+          each(loop="blogpost, index of item.fields.relatedBlogPosts")
+            li {{ blogpost.fields.title }}
+      if(condition="item.fields.relatedWorks")
+        p Découvrez {{ item.fields.relatedWorks.length > 1 ? "ces réalisations" : "cette réalisation" }} :
+        ul
+          each(loop="work, index of item.fields.relatedWorks")
+            li {{ work.fields.title }}
+      if(condition="item.fields.relatedDiscoveries")
+        p Cet article fait référence à {{ item.fields.relatedDiscoveries.length > 1 ? "ces découvertes" : "cette découverte" }} :
+        ul
+          each(loop="discovery, index of item.fields.relatedDiscoveries")
+            li {{ discovery.fields.title }}
 
-    #disqus_thread(data-disqus-identifier="{{ item.fields.id }}")
+      #disqus_thread(data-disqus-identifier="{{ item.fields.id }}")
 
   block(name="js-body" type="append")
     script(src="/js/blogpost.js" data-hot-reload="true" data-script-name="blogpost" data-function-name="onReload" defer)

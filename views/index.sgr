@@ -1,97 +1,47 @@
+block(name="meta" type="append")
+  include(src="_meta-socialnetworks.sgr")
+
 extends(src="layout.sgr")
   block(name="content")
-    .first.part#intro
-      #logo
-        svg.logo#logo-fat(viewbox="0 0 200 200")
-          pattern(id="transformedPattern" x="10" y="10" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(35)")
-            circle.particles(cx="2" cy="2" r="2")
-          circle#aura(cx="100" cy="100" r="200")
-          path#background(d="M -3000 -3000 h 15000 v 15000 h -15000 v -15000 Z")
-          path.polylogo(d="M 100 200 L 114 191 L 129 191 L 144 186 L 154 174 L 165 165 L 178 157 L 189 145 L 189 129 L 197 115 L 193 99 L 198 84 L 191 70 L 183 57 L 176 44 L 168 31 L 153 26 L 142 17 L 129 8 L 115 2 L 99 0 L 85 6 L 69 5 L 55 13 L 42 20 L 35 35 L 23 44 L 15 56 L 4 69 L 2 84 L 8 100 L 8 114 L 4 130 L 13 144 L 23 155 L 32 167 L 45 175 L 55 186 L 70 189 L 85 189 Z")
-          text.show(x="50%" y="50%" transform="translate(-5,5)")
-            tspan L
-            tspan iit
-        div
-          // h2 Ensemble, développons nos qualités
-      #headline
-        div
-          h1#title
-            span Full&nbsp;
-            span Stack :&nbsp;
-            span Web&nbsp;
-            span Apps &&nbsp;
-            span Data
-          p#signature
-            span Mathias HOFFMANN
-            span (+33) 6.62.46.70.82
-    .second.part
-      section#techno
-        // h2 Vous êtes professionnel de l'informatique
-        // h2 Vous avez besoin d'outils
-        div
-          img.fellow(src="/img/technical.svg" alt="Profil technique" aria-label="Le dessin d'un personnage en habits casual pour représenter un professionnel au profil technique")
-          p Vous êtes un professionnel de l'informatique et souhaitez
-          a(href="/freelance-fullstack-lyon" aria-label="Découvrez mon profil technique, mes services en tant que freelance et comment je pourrais intégrer votre projet") Découvrir
-      section#services
-        // h2 Vous avez besoin d'outils
-        div
-          img.fellow(src="/img/business.svg" alt="Profil fonctionnel" aria-label="Le dessin d'un personnage en costume pour représenter un professionnel utilisateur de solutions informatiques")
-          p Vous êtes un utilisateur et vous êtes à la recherche d'un prestataire pour la réalisation d'un site, d'une application, ou pour le traitement de vos données ? Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          a(href="/web-apps-data" aria-label="Découvrez mon profil fonctionnel, mes services en tant que prestataire et comment je peux vous aider à la réalisation de votre projet") En savoir +
-    .third.part
-      section#whoami
-        // #photo
-        #map
-      section#contact
-        // p
-        //   strong
-        //     Ingénieur freelance à LYON
-        //   | (+33) 6.62.46.70.82 ou mathias@liit.fr
+    #hero
+      .logo
+        a.to-home.anim-enabled(href="/")
+          svg(viewbox="0 0 200 200")
+            path.background(d="M 1 1 h 198 v 198 h -198 v -198 Z")
+            text.brand(x="50%" y="50%" transform="translate(-5,5)")
+              tspan L
+              tspan iit
+            text.headlines
+              tspan(x="30px" dy="55px") Full
+              tspan(x="30px" dy="0.75em") Stack
+              tspan(x="30px" dy="0.75em") Web
+              tspan(x="30px" dy="0.75em") Apps &
+              tspan(x="30px" dy="0.75em") Data
+            path.polylogo(d="M -5000 -5000 h 10000 v 10000 h -10000 v -10000 Z M 100 200 L 114 191 L 129 191 L 144 186 L 154 174 L 165 165 L 178 157 L 189 145 L 189 129 L 197 115 L 193 99 L 198 84 L 191 70 L 183 57 L 176 44 L 168 31 L 153 26 L 142 17 L 129 8 L 115 2 L 99 0 L 85 6 L 69 5 L 55 13 L 42 20 L 35 35 L 23 44 L 15 56 L 4 69 L 2 84 L 8 100 L 8 114 L 4 130 L 13 144 L 23 155 L 32 167 L 45 175 L 55 186 L 70 189 L 85 189 Z")
+    .narrow
+      h1 Qui je suis ?
+      i Le 24 février 2017
+      p Je m'appelle Mathias Hoffmann, j'ai 31 ans et je vie dans cette belle ville de Lyon avec mon amie Margaux et notre chienne Mina.
+      p Je suis ingénieur Miage-iste diplômé en informatique décisionnelle. À ce titre, j'ai travaillé de 2008 à 2015 en tant que consultant BI (Business Intelligence) en société de services, successivement pour Sopra Group puis pour Logica, devenues respectivement Sopra Steria et CGI. J'intervenais auprès de leurs clients principalement en qualité d'assistant à la maîtrise d'ouvrage ou en celle de maître d'œuvre.
+      p J'ai démissionné à deux reprises.
+      p La première fois, pour un voyage improbable à vélo en solitaire qui me mena de la côte atlantique française jusqu'en Inde en passant par la Route de la soie et l'Asie Centrale. J'y ai développé le goût de l'effort, l'amour des montagnes et des grands espaces, et la sensation de solitude et de vanité qu'ils nous confèrent. Je pratique l'alpinisme et l'escalade, et un jour découvrirai la voile.
+      p La deuxième fois, lorsque j'ai compris que je ne serais jamais dans mon élément dans ce type de société. Vouloir trouver son chemin n'est pas une entreprise simple et à l'issue certaine ...
+      p En 2015, voulant découvrir une autre vie, je suis devenu coursier à vélo à plein temps, pendant plus d'un an. C'est un métier superbe exercé par des personnes formidables. Mais c'est aussi un métier ingrat, punisseur, qui dicte la difficulté d'une vie ou l'acte rémunérateur est effectué avec son corps, devenu alors machine. Les watts et les joules. La fatigue.
+      p
+        | Aujourd'hui - en réalité depuis plusieurs mois - je travaille de nouveau en tant que
+        strong &nbsp;freelance Full Stack
+        | , animé par les plaisirs de créativité et de polyvalence offerts par les  architectures & langages de dernière génération.
+      p
+        | J'admire les personnes passionnées, qui font preuve d'un sens de l'aventure et d'un esprit d'engagement et d'entreprise. À mon humble niveau, je tâche de cultiver moi-même ces traits de caractères. Si vous êtes fait de ce bois,
+        strong &nbsp;j'adorerais travailler à vos côtés
+        | .
+      p Je peux vous accompagner dans la concrétisation de votre projet, du conseil jusqu'à la réalisation. Mon caractère me pousse à la probité : les solutions ou technologies que je vous proposerai seront toujours celles qui me paraitront les plus cohérentes pour répondre à vos objectifs tout en respectant vos contraintes.
+      .important
+        p En devenant indépendant, j'ai choisi :
+        ul
+          li de placer mes priorité sur la qualité des expériences professionnelles, les rencontres enrichissantes, et la collaboration d'individus motivés dans le cadre de projets innovants & humains
+          li de ne pas être sous le joug des contraintes commerciales
 
-        // h2 Me contacter
-        // form#theForm.simform(autocomplete="off")
-        //   .simform-inner
-        //     ol.questions
-				// 			li
-				// 				span
-        //           label(for="q1") What's your favorite movie?
-				// 				input#q1(name="q1" type="text")
-        //       li
-				// 				span
-        //           label(for="q2") Where do you live?
-				// 				input#q2(name="q2" type="text")
-        //       li
-				// 				span
-        //           label(for="q3") What time do you go to work?
-				// 				input#q3(name="q3" type="text")
-        //       li
-				// 				span
-        //           label(for="q4") How do you like your veggies?
-				// 				input#q4(name="q4" type="text")
-        //       li
-				// 				span
-        //           label(for="q5") What book inspires you?
-				// 				input#q5(name="q5" type="text")
-        //       li
-				// 				span
-        //           label(for="q6") What's your profession?
-				// 				input#q6(name="q6" type="text")
-				// 		button.submit(type="submit") Send answers
-				// 		.controls
-				// 			button.next
-				// 			.progress
-				// 			span.number
-				// 				span.number-current
-				// 				span.number-total
-				// 			span.error-message
-				// 	span.final-message
-    .fourfh.part
-      section#blog
-        h2 Derniers articles
-      section#read
-        h2 Dernières lectures
-
-  block(name="js-body" type="append")
-    script(src="/vendor/scrollmagic/ScrollMagic.min.js" defer)
-    script(src="/vendor/scrollmagic/plugins/animation.gsap.min.js" defer)
-    script(src="/js/home.js" data-hot-reload="true" data-script-name="home" data-function-name="onReload" defer)
+block(name="js-body" type="append")
+  script(src="/vendor/scrollmagic/ScrollMagicWithGSAP.min.js" defer)
+  script(src="/js/home.js" data-hot-reload="true" data-script-name="home" data-function-name="onReload" defer)

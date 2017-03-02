@@ -6,10 +6,11 @@ extends(src="layout.sgr")
     meta(name="robots" content="noindex, follow")
 
   block(name="content")
-    .message
-      p Maintenance
-      a(href="/") Retour à l'accueil
-    .waves
+    .narrow
+      .message
+        p Maintenance
+        a(href="/") Retour à l'accueil
+      .waves
 
   block(name="js-body" type="append")
     script(src="/js/waves.js" data-hot-reload="true" data-script-name="waves" data-function-name="onReload" defer)
