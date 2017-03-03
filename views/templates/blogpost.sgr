@@ -42,5 +42,5 @@ extends(src="../layout.sgr")
 
       #disqus_thread(data-disqus-identifier="{{ item.fields.id }}")
 
-  block(name="js-body" type="append")
+  block(name="js-body")
     script(src="/js/blogpost.js" data-hot-reload="true" data-script-name="blogpost" data-function-name="onReload" defer)

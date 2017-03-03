@@ -1,5 +1,6 @@
 require('dotenv').config({ silent: true })
 
+const critical = require('critical')
 const del = require('del')
 const exec = require('child_process').exec
 const ftp = require('vinyl-ftp')
@@ -50,12 +51,25 @@ gulp.task('compile-spike-project', ['dump-output-folders'], () => {
   return deferredCompile.promise
 })
 
+// Critical execution
+gulp.task('critical', ['compile-spike-project'], () => {
+  return critical.generate({
+    inline: true,
+    base: spikeOutputDir,
+    src: 'index.html',
+    dest: 'index.html',
+    width: 1300,
+    height: 900
+  })
+})
+
 // Create new deployment folder and take opportunity to :
 // - remove comments in js & css minified files
+// - remove unused css
 // - minify html files
 // - remove comments in htaccess
 // - htaccess and robots.txt : customize these files by overwriting .env variables
-gulp.task('generate-deploy-folder', ['compile-spike-project'], () => {
+gulp.task('generate-deploy-folder', ['critical'], () => {
   var cssFiles = $.filter('**/*.css', {restore: true})
   var htaccessFile = $.filter(file => minimatch(file.relative, '.htaccess', {dot: true}), {restore: true})
   var htmlFiles = $.filter(['**/*.{htm,html}'], {restore: true})
@@ -64,12 +78,13 @@ gulp.task('generate-deploy-folder', ['compile-spike-project'], () => {
   return gulp.src(spikeOutputDir + '/**/{*,.*}')
     .pipe(cssFiles)
     .pipe($.stripCssComments())
+    // .pipe($.uncss({html: ['**/*.{htm,html}'], ignore: ['.open']}))
     .pipe(cssFiles.restore)
     .pipe(jsFiles)
     .pipe($.stripComments())
     .pipe(jsFiles.restore)
     .pipe(htmlFiles)
-    .pipe($.htmlmin({collapseWhitespace: true}))
+    .pipe($.htmlmin({collapseWhitespace: true, minifyCSS: true, minifyJS: true}))
     .pipe(htmlFiles.restore)
     .pipe(htaccessFile)
     .pipe($.replace('__SP_403_PAGE__', process.env.SP_403_PAGE))
@@ -240,6 +255,7 @@ gulp.task('deploy-ftp-pages', ['deploy-ftp-assets'], () => {
 gulp.task('default', [
   'dump-output-folders',
   'compile-spike-project',
+  'critical',
   'generate-deploy-folder',
   'assets-revision-step-1',
   'assets-replace-step-1',

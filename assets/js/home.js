@@ -21,7 +21,10 @@ function scrollSupport () {
       })
     })
 
-  tweenMoveLogo = TweenMax.to('#hero .to-home', 2, {left: $('#home header .to-home').offset().left, ease: Power0.easeNone})
+  tweenMoveLogo = TweenMax.to('#hero .to-home', 2, {
+    left: $('#home .to-home').offset().left + ($('#home .to-home').width() / 2),
+    width: $('#home .to-home').width(), ease: Power0.easeNone
+  })
   tweenResizeHero = TweenMax.to('#hero', 2, {height: $('header').height(), ease: Power0.easeNone})
 
   scResizeHero = new ScrollMagic.Scene({
@@ -29,17 +32,13 @@ function scrollSupport () {
   })
     .setTween(tweenResizeHero)
     .addTo(smController)
-    .on('progress', function (ev) {
-      if(ev.progress === 0.5) {
-        console.log('mathias')
-      }
-    })
 
   scMoveLogo = new ScrollMagic.Scene({
     duration: $('#hero').height() - $('header').height()
   })
     .setTween(tweenMoveLogo)
     .addTo(smController)
+
 }
 
 scrollSupport()
@@ -77,23 +76,31 @@ hoverHero()
 // -----------------------------------------------------------------------------
 // ScrollTo Anim
 
-$('#home header .to-home').on('click', function (ev) {
-  ev.preventDefault()
-  smController.scrollTo(0)
-})
+function scrollToAnim () {
+  $('#hero .to-home, header .to-home').on('click', function (ev) {
+    if ($('#home').length) {
+      ev.preventDefault()
+      smController.scrollTo(0)
+    }
+  })
+}
+
+scrollToAnim()
 
 // -----------------------------------------------------------------------------
 // Window resize
 
 $(window).resize(function () {
-  tweenMoveLogo.kill()
-  $('#hero .to-home').removeAttr('style')
-  tweenMoveLogo = TweenMax.to('#hero .to-home', 2, {left: $('#home header .to-home').offset().left, ease: Power0.easeNone})
-  scMoveLogo.setTween(tweenMoveLogo)
-  tweenResizeHero.kill()
-  $('#hero').removeAttr('style')
-  tweenResizeHero = TweenMax.to('#hero', 2, {height: $('header').height(), ease: Power0.easeNone})
-  scResizeHero.setTween(tweenResizeHero)
+  if ($('#home').length) {
+    tweenMoveLogo.kill()
+    $('#hero .to-home').removeAttr('style')
+    tweenMoveLogo = TweenMax.to('#hero .to-home', 2, {left: $('#home header .to-home').offset().left, ease: Power0.easeNone})
+    scMoveLogo.setTween(tweenMoveLogo)
+    tweenResizeHero.kill()
+    $('#hero').removeAttr('style')
+    tweenResizeHero = TweenMax.to('#hero', 2, {height: $('header').height(), ease: Power0.easeNone})
+    scResizeHero.setTween(tweenResizeHero)
+  }
 })
 
 // -----------------------------------------------------------------------------
@@ -102,6 +109,7 @@ $(window).resize(function () {
 function onReload () {
   scrollSupport()
   hoverHero()
+  scrollToAnim()
 }
 
 window[config.spAppName] = Object.assign(

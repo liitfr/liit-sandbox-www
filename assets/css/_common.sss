@@ -12,6 +12,8 @@
   --page-padding: 15px
   --header-height: 100px
   --mobile-header-height: 70px
+  --footer-height: 220px
+  --mobile-footer-height: 370px
   --large-nbdor: calc(var(--base-nbdor) - 2 * var(--nbdor-4))
   --menu-color: rgba(52, 152, 219, 0.9)
 
@@ -28,45 +30,40 @@ body
   overflow-y: scroll
   background: #fff
   position: relative
-  padding-bottom: 300px
-
-html,
-body
   min-height: 100vh
   width: 100%
 
-footer
-  background: #e0e0e0
-  color: rgba(0, 0, 0, 0.54)
-  position: absolute
-  right: 0
-  bottom: 0
-  left: 0
-  z-index: 5
+/* -------------------------------------------------------------------------- */
+/* Logo                                                                       */
 
-  & h4
-    text-decoration: underline
+.to-home
+  text-decoration: none
+  display: inline-block
 
-  & .narrow div
-    lost-column: 1/2
+.logo svg
+  overflow: visible
+  height: 100%
+  width: auto
+  pointer-events: none
 
-    @media screen and (--m)
-      lost-column: 1/1
+  & .background
+    fill: #e74c3c
 
-    &:nth-child(1)
-      & ul
-        list-style-type: square
-        padding: 0 20px
+  & .polylogo
+    fill: #2c3e50
 
-    &:nth-child(2)
-      text-align: right
+  & .brand
+    font-family: 'breeze', sans-serif
+    fill: #ecf0f1
+    text-anchor: middle
+    dominant-baseline: middle
 
-      & ul
-        list-style-type: none
-        padding: 0
+    & tspan
+      text-anchor: middle
+      dominant-baseline: middle
 
-      @media screen and (--m)
-        text-align: left
+/* -------------------------------------------------------------------------- */
+/* Header                                                                     */
 
 header
   position: fixed
@@ -76,48 +73,28 @@ header
   height: var(--header-height)
   background: #2c3e50
   overflow: hidden
+  z-index: 1
 
   @media screen and (--m)
     height: var(--mobile-header-height)
-
-  /* ------------------------------------------------------------------------ */
-  /* Logo                                                                     */
 
   & .logo
     position: absolute
     z-index: 10
     top: calc((100% - var(--large-nbdor)) / 2)
-    left: calc((((100% - var(--page-width)) / 2) * 2 / 3) - (var(--header-height) * 0.8) / 2)
+    left: calc((100% - var(--page-width)) / 2 + 15px)
     height: var(--large-nbdor)
-    width: calc(var(--header-height) * 0.8)
+    width: auto
+
+    @media screen and (--m)
+      left: 15px
 
     & .to-home
-      display: inline-block
       height: 100%
       width: 100%
 
-      & svg
-        overflow: visible
-        height: 100%
-        width: 100%
-        pointer-events: none
-
-        & .background
-          fill: #e74c3c
-
-        & .polylogo
-          fill: #2c3e50
-
-        & .brand
-          font-family: 'breeze', sans-serif
-          fill: #ecf0f1
-          font-size: 6em
-          text-anchor: middle
-          dominant-baseline: middle
-
-          & tspan
-            text-anchor: middle
-            dominant-baseline: middle
+      & .brand
+        font-size: 6em
 
     &.over-menu
       & .to-home
@@ -135,12 +112,16 @@ header
   & #nav-icon
     position: absolute
     top: calc((var(--header-height) - 20px) / 2)
-    right: calc((((100% - var(--page-width)) / 2) * 2 / 3) - 12.5px)
+    right: calc((100% - var(--page-width)) / 2 + 15px)
     width: 25px
     height: 20px
     transition: 0.5s ease-in-out
     cursor: pointer
     z-index: 15
+
+    @media screen and (--m)
+      top: calc((var(--mobile-header-height) - 20px) / 2)
+      right: 15px
 
     &.open
       & span
@@ -182,74 +163,78 @@ header
       &:nth-child(4)
         top: 16px
 
-  /* ------------------------------------------------------------------------ */
-  /* Menu                                                                     */
+/* -------------------------------------------------------------------------- */
+/* Menu                                                                       */
 
-  & #menu
-    position: fixed
-    width: 100%
+#menu
+  position: fixed
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  background: var(--menu-color)
+  visibility: hidden
+  transform: translateY(-100%)
+  transition: transform 0.4s ease-in-out, visibility 0s 0.4s
+
+  &.open
+    visibility: visible
+    transform: translateY(0%)
+    transition: transform 0.4s ease-in-out
+
+  & nav
+    text-align: center
+    position: relative
+    top: 50%
+    height: 60%
+    transform: translateY(-50%)
+
+    @media screen and (max-height: 30.5em)
+      height: 70%
+      font-size: 34px
+
+  & ul
+    list-style: none
+    padding: 0
+    margin: 0 auto
+    display: inline-block
     height: 100%
-    top: 0
-    left: 0
-    background: var(--menu-color)
-    visibility: hidden
-    transform: translateY(-100%)
-    transition: transform 0.4s ease-in-out, visibility 0s 0.4s
+    position: relative
 
-    &.open
-      visibility: visible
-      transform: translateY(0%)
-      transition: transform 0.4s ease-in-out
-
-    & nav
-      text-align: center
-      position: relative
-      top: 50%
-      height: 60%
-      transform: translateY(-50%)
+    & li
+      display: block
+      height: calc(100% / 7)
+      min-height: 54px
+      backface-visibility: hidden
 
       @media screen and (max-height: 30.5em)
-        height: 70%
-        font-size: 34px
+        min-height: 34px
 
-    & ul
-      list-style: none
-      padding: 0
-      margin: 0 auto
-      display: inline-block
-      height: 100%
-      position: relative
-
-      & li
+      & a
+        font-size: 54px
+        font-weight: 300
         display: block
-        height: calc(100% / 7)
-        min-height: 54px
-        backface-visibility: hidden
+        color: #fff
+        transition: color 0.2s
 
-        @media screen and (max-height: 30.5em)
-          min-height: 34px
-
-        & a
-          font-size: 54px
-          font-weight: 300
-          display: block
-          color: #fff
-          transition: color 0.2s
-
-          &:hover,
-          &:focus
-            color: #e3fcb1
+        &:hover,
+        &:focus
+          color: #e3fcb1
 
 /* -------------------------------------------------------------------------- */
 /* Main                                                                       */
 
 main
-  margin-top: var(--header-height)
-  margin-bottom: 3em
+  padding-top: var(--header-height)
+  padding-bottom: 3em
   width: 100%
+  min-height: calc(100vh - var(--footer-height))
   font-size: responsive 16px 21px
   font-family: 'Amiko', sans-serif
   color: #2c3e50
+
+  @media screen and (--m)
+    min-height: calc(100vh - var(--mobile-footer-height))
 
 .narrow
   padding: 0 var(--page-padding)
@@ -263,3 +248,39 @@ h1
   padding: 0.5em 1em
   background: #3498db
   color: #fff
+
+/* -------------------------------------------------------------------------- */
+/* Footer                                                                     */
+
+footer
+  background: #e0e0e0
+  color: rgba(0, 0, 0, 0.54)
+  width: 100%
+  height: var(--footer-height)
+
+  @media screen and (--m)
+    height: var(--mobile-footer-height)
+
+  & h4
+    text-decoration: underline
+
+  & .narrow div
+    lost-column: 1/2
+
+    @media screen and (--m)
+      lost-column: 1/1
+
+    &:nth-child(1)
+      & ul
+        list-style-type: square
+        padding: 0 20px
+
+    &:nth-child(2)
+      text-align: right
+
+      & ul
+        list-style-type: none
+        padding: 0
+
+      @media screen and (--m)
+        text-align: left

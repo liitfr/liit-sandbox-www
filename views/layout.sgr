@@ -43,31 +43,6 @@ html.no-js(lang="fr")
         span
         span
         span
-      #menu
-        nav
-          ul
-            li: a(href="/") Accueil
-            li: a(href="/web-apps-data") Services
-            li: a(href="/realisations/") Réalisations
-            li: a(href="/freelance-fullstack-lyon") Technologies
-            li: a(href="/blog") Articles
-            li: a(href="/bookmarks") Lectures
-            li: a(href="/contacter-developpeur") Contact
-        nav.network
-          button.network-toggle-button(aria-label="Afficher les liens exterieurs")
-          ul.network-items
-            li.network-item
-              a.network-button#to-mail(href="mailto:hello@liit.fr" rel="noopener" target="_blank" aria-label="Ouvrir votre outil de messagerie pour m'écrire un message")
-                span Mail
-            li.network-item
-              a.network-button#to-twitter(href="https://twitter.com/liitfr" rel="noopener" target="_blank" aria-label="Consulter ma page Twitter")
-                span Twitter
-            li.network-item
-              a.network-button#to-github(href="https://github.com/liitfr" rel="noopener" target="_blank" aria-label="Consulter mon repository Github")
-                span Github
-            li.network-item
-              a.network-button#to-dribbble(href="https://dribbble.com/liit" rel="noopener" target="_blank" aria-label="Consulter ma page Dribbble")
-                span Dribble
 
     main(role="main")
       block(name="content")
@@ -90,13 +65,37 @@ html.no-js(lang="fr")
             li France
             li SIRET: 81425984200015
 
+    #menu
+      nav
+        ul
+          li: a(href="/") Accueil
+          li: a(href="/web-apps-data") Services
+          li: a(href="/realisations/") Réalisations
+          li: a(href="/freelance-fullstack-lyon") Technologies
+          li: a(href="/blog") Articles
+          li: a(href="/bookmarks") Lectures
+          li: a(href="/contacter-developpeur") Contact
+      nav.network
+        button.network-toggle-button(aria-label="Afficher les liens exterieurs")
+        ul.network-items
+          li.network-item
+            a.network-button#to-mail(href="mailto:hello@liit.fr" rel="noopener" target="_blank" aria-label="Ouvrir votre outil de messagerie pour m'écrire un message")
+              span Mail
+          li.network-item
+            a.network-button#to-twitter(href="https://twitter.com/liitfr" rel="noopener" target="_blank" aria-label="Consulter ma page Twitter")
+              span Twitter
+          li.network-item
+            a.network-button#to-github(href="https://github.com/liitfr" rel="noopener" target="_blank" aria-label="Consulter mon repository Github")
+              span Github
+          li.network-item
+            a.network-button#to-dribbble(href="https://dribbble.com/liit" rel="noopener" target="_blank" aria-label="Consulter ma page Dribbble")
+              span Dribble
+
+    script(src="/vendor/modernizr/modernizr-3.3.1.min.js" defer)
+    script(src="/vendor/jquery/jquery-3.1.1.min.js" defer)
+    script(src="/js/common.js" defer)
     block(name="js-body")
-      script(src="/vendor/modernizr/modernizr-3.3.1.min.js")
-      script(src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous")
-      script.
-        window.jQuery || document.write('<script src="/vendor/jquery/jquery-3.1.1.min.js"><\/script>')
-      script(src="/js/common.js" defer)
-      script.
-        window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-        ga('create','{{ config.googleSiteId }}','auto');ga('send','pageview')
-      script(src="https://www.google-analytics.com/analytics.js" async defer)
+    script.
+      window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+      ga('create','{{ config.googleSiteId }}','auto');ga('send','pageview')
+    script(src="https://www.google-analytics.com/analytics.js" async defer)

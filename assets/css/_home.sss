@@ -1,6 +1,5 @@
 #home header
   background: transparent
-  z-index: 1
 
 #home header .to-home
   visibility: hidden
@@ -10,8 +9,6 @@
   top: 0
   left: 0
   width: 100%
-  /*margin-bottom: 25px*/
-  /*height: var(--large-nbdor)*/
   height: 70.82vh
   background: #2c3e50
   overflow: hidden
@@ -22,49 +19,28 @@
     lost-align: middle-center
 
     & .to-home
-      display: inline-block
       height: var(--large-nbdor)
+      width: auto
 
-      & svg
-        overflow: visible
-        height: 100%
-        width: auto
-        pointer-events: none
+      & .brand
+        font-size: 5em
 
-        & .background
-          fill: #e74c3c
+        & tspan:nth-child(2)
+          display: none
 
-        & .polylogo
-          fill: #2c3e50
+      & .headlines
+        font-family: 'Roboto', sans-serif
+        text-transform: uppercase
+        font-size: 2em
+        visibility: hidden
+        fill: #ecf0f1
 
-        & .brand
-          font-family: 'breeze', sans-serif
-          fill: #ecf0f1
-          font-size: 5em
-          text-anchor: middle
-          dominant-baseline: middle
-
-          & tspan
-            text-anchor: middle
-            dominant-baseline: middle
-
-            &:nth-child(2)
-              display: none
-
-        & .headlines
-          font-family: 'Roboto', sans-serif
-          text-transform: uppercase
-          font-size: 2em
-          visibility: hidden
-          fill: #ecf0f1
-
-          & tspan
-            display: block
+        & tspan
+          display: block
 
       &.anim-enabled
         & .brand tspan:nth-child(2)
           display: initial
 
 #home main
-  /*margin-top: var(--large-nbdor)*/
-  margin-top: calc(70.82vh + 20px)
+  padding-top: calc(70.82vh + 20px)

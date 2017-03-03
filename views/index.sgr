@@ -1,7 +1,8 @@
-block(name="meta" type="append")
-  include(src="_meta-socialnetworks.sgr")
-
 extends(src="layout.sgr")
+
+  block(name="meta" type="append")
+    include(src="_meta-socialnetworks.sgr")
+    
   block(name="content")
     #hero
       .logo
@@ -42,6 +43,6 @@ extends(src="layout.sgr")
           li de placer mes priorité sur la qualité des expériences professionnelles, les rencontres enrichissantes, et la collaboration d'individus motivés dans le cadre de projets innovants & humains
           li de ne pas être sous le joug des contraintes commerciales
 
-block(name="js-body" type="append")
-  script(src="/vendor/scrollmagic/ScrollMagicWithGSAP.min.js" defer)
-  script(src="/js/home.js" data-hot-reload="true" data-script-name="home" data-function-name="onReload" defer)
+  block(name="js-body")
+    script(src="/vendor/scrollmagic/ScrollMagicWithGSAP.min.js" defer)
+    script(src="/js/home.js" data-hot-reload="true" data-script-name="home" data-function-name="onReload" defer)

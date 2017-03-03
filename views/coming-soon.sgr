@@ -12,5 +12,5 @@ extends(src="layout.sgr")
         a(href="/") Retour à l'accueil
       .waves
 
-  block(name="js-body" type="append")
+  block(name="js-body")
     script(src="/js/waves.js" data-hot-reload="true" data-script-name="waves" data-function-name="onReload" defer)
