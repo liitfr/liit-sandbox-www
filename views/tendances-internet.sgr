@@ -3,10 +3,10 @@ extends(src="layout.sgr")
   block(name="meta")
     title Websites | LIIT
     meta(name="description" content="Création de sites web modernes. Interfaces et expériences utilisateur qui tapent en plein dans le mille")
-    meta(name="robots" content="index, follow")
+    meta(name="robots" content="noindex, follow")
 
   block(name="content")
-    .narrow
+    .centered
       p Connaitre les tendances du web, c'est avant tout se donner les moyens de prendre les décisions les plus cohérentes
       .isolayer
         ul.grid

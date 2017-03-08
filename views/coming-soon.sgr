@@ -6,7 +6,7 @@ extends(src="layout.sgr")
     meta(name="robots" content="noindex, follow")
 
   block(name="content")
-    .narrow
+    .centered
       .message
         p Coming-soon
         a(href="/") Retour à l'accueil

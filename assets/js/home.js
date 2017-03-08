@@ -1,81 +1,33 @@
-/* global ScrollMagic, TweenMax, Cubic, $, Power0, config, Back */
+/* global TweenMax, $, config, Back */
 
 // -----------------------------------------------------------------------------
-// Scrolling Effect
+// Hero Animation
 
-var tweenMoveLogo
-var tweenResizeHero
-var scMoveLogo
-var scResizeHero
-var scSwitchBrand
-var smController
+var heroTween
 
-function scrollSupport () {
-  smController = new ScrollMagic.Controller()
-    .scrollTo(function (target) {
-      TweenMax.to(window, 0.5, {
-        scrollTo: {
-          y: target,
-          autoKill: true
-        },
-        ease: Cubic.easeInOut
-      })
-    })
-
-  tweenMoveLogo = TweenMax.to('#hero .to-home', 2, {
-    left: $('#home .to-home').offset().left + ($('#home .to-home').width() / 2),
-    width: $('#home .to-home').width(),
-    ease: Power0.easeNone
-  })
-  tweenResizeHero = TweenMax.to('#hero', 2, {height: $('header').height(), ease: Power0.easeNone})
-
-  scResizeHero = new ScrollMagic.Scene({
-    duration: $('#hero').height() - $('header').height()
-  })
-    .setTween(tweenResizeHero)
-    .addTo(smController)
-
-  scMoveLogo = new ScrollMagic.Scene({
-    duration: $('#hero').height() - $('header').height()
-  })
-    .setTween(tweenMoveLogo)
-    .addTo(smController)
-
-  scSwitchBrand = new ScrollMagic.Scene({
-    duration: ($('#hero').height() - $('header').height()) / 2
-  })
-    .setClassToggle('#home #hero .to-home', 'anim-enabled')
-    .addTo(smController)
-    .on('leave', function () {
-      // leaveHero()
-    })
-
+function flickHero (updateInterval, logoSides) {
+  heroTween = TweenMax.to('#hero .polylogo', updateInterval, { attr: { d: window[config.spAppName].common.generate(true, logoSides) }, onComplete: flickHero, onCompleteParams: [updateInterval, logoSides] })
 }
 
-scrollSupport()
+flickHero(1.351, 40)
 
 // -----------------------------------------------------------------------------
 // Logo Anim when hovering
 
 function hoverHero () {
-  TweenMax.set('#hero .logo .headlines', {transformOrigin: '50% -100%', rotationZ: '-90'})
-  TweenMax.set('#hero .logo .headlines', {autoAlpha: 1})
-  $('#hero .to-home.anim-enabled').hover(
-    function () {
-      window[config.spAppName].common.killLogoTween()
-      window[config.spAppName].common.setUpdateInterval(50)
-      window[config.spAppName].common.setLogoSides(100)
-      $('.polylogo').attr('d', window[config.spAppName].common.generate(true))
-      window[config.spAppName].common.flickLogo()
+  $('#hero .logo .background').hover(
+    function (ev) {
+      ev.preventDefault()
+      heroTween.kill()
+      $('#hero .polylogo').attr('d', window[config.spAppName].common.generate(true, 100))
+      flickHero(0.07, 100)
       TweenMax.to('#hero .logo .brand', 1, {transformOrigin: '50% -100%', ease: Back.easeInOut.config(1.3), rotationZ: 90})
       TweenMax.to('#hero .logo .headlines', 1, {transformOrigin: '50% -100%', ease: Back.easeInOut.config(1.3), rotationZ: 0})
     },
     function () {
-      window[config.spAppName].common.killLogoTween()
-      window[config.spAppName].common.setUpdateInterval(1351)
-      window[config.spAppName].common.setLogoSides(40)
-      $('.polylogo').attr('d', window[config.spAppName].common.generate(true))
-      window[config.spAppName].common.flickLogo()
+      heroTween.kill()
+      $('#hero .polylogo').attr('d', window[config.spAppName].common.generate(true, 40))
+      flickHero(1.351, 40)
       TweenMax.to('#hero .logo .brand', 1, {transformOrigin: '50% -100%', ease: Back.easeInOut.config(1.3), rotationZ: 0})
       TweenMax.to('#hero .logo .headlines', 1, {transformOrigin: '50% -100%', ease: Back.easeInOut.config(1.3), rotationZ: -90})
     }
@@ -85,47 +37,33 @@ function hoverHero () {
 hoverHero()
 
 // -----------------------------------------------------------------------------
-// ScrollTo Anim
+// Scroll watcher
 
-function scrollToAnim () {
-  $('#hero .to-home, header .to-home').on('click', function (ev) {
-    if ($('#home').length) {
-      ev.preventDefault()
-      smController.scrollTo(0)
+$(window).scroll(function () {
+  if ($('#home').length && $(window).width() / 2 < 1023) {
+    if ($(window).scrollTop() + $('#nav-icon').position().top > $('#punchline').offset().top && !$('#nav-icon').hasClass('secondary-color') ||
+    $(window).scrollTop() + $('#nav-icon').position().top < $('#punchline').offset().top && $('#nav-icon').hasClass('secondary-color')) {
+      $('#nav-icon').toggleClass('secondary-color')
     }
-  })
-}
-
-scrollToAnim()
+  }
+})
 
 // -----------------------------------------------------------------------------
-// Window resize
+// on leave
 
-$(window).resize(function () {
-  if ($('#home').length) {
-    tweenResizeHero.kill()
-    $('#hero').removeAttr('style')
-    tweenResizeHero = TweenMax.to('#hero', 2, {height: $('header').height(), ease: Power0.easeNone})
-    scResizeHero.setTween(tweenResizeHero)
+$('#home #menu ul').first().children().not(':first').click(function () {
+  $('#nav-icon').removeClass('secondary-color')
+})
 
-    tweenMoveLogo.kill()
-    $('#hero .to-home').removeAttr('style')
-    tweenMoveLogo = TweenMax.to('#hero .to-home', 2, {
-      left: $('#home .to-home').offset().left + ($('#home .to-home').width() / 2),
-      width: $('#home .to-home').width(),
-      ease: Power0.easeNone
-    })
-    scMoveLogo.setTween(tweenMoveLogo)
-  }
+$('#headlines a').click(function () {
+  $('#nav-icon').removeClass('secondary-color')
 })
 
 // -----------------------------------------------------------------------------
 // on reload
 
 function onReload () {
-  scrollSupport()
   hoverHero()
-  scrollToAnim()
 }
 
 window[config.spAppName] = Object.assign(

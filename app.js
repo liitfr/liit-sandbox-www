@@ -31,6 +31,7 @@ const pages = require('./pages.json')
 const path = require('path')
 const slug = require('speakingurl')
 const {DefinePlugin, ProvidePlugin} = require('webpack')
+const OfflinePlugin = require('offline-plugin')
 
 moment.locale('fr')
 
@@ -224,7 +225,9 @@ module.exports = {
 
     new ProvidePlugin({
       THREE: 'three'
-    })
+    }),
+
+    new OfflinePlugin()
 
   ],
 

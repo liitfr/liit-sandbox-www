@@ -6,7 +6,7 @@ extends(src="../layout.sgr")
     meta(name="robots" content="index, follow")
 
   block(name="content")
-    .narrow
+    .centered
       h1 Les fournées
       ul
         each(loop="discoverybatch, index in contentful.discovery_batches")

@@ -1,46 +1,131 @@
-#home header
-  background: transparent
+#home
+  & footer
+    display: none
 
-#home header .to-home
-  visibility: hidden
+  & #header-background
+    display: none
 
-#home #hero
-  position: fixed
-  z-index: 3
-  top: 0
-  left: 0
-  width: 100%
-  height: 70.82vh
-  background: #2c3e50
-  overflow: hidden
+  & header
+    & .logo
+      visibility: hidden
 
-  & .logo
-    height: 100%
-    width: 100%
-    lost-align: middle-center
+    & #nav-icon span
+      background: #2c3e50
 
-    & .to-home
-      height: var(--large-nbdor)
+      @media screen and (--l)
+        background: #ecf0f1
 
-      & .brand
-        font-size: 5em
+  & main
+    min-height: 100%
+    padding: 0
+    margin: 0
+    lost-flex-container: row
 
-        & tspan:nth-child(2)
-          display: none
+    @media screen and (--l)
+      lost-flex-container: column
+      height: 100%
 
-      & .headlines
-        font-family: 'Roboto', sans-serif
-        text-transform: uppercase
-        font-size: 2em
-        visibility: hidden
-        fill: #ecf0f1
+    & #punchline
+      font-family: 'Raleway', Arial, sans-serif
+      font-weight: 300
+      font-size: responsive 16px 32px
 
-        & tspan
-          display: block
+      & section
+        max-width: 60%
 
-      &.anim-enabled
-        & .brand tspan:nth-child(2)
-          display: initial
+        & a
+          position: relative
+          display: inline-block
+          outline: none
+          color: #e74c3c
+          vertical-align: bottom
+          text-decoration: none
+          white-space: nowrap
+          font-weight: 500
 
-#home main
-  padding-top: calc(70.82vh + 20px)
+          &::before
+            position: absolute
+            top: 0
+            left: -5px
+            z-index: -1
+            box-sizing: content-box
+            padding: 0 5px
+            width: 100%
+            height: 100%
+            border-radius: 10px
+            background-color: #d3d7d7
+            content: ''
+            opacity: 0
+            transition: transform 0.2s, opacity 0.2s
+            transform: scale(0)
+
+          &:hover::before,
+          &:focus::before
+            opacity: 1
+            transform: scale(1)
+
+        & ul
+          list-style: none
+          padding: 0
+
+    & #hero,
+    & #punchline
+      lost-column: 1/2 0 0
+      min-height: 100%
+      lost-align: middle-center flex
+
+      @media screen and (--l)
+        lost-column: none
+
+    & #hero
+      background: #2c3e50
+
+      @media screen and (--l)
+        min-height: 100%
+
+      & .logo
+        overflow: hidden
+        width: 70vmin
+
+        & svg
+          pointer-events: initial
+          width: 100%
+
+          & .headlines,
+          & .brand
+            pointer-events: none
+
+          & .headlines
+            font-family: 'Roboto', sans-serif
+            text-transform: uppercase
+            font-size: 40px
+            fill: #ecf0f1
+
+    & #punchline
+      @media screen and (--l)
+        min-height: 100vh
+
+.no-js #home
+  @media screen and (--l)
+    height: initial
+
+  & #header-background,
+  & header
+    display: none
+
+  & #hero,
+  & #punchline
+    min-height: 100vh
+
+  & #menu
+    transition: none
+    transform: none
+    visibility: visible
+    position: relative
+    top: initial
+    left: initial
+
+    & nav
+      min-height: 100vh
+      top: initial
+      transform: none

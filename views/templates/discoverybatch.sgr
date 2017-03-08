@@ -9,7 +9,7 @@ extends(src="../layout.sgr")
     meta(name="robots" content="index, follow")
 
   block(name="content")
-    .narrow
+    .centered
       h1 Fournée #{{ item.fields.batchNumber }}
       p Le {{ item.fields.pubDate }}
       p {{ item.fields.descriptionSite }}

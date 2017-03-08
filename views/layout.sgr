@@ -30,33 +30,34 @@ html.no-js(lang="fr")
 
     // [if lt IE 9]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 
+    #header-background
     header
-      .logo
-        a.to-home(href="/")
-          svg(viewbox="0 0 200 200")
-            path.background(d="M 1 1 h 198 v 198 h -198 v -198 Z")
-            text.brand(x="50%" y="50%" transform="translate(-5,5)")
-              tspan L
-            path.polylogo(d="M -5000 -5000 h 10000 v 10000 h -10000 v -10000 Z M 100 200 L 114 191 L 129 191 L 144 186 L 154 174 L 165 165 L 178 157 L 189 145 L 189 129 L 197 115 L 193 99 L 198 84 L 191 70 L 183 57 L 176 44 L 168 31 L 153 26 L 142 17 L 129 8 L 115 2 L 99 0 L 85 6 L 69 5 L 55 13 L 42 20 L 35 35 L 23 44 L 15 56 L 4 69 L 2 84 L 8 100 L 8 114 L 4 130 L 13 144 L 23 155 L 32 167 L 45 175 L 55 186 L 70 189 L 85 189 Z")
-      #nav-icon
-        span
-        span
-        span
-        span
+      .centered-large
+        .logo
+          a.to-home(href="/")
+            svg(viewbox="0 0 200 200")
+              path.polylogo(d="M 100 200 L 114 191 L 129 191 L 144 186 L 154 174 L 165 165 L 178 157 L 189 145 L 189 129 L 197 115 L 193 99 L 198 84 L 191 70 L 183 57 L 176 44 L 168 31 L 153 26 L 142 17 L 129 8 L 115 2 L 99 0 L 85 6 L 69 5 L 55 13 L 42 20 L 35 35 L 23 44 L 15 56 L 4 69 L 2 84 L 8 100 L 8 114 L 4 130 L 13 144 L 23 155 L 32 167 L 45 175 L 55 186 L 70 189 L 85 189 Z")
+              g.brand(transform="translate(47,-862.36225)")
+                path(d="m 57.49238,905.48347 q 1.707495,-0.10672 4.375455,0.42688 2.667961,0.42687 5.44264,1.49405 2.774679,0.96047 5.122485,2.34781 2.347805,1.38734 3.308271,2.8814 -2.881398,2.66796 -6.723261,8.00388 -3.735145,5.33592 -7.790445,12.27262 -4.055301,6.82998 -8.110601,14.62042 -3.948582,7.68373 -7.150135,15.15402 -3.201553,7.47029 -5.229203,14.08683 -1.920932,6.50983 -2.02765,10.88528 3.41499,-0.10672 8.110601,-0.74703 4.802329,-0.64031 9.818095,-1.49405 5.656077,-0.85375 10.671843,-1.60078 5.122485,-0.74703 9.071067,-0.64031 l 3.094834,12.27262 q -3.948582,0.21344 -9.071066,0.74703 -5.015767,0.64031 -9.391222,1.1739 -5.015766,0.53359 -10.031533,1.06718 -4.909047,0.5336 -9.391221,0.74703 l -0.533593,0 q -1.173902,0 -3.201552,-0.10671 -2.027651,0 -4.695611,-0.96047 -2.561243,-0.85375 -5.656077,-2.77468 -2.988116,-1.92093 -5.976232,-5.54936 -0.533592,-6.08295 1.280621,-14.08683 1.814213,-8.1106 5.015766,-16.75479 3.308272,-8.6442 7.363572,-17.28839 4.162019,-8.64419 8.217319,-15.90105 4.162019,-7.25685 7.683727,-12.59277 3.521708,-5.33592 5.549358,-7.25685 l 0.853748,-0.42688 z")
+        #nav-icon
+          span
+          span
+          span
+          span
 
     main(role="main")
       block(name="content")
 
     footer
-      .narrow
+      .centered-large
         div
-          h4 Services en ingénierie informatique
+          h3 Services en ingénierie informatique à Lyon
           ul
             li Création de sites web performants et adaptés aux mobiles
             li Développement d'applications fonctionnelles et ergonomiques
             li Traitement des données et Reporting
         div
-          h4 LIIT
+          h3 LIIT
           ul
             li hello@liit.fr
             li 0033662467082
@@ -70,26 +71,32 @@ html.no-js(lang="fr")
         ul
           li: a(href="/") Accueil
           li: a(href="/web-apps-data") Services
-          li: a(href="/realisations/") Réalisations
           li: a(href="/freelance-fullstack-lyon") Technologies
-          li: a(href="/blog") Articles
+          li: a(href="/realisations/") Réalisations
+          li: a(href="/blog") Blog
           li: a(href="/bookmarks") Lectures
+          li: a(href="/vision-profession") À propos
           li: a(href="/contacter-developpeur") Contact
-      nav.network
-        button.network-toggle-button(aria-label="Afficher les liens exterieurs")
-        ul.network-items
-          li.network-item
-            a.network-button#to-mail(href="mailto:hello@liit.fr" rel="noopener" target="_blank" aria-label="Ouvrir votre outil de messagerie pour m'écrire un message")
+        ul
+          li
+            a(href="mailto:hello@liit.fr" rel="noopener" target="_blank")
+              img(src="/img/contact.svg")
               span Mail
-          li.network-item
-            a.network-button#to-twitter(href="https://twitter.com/liitfr" rel="noopener" target="_blank" aria-label="Consulter ma page Twitter")
+          li
+            a(href="https://twitter.com/liitfr" rel="noopener" target="_blank")
+              img(src="/img/twitter.svg")
               span Twitter
-          li.network-item
-            a.network-button#to-github(href="https://github.com/liitfr" rel="noopener" target="_blank" aria-label="Consulter mon repository Github")
+          li
+            img(src="/img/social-networks-share.svg")
+            span Poursuivre la navigation
+          li
+            a(href="https://github.com/liitfr" rel="noopener" target="_blank")
+              img(src="/img/github.svg")
               span Github
-          li.network-item
-            a.network-button#to-dribbble(href="https://dribbble.com/liit" rel="noopener" target="_blank" aria-label="Consulter ma page Dribbble")
-              span Dribble
+          li
+            a(href="https://dribbble.com/liit" rel="noopener" target="_blank")
+              img(src="/img/dribbble.svg")
+              span Dribbble
 
     script(src="/vendor/modernizr/modernizr-3.3.1.min.js" defer)
     script(src="/vendor/jquery/jquery-3.1.1.min.js" defer)

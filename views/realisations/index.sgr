@@ -1,5 +1,5 @@
 extends(src="../layout.sgr")
 
   block(name="content")
-    .narrow
+    .centered
       h1 Réalisation

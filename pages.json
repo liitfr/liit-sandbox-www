@@ -51,14 +51,6 @@
     "path": "^\/erreurs\/500(?:\\.html?)?(?:\\?.*)?(?:#.*)?$",
     "view": "erreurs/500.sgr"
   },
-  "tag": {
-    "path": "^\/tag\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:#.*)?$).+$",
-    "view": "templates/tag.sgr"
-  },
-  "tags": {
-    "path": "^\/tags(?:\/(?:index(?:\\.html?)?)?)?(?:\\?.*)?(?:#.*)?$",
-    "view": "tags/index.sgr"
-  },
   "technicalprofil": {
     "path": "^\/freelance-fullstack-lyon(?:\\.html?)?(?:\\?.*)?(?:#.*)?$",
     "view": "freelance-fullstack-lyon.sgr"
@@ -68,7 +60,7 @@
     "view": "vision-profession.sgr"
   },
   "work": {
-    "path": "^\/work\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:#.*)?$).+$",
+    "path": "^\/realisations\/(?!(?:index(?:.html?)?)?(?:\\?.*)?(?:#.*)?$).+$",
     "view": "templates/work.sgr"
   },
   "works": {

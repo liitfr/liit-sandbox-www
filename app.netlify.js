@@ -10,6 +10,7 @@ const locals = {}
 const lost = require('lost')
 const markdown = require('markdown-it')()
 const moment = require('moment')
+const OfflinePlugin = require('offline-plugin')
 const pages = require('./pages.json')
 const path = require('path')
 const slug = require('speakingurl')
@@ -230,7 +231,9 @@ module.exports = {
 
     new ProvidePlugin({
       THREE: 'three'
-    })
+    }),
+
+    new OfflinePlugin()
 
   ],
 

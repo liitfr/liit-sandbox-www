@@ -2,47 +2,46 @@ extends(src="layout.sgr")
 
   block(name="meta" type="append")
     include(src="_meta-socialnetworks.sgr")
-    
+
   block(name="content")
     #hero
-      .logo
-        a.to-home.anim-enabled(href="/")
+      section.logo
+        h1
           svg(viewbox="0 0 200 200")
-            path.background(d="M 1 1 h 198 v 198 h -198 v -198 Z")
-            text.brand(x="50%" y="50%" transform="translate(-5,5)")
-              tspan L
-              tspan iit
-            text.headlines
-              tspan(x="30px" dy="55px") Full
+            title LIIT - Services en ingénierie informatique à Lyon
+            path.background(d="M 0 0 h 200 v 200 h -200 v -200 Z")
+            g.brand(transform="translate(0,-862.36225)")
+              path(d="m 57.49238,905.48347 q 1.707495,-0.10672 4.375455,0.42688 2.667961,0.42687 5.44264,1.49405 2.774679,0.96047 5.122485,2.34781 2.347805,1.38734 3.308271,2.8814 -2.881398,2.66796 -6.723261,8.00388 -3.735145,5.33592 -7.790445,12.27262 -4.055301,6.82998 -8.110601,14.62042 -3.948582,7.68373 -7.150135,15.15402 -3.201553,7.47029 -5.229203,14.08683 -1.920932,6.50983 -2.02765,10.88528 3.41499,-0.10672 8.110601,-0.74703 4.802329,-0.64031 9.818095,-1.49405 5.656077,-0.85375 10.671843,-1.60078 5.122485,-0.74703 9.071067,-0.64031 l 3.094834,12.27262 q -3.948582,0.21344 -9.071066,0.74703 -5.015767,0.64031 -9.391222,1.1739 -5.015766,0.53359 -10.031533,1.06718 -4.909047,0.5336 -9.391221,0.74703 l -0.533593,0 q -1.173902,0 -3.201552,-0.10671 -2.027651,0 -4.695611,-0.96047 -2.561243,-0.85375 -5.656077,-2.77468 -2.988116,-1.92093 -5.976232,-5.54936 -0.533592,-6.08295 1.280621,-14.08683 1.814213,-8.1106 5.015766,-16.75479 3.308272,-8.6442 7.363572,-17.28839 4.162019,-8.64419 8.217319,-15.90105 4.162019,-7.25685 7.683727,-12.59277 3.521708,-5.33592 5.549358,-7.25685 l 0.853748,-0.42688 z")
+              path(d="m 80.183385,985.09542 q -0.320155,-4.69561 1.280621,-10.45841 1.494058,-5.76279 3.841864,-11.52559 2.347805,-5.86951 5.015766,-11.20543 2.774679,-5.33592 4.695611,-9.07107 2.881397,-0.32015 5.656073,0.10672 2.8814,0.32016 5.22921,0.96047 2.3478,0.64031 3.94858,1.38734 1.60077,0.74703 2.02765,1.28062 -1.60078,1.92093 -3.73515,5.54936 -2.13437,3.5217 -4.26873,7.68372 -2.13437,4.16202 -3.948586,8.43076 -1.814213,4.26874 -2.561242,7.47029 -0.64031,2.45452 -0.533592,3.73514 0.106718,1.17391 0.747029,1.38734 0.640311,0.10672 1.707495,-0.64031 1.067186,-0.74703 2.454526,-2.24108 2.66796,-2.77468 5.44264,-6.82998 2.77468,-4.0553 4.80233,-7.68373 1.70749,-3.09483 3.73514,-3.84186 2.02765,-0.74703 3.52171,0 1.49406,0.74703 2.02765,2.56124 0.64031,1.81421 -0.42687,3.73514 -3.52171,6.50983 -6.72326,11.95247 -3.09484,5.44264 -6.40311,9.39122 -3.30827,3.84186 -7.15013,6.08295 -3.73515,2.13437 -8.537479,2.13437 -5.015766,0 -8.110601,-2.77468 -3.201553,-2.77468 -3.735145,-7.57701 z m 25.825855,-45.67549 q -2.3478,-1.38734 -3.09483,-2.98811 -0.64031,-1.7075 -0.42687,-3.73515 0.10672,-1.70749 0.64031,-3.41499 0.64031,-1.81421 1.81421,-3.20155 1.06718,-1.49406 4.69561,-1.49406 2.45453,0 4.37546,0.96047 2.02765,0.85374 4.16202,2.3478 l -0.21344,0 q 1.06718,0.64031 1.49406,1.38734 0.42687,0.64031 0.42687,1.28062 0,0.5336 -0.21344,0.96047 -0.21343,0.42687 -0.32015,0.53359 l -5.2292,8.64419 q -1.17391,1.38734 -3.62843,0.85375 -2.45452,-0.64031 -4.48218,-2.13437 z")
+              path(d="m 106.44613,985.09542 q -0.32016,-4.69561 1.28062,-10.45841 1.49406,-5.76279 3.84186,-11.52559 2.34781,-5.86951 5.01577,-11.20543 2.77468,-5.33592 4.69561,-9.07107 2.8814,-0.32015 5.65607,0.10672 2.8814,0.32016 5.22921,0.96047 2.3478,0.64031 3.94858,1.38734 1.60078,0.74703 2.02765,1.28062 -1.60078,1.92093 -3.73515,5.54936 -2.13436,3.5217 -4.26873,7.68372 -2.13437,4.16202 -3.94858,8.43076 -1.81422,4.26874 -2.56125,7.47029 -0.64031,2.45452 -0.53359,3.73514 0.10672,1.17391 0.74703,1.38734 0.64031,0.10672 1.70749,-0.64031 1.06719,-0.74703 2.45453,-2.24108 2.66796,-2.77468 5.44264,-6.82998 2.77468,-4.0553 4.80233,-7.68373 1.70749,-3.09483 3.73514,-3.84186 2.02765,-0.74703 3.52171,0 1.49406,0.74703 2.02765,2.56124 0.64031,1.81421 -0.42687,3.73514 -3.52171,6.50983 -6.72326,11.95247 -3.09484,5.44264 -6.40311,9.39122 -3.30827,3.84186 -7.15013,6.08295 -3.73515,2.13437 -8.53748,2.13437 -5.01576,0 -8.1106,-2.77468 -3.20155,-2.77468 -3.73514,-7.57701 z m 25.82586,-45.67549 q -2.34781,-1.38734 -3.09484,-2.98811 -0.64031,-1.7075 -0.42687,-3.73515 0.10672,-1.70749 0.64031,-3.41499 0.64031,-1.81421 1.81421,-3.20155 1.06719,-1.49406 4.69561,-1.49406 2.45453,0 4.37546,0.96047 2.02765,0.85374 4.16202,2.3478 l -0.21344,0 q 1.06718,0.64031 1.49406,1.38734 0.42687,0.64031 0.42687,1.28062 0,0.5336 -0.21343,0.96047 -0.21344,0.42687 -0.32016,0.53359 l -5.2292,8.64419 q -1.17391,1.38734 -3.62843,0.85375 -2.45452,-0.64031 -4.48217,-2.13437 z")
+              path(d="m 140.92618,951.90599 q -1.7075,0 -1.60078,-1.38734 0,-1.49406 0.85375,-3.20155 0.85375,-1.81422 2.13437,-3.30827 1.38734,-1.49406 2.24109,-1.49406 l 3.41498,0 q 1.49406,-3.09484 2.8814,-5.97623 1.49406,-2.8814 2.66796,-5.7628 0.96047,-2.66796 0.10672,-3.62843 -0.74703,-0.96046 -2.13437,-1.49405 0.5336,-0.74703 2.34781,-1.28063 1.81421,-0.53359 4.26874,-0.74702 2.45452,-0.32016 5.12248,-0.21344 2.77468,0.10672 5.01577,0.64031 2.3478,0.42687 3.84186,1.28062 1.60078,0.85375 1.70749,2.13437 -0.21343,0.42687 -0.64031,1.38734 -0.42687,0.85375 -1.28062,2.66796 -0.85374,1.70749 -2.24108,4.37545 -1.38734,2.66797 -3.30828,6.61655 3.94859,0 4.90905,0.32015 1.06719,0.32016 1.17391,1.17391 0.10671,0.96046 -0.5336,2.24108 -0.53359,1.28062 -1.49405,2.56124 -0.96047,1.17391 -2.24109,2.13437 -1.1739,0.85375 -2.24109,0.96047 -0.74703,0.21344 -2.24109,0.10672 -1.38734,-0.10672 -2.45452,-0.10672 -0.64031,1.38734 -2.02765,3.94858 -1.38734,2.45452 -2.8814,5.54936 -1.38734,2.98812 -2.66796,6.29639 -1.28062,3.20155 -1.60077,6.18967 -0.21344,1.81421 -0.21344,3.41499 0,1.49405 0.53359,2.45452 0.53359,0.85375 1.7075,0.85375 1.28062,-0.10672 3.41499,-1.60078 0.42687,-0.21344 1.60077,-1.38734 1.28062,-1.1739 2.98812,-3.20155 1.81421,-2.13437 3.94858,-5.01577 2.24109,-2.8814 4.48217,-6.50982 1.38734,-2.45453 3.09484,-2.66796 1.81421,-0.32016 3.09483,0.64031 1.38734,0.96046 1.81422,2.77468 0.53359,1.81421 -0.64031,3.5217 -2.45453,3.73515 -5.22921,8.32404 -2.66796,4.48218 -6.08295,8.53748 -3.30827,3.94858 -7.57701,6.93669 -4.16202,2.98812 -9.71137,3.73515 -0.74703,0.10672 -1.49406,0.21344 -0.74703,0.10671 -1.60078,0.10671 -7.25685,0 -10.4584,-4.0553 -3.30828,-4.16201 -2.24109,-12.27262 0.53359,-3.5217 1.81421,-7.25685 1.1739,-3.73514 2.66796,-7.25685 1.38734,-3.62843 2.8814,-6.72326 1.60078,-3.20156 2.77468,-5.54936 l -2.66796,0 z")
+            text.headlines(data-svg-origin="105.49360466003418 -154.2044162750244" style="transform-origin: 0px 0px 0px;" transform="matrix(0,-1,1,0,259.6980209350586,-48.71081161499022)")
+              tspan(x="30px" dy="50px") Full
               tspan(x="30px" dy="0.75em") Stack
               tspan(x="30px" dy="0.75em") Web
               tspan(x="30px" dy="0.75em") Apps &
               tspan(x="30px" dy="0.75em") Data
             path.polylogo(d="M -5000 -5000 h 10000 v 10000 h -10000 v -10000 Z M 100 200 L 114 191 L 129 191 L 144 186 L 154 174 L 165 165 L 178 157 L 189 145 L 189 129 L 197 115 L 193 99 L 198 84 L 191 70 L 183 57 L 176 44 L 168 31 L 153 26 L 142 17 L 129 8 L 115 2 L 99 0 L 85 6 L 69 5 L 55 13 L 42 20 L 35 35 L 23 44 L 15 56 L 4 69 L 2 84 L 8 100 L 8 114 L 4 130 L 13 144 L 23 155 L 32 167 L 45 175 L 55 186 L 70 189 L 85 189 Z")
-    .narrow
-      h1 Qui je suis ?
-      i Le 24 février 2017
-      p Je m'appelle Mathias Hoffmann, j'ai 31 ans et je vie dans cette belle ville de Lyon avec mon amie Margaux et notre chienne Mina.
-      p Je suis ingénieur Miage-iste diplômé en informatique décisionnelle. À ce titre, j'ai travaillé de 2008 à 2015 en tant que consultant BI (Business Intelligence) en société de services, successivement pour Sopra Group puis pour Logica, devenues respectivement Sopra Steria et CGI. J'intervenais auprès de leurs clients principalement en qualité d'assistant à la maîtrise d'ouvrage ou en celle de maître d'œuvre.
-      p J'ai démissionné à deux reprises.
-      p La première fois, pour un voyage improbable à vélo en solitaire qui me mena de la côte atlantique française jusqu'en Inde en passant par la Route de la soie et l'Asie Centrale. J'y ai développé le goût de l'effort, l'amour des montagnes et des grands espaces, et la sensation de solitude et de vanité qu'ils nous confèrent. Je pratique l'alpinisme et l'escalade, et un jour découvrirai la voile.
-      p La deuxième fois, lorsque j'ai compris que je ne serais jamais dans mon élément dans ce type de société. Vouloir trouver son chemin n'est pas une entreprise simple et à l'issue certaine ...
-      p En 2015, voulant découvrir une autre vie, je suis devenu coursier à vélo à plein temps, pendant plus d'un an. C'est un métier superbe exercé par des personnes formidables. Mais c'est aussi un métier ingrat, punisseur, qui dicte la difficulté d'une vie ou l'acte rémunérateur est effectué avec son corps, devenu alors machine. Les watts et les joules. La fatigue.
-      p
-        | Aujourd'hui - en réalité depuis plusieurs mois - je travaille de nouveau en tant que
-        strong &nbsp;freelance Full Stack
-        | , animé par les plaisirs de créativité et de polyvalence offerts par les  architectures & langages de dernière génération.
-      p
-        | J'admire les personnes passionnées, qui font preuve d'un sens de l'aventure et d'un esprit d'engagement et d'entreprise. À mon humble niveau, je tâche de cultiver moi-même ces traits de caractères. Si vous êtes fait de ce bois,
-        strong &nbsp;j'adorerais travailler à vos côtés
-        | .
-      p Je peux vous accompagner dans la concrétisation de votre projet, du conseil jusqu'à la réalisation. Mon caractère me pousse à la probité : les solutions ou technologies que je vous proposerai seront toujours celles qui me paraitront les plus cohérentes pour répondre à vos objectifs tout en respectant vos contraintes.
-      .important
-        p En devenant indépendant, j'ai choisi :
+    #punchline
+      section
+        p
+          | Je&nbsp;
+          a(href="/web-apps-data") crée
+          |  ...
         ul
-          li de placer mes priorité sur la qualité des expériences professionnelles, les rencontres enrichissantes, et la collaboration d'individus motivés dans le cadre de projets innovants & humains
-          li de ne pas être sous le joug des contraintes commerciales
+          li: strong Des sites web performants et adaptés aux mobiles,
+          li: strong Des applications de gestion fonctionnelles et ergonomiques,
+          li: strong Des outils de traitement des données et de reporting.
+        p
+          | Découvrez mes&nbsp;
+          a(href="/realisations/") réalisations
+          |  et les&nbsp;
+          a(href="/freelance-fullstack-lyon") technologies
+          |  que j'utilise puis laissez-
+          a(href="/vision-profession") moi
+          |  un petit&nbsp;
+          a(href="/contacter-developpeur") mot
+          |  !
 
   block(name="js-body")
-    script(src="/vendor/scrollmagic/ScrollMagicWithGSAP.min.js" defer)
     script(src="/js/home.js" data-hot-reload="true" data-script-name="home" data-function-name="onReload" defer)

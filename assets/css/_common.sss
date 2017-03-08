@@ -1,50 +1,47 @@
-@import 'nombredor'
-@import url('https://fonts.googleapis.com/css?family=Amiko|Roboto:900')
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,500|Amiko|Roboto:900')
 
-@font-face
-  font-family: 'breeze'
-  font-path: '../fonts/breeze/breeze'
-  font-weight: normal
-  font-style: normal
+@lost flexbox flex
 
 :root
   --page-width: 920px
+  --page-width-large: 1280px
   --page-padding: 15px
-  --header-height: 100px
-  --mobile-header-height: 70px
+  --page-padding-large: 30px
+  --header-height: 150px
+  --mobile-header-height: 75px
   --footer-height: 220px
-  --mobile-footer-height: 370px
-  --large-nbdor: calc(var(--base-nbdor) - 2 * var(--nbdor-4))
+  --mobile-footer-height: 450px
   --menu-color: rgba(52, 152, 219, 0.9)
 
 ::selection
   color: #ecf0f1
   background: #e74c3c
 
-html
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
-
-body
+*
+  text-rendering: optimizeLegibility
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
+
+html
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+  height: 100%
   overflow-y: scroll
-  background: #fff
+
+body
+  background: #ecf0f1
   position: relative
-  min-height: 100vh
+  height: 100%
   width: 100%
 
-/* -------------------------------------------------------------------------- */
-/* Logo                                                                       */
+/* -----------------------------------------------------------------------------
+  Logo                                                                        */
 
 .to-home
   text-decoration: none
-  display: inline-block
 
 .logo svg
-  overflow: visible
   height: 100%
   width: auto
-  pointer-events: none
 
   & .background
     fill: #e74c3c
@@ -53,192 +50,233 @@ body
     fill: #2c3e50
 
   & .brand
-    font-family: 'breeze', sans-serif
     fill: #ecf0f1
-    text-anchor: middle
-    dominant-baseline: middle
 
-    & tspan
-      text-anchor: middle
-      dominant-baseline: middle
+/* -----------------------------------------------------------------------------
+  Header                                                                      */
 
-/* -------------------------------------------------------------------------- */
-/* Header                                                                     */
-
+#header-background,
 header
   position: fixed
   top: 0
   left: 0
   width: 100%
   height: var(--header-height)
-  background: #2c3e50
-  overflow: hidden
-  z-index: 1
 
   @media screen and (--m)
     height: var(--mobile-header-height)
 
-  & .logo
-    position: absolute
-    z-index: 6
-    top: calc((100% - var(--large-nbdor)) / 2)
-    left: calc((100% - var(--page-width)) / 2 + 15px)
-    height: var(--large-nbdor)
-    width: auto
+#header-background
+  background: #2c3e50
+  z-index: 0
 
-    @media screen and (--m)
-      left: 15px
+header
+  background: transparent
+  z-index: 5
 
-    & .to-home
-      height: 100%
-      width: 100%
+  & .centered-large
+    lost-align: vertical
+    height: 100%
+    justify-content: space-between !important
 
-      & .brand
-        font-size: 6em
+    & .logo
+      position: relative
+      z-index: 6
+      height: 70.82238%
+      width: auto
 
-    &.over-menu
       & .to-home
-        visibility: visible !important
+        height: 100%
+        width: 100%
 
         & .polylogo
-          fill: #328fcd !important
+          fill: #e74c3c
 
-        & .background
-          fill: #fff !important
+    /* -------------------------------------------------------------------------
+      Nav-icon                                                               */
 
-  /* ------------------------------------------------------------------------ */
-  /* Nav-icon                                                                 */
+    & #nav-icon
+      position: relative
+      right: 0
+      width: 25px
+      height: 20px
+      transition: 0.25s ease-in-out
+      cursor: pointer
 
-  & #nav-icon
-    position: absolute
-    top: calc((var(--header-height) - 20px) / 2)
-    right: calc((100% - var(--page-width)) / 2 + 15px)
-    width: 25px
-    height: 20px
-    transition: 0.5s ease-in-out
-    cursor: pointer
-    z-index: 300
-
-    @media screen and (--m)
-      top: calc((var(--mobile-header-height) - 20px) / 2)
-      right: 15px
-
-    &.open
       & span
+        display: block
+        position: absolute
+        height: 4px
+        width: 100%
+        background: #ecf0f1
+        border-radius: 9px
+        left: 0
+        transition: 0.25s ease-in-out
+
         &:nth-child(1)
-          top: 8px
-          width: 0%
-          left: 50%
+          top: 0
 
-        &:nth-child(2)
-          transform: rotate(45deg)
-
+        &:nth-child(2),
         &:nth-child(3)
-          transform: rotate(-45deg)
+          top: 8px
 
         &:nth-child(4)
-          top: 8px
-          width: 0%
-          left: 50%
+          top: 16px
 
-    & span
-      display: block
-      position: absolute
-      height: 4px
-      width: 100%
-      background: #fff
-      border-radius: 9px
-      opacity: 1
-      left: 0
-      transform: rotate(0deg)
-      transition: 0.25s ease-in-out
+      &.open
+        & span
+          background: #ecf0f1 !important
 
-      &:nth-child(1)
-        top: 0
+          &:nth-child(1)
+            top: 8px
+            width: 0%
+            left: 50%
 
-      &:nth-child(2),
-      &:nth-child(3)
-        top: 8px
+          &:nth-child(2)
+            transform: rotate(45deg)
 
-      &:nth-child(4)
-        top: 16px
+          &:nth-child(3)
+            transform: rotate(-45deg)
 
-/* -------------------------------------------------------------------------- */
-/* Menu                                                                       */
+          &:nth-child(4)
+            top: 8px
+            width: 0%
+            left: 50%
+
+        &:hover span,
+        &:focus span
+          background: #ff328c !important
+
+      &.secondary-color span
+        @media screen and (--l)
+          background: #2c3e50 !important
+
+  /* ---------------------------------------------------------------------------
+    Header over menu                                                          */
+
+  &.over-menu
+    & .to-home
+      transition-delay: 0.1s
+      visibility: visible !important
+
+      & .polylogo
+        transition: fill 0s
+        fill: #ecf0f1 !important
+
+      & .brand
+        transition: fill 0s
+        fill: #ff328c !important
+
+/* -----------------------------------------------------------------------------
+  Menu                                                                        */
 
 #menu
+  overflow: hidden
   position: fixed
   width: 100%
   height: 100%
-  top: 0
+  top: -100%
   left: 0
   background: var(--menu-color)
   visibility: hidden
-  transform: translateY(-100%)
   transition: transform 0.4s ease-in-out, visibility 0s 0.4s
 
   &.open
     visibility: visible
-    transform: translateY(0%)
+    transform: translateY(100%)
     transition: transform 0.4s ease-in-out
 
   & nav
     text-align: center
-    position: relative
-    top: 50%
-    height: 60%
-    transform: translateY(-50%)
-
-    @media screen and (max-height: 30.5em)
-      height: 70%
-      font-size: 34px
-
-  & ul
-    list-style: none
-    padding: 0
-    margin: 0 auto
-    display: inline-block
     height: 100%
-    position: relative
+    lost-align: middle-center
 
-    & li
-      display: block
-      height: calc(100% / 7)
-      min-height: 54px
-      backface-visibility: hidden
+    & ul
+      list-style: none
+      padding: 0
 
-      @media screen and (max-height: 30.5em)
-        min-height: 34px
+    /* -------------------------------------------------------------------------
+      Inner links                                                             */
 
-      & a
-        font-size: 54px
-        font-weight: 300
-        display: block
-        color: #fff
-        transition: color 0.2s
+    & ul:nth-child(1)
+      & li
+        & a
+          text-decoration: none
+          font-size: 54px
+          display: block
+          color: #ecf0f1
 
-        &:hover,
-        &:focus
-          color: #e3fcb1
+          @media screen and (--m)
+            font-size: 35px
 
-/* -------------------------------------------------------------------------- */
-/* Main                                                                       */
+          &:hover,
+          &:focus
+            background: #ff328c
+
+      @media screen and (max-height: 500px)
+        lost-flex-container: row
+
+        & li
+          lost-column: 1/2 0 0
+
+    /* -------------------------------------------------------------------------
+      Social Network buttons                                                  */
+
+    & ul:nth-child(2)
+      position: absolute
+      bottom: 0
+      width: 100%
+      lost-align: center
+      margin: 0
+
+      & li
+        background: #ecf0f1
+        border-radius: 50%
+        width: 50px
+        height: 50px
+        margin: 40px 20px
+        lost-align: middle-center
+        box-shadow: 2px 2px rgba(0, 0, 0, 0.2)
+
+        @media screen and (--m)
+          margin: 10px 15px
+          margin-bottom: 20px
+          width: 40px
+          height: 40px
+
+        & img
+          width: 65%
+          height: 65%
+
+        &:nth-child(1) img
+          width: 90%
+          height: 90%
+
+        & span
+          display: none
+
+/* -----------------------------------------------------------------------------
+  Main                                                                        */
 
 main
   padding-top: var(--header-height)
   padding-bottom: 3em
-  width: 100%
   min-height: calc(100vh - var(--footer-height))
   font-size: responsive 16px 21px
   font-family: 'Amiko', sans-serif
-  color: #2c3e50
+  color: #404d5b
 
   @media screen and (--m)
+    padding-top: var(--mobile-header-height)
     min-height: calc(100vh - var(--mobile-footer-height))
 
-.narrow
-  padding: 0 var(--page-padding)
-  lost-center: var(--page-width)
+.centered
+  padding: 0 var(--page-padding-large)
+  lost-center: var(--page-width) no-flex
+
+.centered-large
+  padding: 0 var(--page-padding-large)
+  lost-center: var(--page-width-large)
 
 h1
   color: #e74c3c
@@ -247,15 +285,14 @@ h1
   border-radius: 5px
   padding: 0.5em 1em
   background: #3498db
-  color: #fff
+  color: #ecf0f1
 
-/* -------------------------------------------------------------------------- */
-/* Footer                                                                     */
+/* -----------------------------------------------------------------------------
+  Footer                                                                      */
 
 footer
   background: #e0e0e0
   color: rgba(0, 0, 0, 0.54)
-  width: 100%
   height: var(--footer-height)
 
   @media screen and (--m)
@@ -264,7 +301,7 @@ footer
   & h4
     text-decoration: underline
 
-  & .narrow div
+  & .centered-large div
     lost-column: 1/2
 
     @media screen and (--m)

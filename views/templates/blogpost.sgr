@@ -8,7 +8,7 @@ extends(src="../layout.sgr")
     meta(name="robots" content="index, follow")
 
   block(name="content")
-    .narrow
+    .centered
       h1 {{ item.fields.title }}
       p {{ item.fields.dateLabel }}
       if(condition="item.fields.readingTime")
