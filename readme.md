@@ -1,5 +1,7 @@
 # liit-www
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/liitfr/liit-www.svg)](https://greenkeeper.io/)
+
 :warning: Work in progress :warning:
 :beginner: Single Page Application with Spike :cactus: [http://liit.fr](http://liit.fr)  
 :construction: This document is a draft :heavy_exclamation_mark: I hope it will be helpful.  
