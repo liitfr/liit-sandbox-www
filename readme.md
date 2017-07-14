@@ -1,6 +1,8 @@
 # liit-www
 
-:warning: Work in progress :warning:
+~~:warning: Work in progress :warning:~~  
+This project isn't maintained anymore !  
+
 :beginner: Single Page Application with Spike :cactus: [http://liit.fr](http://liit.fr)  
 :construction: This document is a draft :heavy_exclamation_mark: I hope it will be helpful.  
 Improvements & PR are welcome !
